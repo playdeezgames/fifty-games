@@ -1,11 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>FiftyGames</RootNamespace>
+    <RootNamespace>GuessMyNumber</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
+    <ImportedNamespaces>Spectre.Console=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,GuessMyNumber=True</ImportedNamespaces>
     <OptionStrict>On</OptionStrict>
-    <ImportedNamespaces>Spectre.Console=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,FiftyGames=True</ImportedNamespaces>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,10 +21,6 @@
 
   <ItemGroup>
     <Import Include="Spectre.Console" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\GuessMyNumber\GuessMyNumber.vbproj" />
   </ItemGroup>
 
 </Project>

@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_STUFF", "_STUFF", "{1B4F30
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "GuessMyNumber", "GuessMyNumber\GuessMyNumber.vbproj", "{FF94B8F2-6EAF-4BF0-9AEC-CC16D1A265E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{4D44A5B6-EBDB-4B63-B776-7950DACD11C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D44A5B6-EBDB-4B63-B776-7950DACD11C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D44A5B6-EBDB-4B63-B776-7950DACD11C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF94B8F2-6EAF-4BF0-9AEC-CC16D1A265E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF94B8F2-6EAF-4BF0-9AEC-CC16D1A265E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF94B8F2-6EAF-4BF0-9AEC-CC16D1A265E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF94B8F2-6EAF-4BF0-9AEC-CC16D1A265E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

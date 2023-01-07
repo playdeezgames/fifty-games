@@ -4,7 +4,7 @@ Module Program
     Private ReadOnly gameTable As IReadOnlyDictionary(Of String, Action) =
         New Dictionary(Of String, Action) From
         {
-            {"Game01", AddressOf ThisGameIsAStub},
+            {"Guess My Number", AddressOf GuessMyNumber.Run},
             {"Game02", AddressOf ThisGameIsAStub},
             {"Game03", AddressOf ThisGameIsAStub},
             {"Game04", AddressOf ThisGameIsAStub},
@@ -57,17 +57,19 @@ Module Program
         }
     Sub Main(args As String())
         Console.Title = "Fifty Games!"
-        AnsiConsole.Clear()
-        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Fifty Games![/]"}
-        prompt.AddChoice(QuitText)
-        prompt.AddChoices(gameTable.Keys)
-        Dim answer = AnsiConsole.Prompt(prompt)
-        Select Case answer
-            Case QuitText
-                End
-            Case Else
-                gameTable(answer)()
-        End Select
+        Do
+            AnsiConsole.Clear()
+            Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Fifty Games![/]"}
+            prompt.AddChoice(QuitText)
+            prompt.AddChoices(gameTable.Keys)
+            Dim answer = AnsiConsole.Prompt(prompt)
+            Select Case answer
+                Case QuitText
+                    Exit Do
+                Case Else
+                    gameTable(answer)()
+            End Select
+        Loop
     End Sub
     Private Sub ThisGameIsAStub()
         AnsiConsole.Clear()
