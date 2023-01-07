@@ -57,8 +57,7 @@ Module Program
         }
     Sub Main(args As String())
         Console.Title = "Fifty Games!"
-        Dim data As New FiftyGamesData
-        'TODO: load data from file if it exists, otherwise blank it out
+        Dim data As FiftyGamesData = LoadData()
         Do
             AnsiConsole.Clear()
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Fifty Games![/]"}
@@ -72,11 +71,23 @@ Module Program
                     End If
                 Case Else
                     gameTable(answer)(data)
-                    'TODO: save data
+                    SaveData(data)
             End Select
-
         Loop
     End Sub
+
+    Private Sub SaveData(data As FiftyGamesData)
+        File.WriteAllText("data.json", JsonSerializer.Serialize(data))
+    End Sub
+
+    Private Function LoadData() As FiftyGamesData
+        Try
+            Return JsonSerializer.Deserialize(Of FiftyGamesData)(File.ReadAllText("data.json"))
+        Catch ex As Exception
+            Return New FiftyGamesData
+        End Try
+    End Function
+
     Private Sub ThisGameIsAStub(data As FiftyGamesData)
         AnsiConsole.Clear()
         AnsiConsole.MarkupLine("[red]This Game Is A Stub! Come back later![/]")
