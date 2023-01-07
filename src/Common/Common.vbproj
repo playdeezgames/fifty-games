@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>GuessMyNumber</RootNamespace>
+    <RootNamespace>Common</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
-    <ImportedNamespaces>Spectre.Console=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,GuessMyNumber=True</ImportedNamespaces>
+    <ImportedNamespaces>Spectre.Console=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,Common=True</ImportedNamespaces>
     <OptionStrict>On</OptionStrict>
   </PropertyGroup>
 
@@ -20,11 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Import Include="Spectre.Console" />
+    <Folder Include="My Project\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.vbproj" />
+    <Import Include="Spectre.Console" />
   </ItemGroup>
 
 </Project>

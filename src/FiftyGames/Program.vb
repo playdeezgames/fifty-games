@@ -74,8 +74,6 @@ Module Program
     Private Sub ThisGameIsAStub()
         AnsiConsole.Clear()
         AnsiConsole.MarkupLine("[red]This Game Is A Stub! Come back later![/]")
-        Dim prompt As New SelectionPrompt(Of String) With {.Title = ""}
-        prompt.AddChoice(OkText)
-        AnsiConsole.Prompt(prompt)
+        Common.OkPrompt()
     End Sub
 End Module
