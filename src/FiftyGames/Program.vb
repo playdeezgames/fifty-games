@@ -65,7 +65,9 @@ Module Program
             Dim answer = AnsiConsole.Prompt(prompt)
             Select Case answer
                 Case QuitText
-                    Exit Do
+                    If Common.Confirm("[red]Are you sure you want to quit?[/]") Then
+                        Exit Do
+                    End If
                 Case Else
                     gameTable(answer)()
             End Select
