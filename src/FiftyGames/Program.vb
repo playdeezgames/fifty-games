@@ -5,7 +5,7 @@ Module Program
         New Dictionary(Of String, Action(Of FiftyGamesData)) From
         {
             {"Guess My Number", Sub(data) GuessMyNumber.Run(data.GuessMyNumber)},
-            {"Game02", AddressOf ThisGameIsAStub},
+            {"Feed the Fish", Sub(data) FeedTheFish.Run(data.FeedTheFish)},
             {"Game03", AddressOf ThisGameIsAStub},
             {"Game04", AddressOf ThisGameIsAStub},
             {"Game05", AddressOf ThisGameIsAStub},

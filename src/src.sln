@@ -16,6 +16,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Common", "Common\Common.vbp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Done", "Done", "{17D271F3-D6BB-42B0-84D0-D6D8A932E0C8}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FeedTheFish", "FeedTheFish\FeedTheFish.vbproj", "{0B45130D-D709-4992-B19F-E555B54661A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{15B26093-DBA4-47A2-A31E-E43BD5089558}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15B26093-DBA4-47A2-A31E-E43BD5089558}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15B26093-DBA4-47A2-A31E-E43BD5089558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B45130D-D709-4992-B19F-E555B54661A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B45130D-D709-4992-B19F-E555B54661A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B45130D-D709-4992-B19F-E555B54661A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B45130D-D709-4992-B19F-E555B54661A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
