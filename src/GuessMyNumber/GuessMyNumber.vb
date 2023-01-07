@@ -2,14 +2,15 @@ Public Module GuessMyNumber
     Private Const PlayText = "Play!"
     Private Const HowToPlayText = "How to play?"
     Private Const QuitText = "Quit"
-    Public Sub Run()
+    Public Sub Run(data As GuessMyNumberData)
         Do
             AnsiConsole.Clear()
+            ShowStatistics(data)
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Guess My Number(1-100)[/]"}
             prompt.AddChoices(PlayText, HowToPlayText, QuitText)
             Select Case AnsiConsole.Prompt(prompt)
                 Case PlayText
-                    PlayGame()
+                    PlayGame(data)
                 Case HowToPlayText
                     ShowInstructions()
                 Case QuitText
@@ -20,7 +21,15 @@ Public Module GuessMyNumber
         Loop
     End Sub
 
-    Private Sub PlayGame()
+    Private Sub ShowStatistics(data As GuessMyNumberData)
+        If data.GamesPlayed > 0 Then
+            AnsiConsole.MarkupLine($"Games Played: {data.GamesPlayed}")
+            AnsiConsole.MarkupLine($"Total Guesses: {data.TotalGuesses}")
+            AnsiConsole.MarkupLine($"Average Guesses: {data.TotalGuesses / data.GamesPlayed:f}")
+        End If
+    End Sub
+
+    Private Sub PlayGame(data As GuessMyNumberData)
         Dim random As New Random
         Dim target = random.Next(1, 101)
         Dim minimumGuess As Integer = 1
@@ -38,17 +47,19 @@ Public Module GuessMyNumber
                 Exit Do
             End If
             If guess < target Then
-                AnsiConsole.MarkupLine($"[red]Yer of {guess} guess is too low![/]")
+                AnsiConsole.MarkupLine($"[red]Yer guess of {guess} is too low![/]")
                 minimumGuess = guess + 1
             End If
             If guess > target Then
-                AnsiConsole.MarkupLine($"[red]Yer of {guess} guess is too high![/]")
+                AnsiConsole.MarkupLine($"[red]Yer goess of {guess} is too high![/]")
                 maximumGuess = guess - 1
             End If
             Common.OkPrompt()
         Loop
         AnsiConsole.MarkupLine("[lime]Yer correct![/]")
         AnsiConsole.MarkupLine($"It took you {guessCount} guesses!")
+        data.GamesPlayed += 1
+        data.TotalGuesses += guessCount
         Common.OkPrompt()
     End Sub
 

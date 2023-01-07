@@ -1,10 +1,10 @@
 Module Program
     Private Const QuitText = "Quit"
     Private Const OkText = "Ok"
-    Private ReadOnly gameTable As IReadOnlyDictionary(Of String, Action) =
-        New Dictionary(Of String, Action) From
+    Private ReadOnly gameTable As IReadOnlyDictionary(Of String, Action(Of FiftyGamesData)) =
+        New Dictionary(Of String, Action(Of FiftyGamesData)) From
         {
-            {"Guess My Number", AddressOf GuessMyNumber.Run},
+            {"Guess My Number", Sub(data) GuessMyNumber.Run(data.GuessMyNumber)},
             {"Game02", AddressOf ThisGameIsAStub},
             {"Game03", AddressOf ThisGameIsAStub},
             {"Game04", AddressOf ThisGameIsAStub},
@@ -57,6 +57,8 @@ Module Program
         }
     Sub Main(args As String())
         Console.Title = "Fifty Games!"
+        Dim data As New FiftyGamesData
+        'TODO: load data from file if it exists, otherwise blank it out
         Do
             AnsiConsole.Clear()
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Fifty Games![/]"}
@@ -69,11 +71,13 @@ Module Program
                         Exit Do
                     End If
                 Case Else
-                    gameTable(answer)()
+                    gameTable(answer)(data)
+                    'TODO: save data
             End Select
+
         Loop
     End Sub
-    Private Sub ThisGameIsAStub()
+    Private Sub ThisGameIsAStub(data As FiftyGamesData)
         AnsiConsole.Clear()
         AnsiConsole.MarkupLine("[red]This Game Is A Stub! Come back later![/]")
         Common.OkPrompt()
