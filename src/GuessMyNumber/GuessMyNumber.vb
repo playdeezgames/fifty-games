@@ -1,7 +1,4 @@
 Public Module GuessMyNumber
-    Private Const PlayText = "Play!"
-    Private Const HowToPlayText = "How to play?"
-    Private Const QuitText = "Quit"
     Public Sub Run(data As GuessMyNumberData)
         Do
             AnsiConsole.Clear()
@@ -14,7 +11,7 @@ Public Module GuessMyNumber
                 Case HowToPlayText
                     ShowInstructions()
                 Case QuitText
-                    If Common.Confirm("[red]Are you sure you want to quit?[/]") Then
+                    If ConfirmQuit() Then
                         Exit Do
                     End If
             End Select

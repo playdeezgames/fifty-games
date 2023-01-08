@@ -5,7 +5,7 @@ Module Program
         New Dictionary(Of String, Action(Of FiftyGamesData)) From
         {
             {"Guess My Number", Sub(data) GuessMyNumber.Run(data.GuessMyNumber)},
-            {"Feed the Fish", Sub(data) FeedTheFish.Run(data.FeedTheFish)},
+            {"Feed the Fish", Sub(data) FeedTheFish.Run(data.FeedTheFish, Sub() SaveData(data))},
             {"Game03", AddressOf ThisGameIsAStub},
             {"Game04", AddressOf ThisGameIsAStub},
             {"Game05", AddressOf ThisGameIsAStub},
@@ -66,7 +66,7 @@ Module Program
             Dim answer = AnsiConsole.Prompt(prompt)
             Select Case answer
                 Case QuitText
-                    If Common.Confirm("[red]Are you sure you want to quit?[/]") Then
+                    If ConfirmQuit() Then
                         Exit Do
                     End If
                 Case Else

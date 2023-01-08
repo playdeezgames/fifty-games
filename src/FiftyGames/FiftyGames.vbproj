@@ -5,7 +5,7 @@
     <RootNamespace>FiftyGames</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
-    <ImportedNamespaces>FeedTheFish=False,Spectre.Console=False,System.IO=False,System.Text.Json=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,FiftyGames=True</ImportedNamespaces>
+    <ImportedNamespaces>Common=False,FeedTheFish=False,Spectre.Console=False,System.IO=False,System.Text.Json=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,FiftyGames=True</ImportedNamespaces>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Import Include="Common" />
     <Import Include="FeedTheFish" />
     <Import Include="Spectre.Console" />
     <Import Include="System.IO" />

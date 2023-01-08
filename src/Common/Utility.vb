@@ -1,7 +1,4 @@
 Public Module Utility
-    Private Const OkText = "Ok"
-    Private Const NoText = "No"
-    Private Const YesText = "Yes"
     Public Sub OkPrompt()
         Dim prompt As New SelectionPrompt(Of String) With {.Title = ""}
         prompt.AddChoice(OkText)
@@ -11,5 +8,8 @@ Public Module Utility
         Dim prompt As New SelectionPrompt(Of String) With {.Title = text}
         prompt.AddChoices(NoText, YesText)
         Return AnsiConsole.Prompt(prompt) = YesText
+    End Function
+    Public Function ConfirmQuit() As Boolean
+        Return Common.Confirm("[red]Are you sure you want to quit?[/]")
     End Function
 End Module
