@@ -3,20 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FiftyGames", "FiftyGames\FiftyGames.vbproj", "{4D44A5B6-EBDB-4B63-B776-7950DACD11C7}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "FiftyGames", "FiftyGames\FiftyGames.vbproj", "{4D44A5B6-EBDB-4B63-B776-7950DACD11C7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_STUFF", "_STUFF", "{1B4F301B-37DD-4A9C-A42B-7BD72188E1D2}"
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "GuessMyNumber", "GuessMyNumber\GuessMyNumber.vbproj", "{FF94B8F2-6EAF-4BF0-9AEC-CC16D1A265E8}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "GuessMyNumber", "GuessMyNumber\GuessMyNumber.vbproj", "{FF94B8F2-6EAF-4BF0-9AEC-CC16D1A265E8}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Common", "Common\Common.vbproj", "{15B26093-DBA4-47A2-A31E-E43BD5089558}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Common", "Common\Common.vbproj", "{15B26093-DBA4-47A2-A31E-E43BD5089558}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Done", "Done", "{17D271F3-D6BB-42B0-84D0-D6D8A932E0C8}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FeedTheFish", "FeedTheFish\FeedTheFish.vbproj", "{0B45130D-D709-4992-B19F-E555B54661A8}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "FeedTheFish", "FeedTheFish\FeedTheFish.vbproj", "{0B45130D-D709-4992-B19F-E555B54661A8}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MoneyFace", "MoneyFace\MoneyFace.vbproj", "{19EE520D-6F92-4AB5-8CCF-0AE7D2001A58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,12 +42,17 @@ Global
 		{0B45130D-D709-4992-B19F-E555B54661A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B45130D-D709-4992-B19F-E555B54661A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B45130D-D709-4992-B19F-E555B54661A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19EE520D-6F92-4AB5-8CCF-0AE7D2001A58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19EE520D-6F92-4AB5-8CCF-0AE7D2001A58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19EE520D-6F92-4AB5-8CCF-0AE7D2001A58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19EE520D-6F92-4AB5-8CCF-0AE7D2001A58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FF94B8F2-6EAF-4BF0-9AEC-CC16D1A265E8} = {17D271F3-D6BB-42B0-84D0-D6D8A932E0C8}
+		{0B45130D-D709-4992-B19F-E555B54661A8} = {17D271F3-D6BB-42B0-84D0-D6D8A932E0C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FE36599-FFFB-49E0-9C4C-F3B5AD7B927E}

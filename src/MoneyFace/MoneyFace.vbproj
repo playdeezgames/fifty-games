@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>MoneyFace</RootNamespace>
+    <TargetFramework>net6.0</TargetFramework>
+    <OptionStrict>On</OptionStrict>
+    <ImportedNamespaces>Common=False,Spectre.Console=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,MoneyFace=True</ImportedNamespaces>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Import Include="Common" />
+    <Import Include="Spectre.Console" />
+  </ItemGroup>
+
+</Project>
