@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Done", "Done", "{17D271F3-D
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "FeedTheFish", "FeedTheFish\FeedTheFish.vbproj", "{0B45130D-D709-4992-B19F-E555B54661A8}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MoneyFace", "MoneyFace\MoneyFace.vbproj", "{19EE520D-6F92-4AB5-8CCF-0AE7D2001A58}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "MoneyFace", "MoneyFace\MoneyFace.vbproj", "{19EE520D-6F92-4AB5-8CCF-0AE7D2001A58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +53,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{FF94B8F2-6EAF-4BF0-9AEC-CC16D1A265E8} = {17D271F3-D6BB-42B0-84D0-D6D8A932E0C8}
 		{0B45130D-D709-4992-B19F-E555B54661A8} = {17D271F3-D6BB-42B0-84D0-D6D8A932E0C8}
+		{19EE520D-6F92-4AB5-8CCF-0AE7D2001A58} = {17D271F3-D6BB-42B0-84D0-D6D8A932E0C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FE36599-FFFB-49E0-9C4C-F3B5AD7B927E}
