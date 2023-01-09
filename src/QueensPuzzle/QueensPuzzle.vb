@@ -4,6 +4,10 @@ Public Module QueensPuzzle
     Public Sub Run(data As QueensPuzzleData)
         Do
             AnsiConsole.Clear()
+            If data.GamesAttempted > 0 Then
+                AnsiConsole.MarkupLine($"Attempts: {data.GamesAttempted}")
+                AnsiConsole.MarkupLine($"Completion Percentage: {100 * data.GamesCompleted / (data.GamesAttempted):f}%")
+            End If
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Queen's Puzzle[/]"}
             prompt.AddChoices(PlayText, HowToPlayText, QuitText)
             Select Case AnsiConsole.Prompt(prompt)
@@ -21,6 +25,7 @@ Public Module QueensPuzzle
 
     Private Sub PlayGame(data As QueensPuzzleData)
         Dim queens As New List(Of (Integer, Integer))
+        data.GamesAttempted += 1
         Do
             AnsiConsole.Clear()
             AnsiConsole.MarkupLine("  A B C D E F G H")
@@ -75,7 +80,13 @@ Public Module QueensPuzzle
                 Continue Do
             End If
             queens.Add((boardColumn, boardRow))
+            If queens.Count = 8 Then
+                Exit Do
+            End If
         Loop
+        If queens.Count = 8 Then
+            data.GamesCompleted += 1
+        End If
     End Sub
 
     Private Function CanCapture(fromCell As (Integer, Integer), toCell As (boardColumn As Integer, boardRow As Integer)) As Boolean

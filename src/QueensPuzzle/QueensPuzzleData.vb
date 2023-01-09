@@ -1,3 +1,4 @@
 ﻿Public Class QueensPuzzleData
-    Public Property GamesPlayed As Integer
+    Public Property GamesAttempted As Integer
+    Public Property GamesCompleted As Integer
 End Class
