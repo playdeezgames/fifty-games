@@ -7,7 +7,7 @@ Module Program
             {"Guess My Number", Sub(data) GuessMyNumber.Run(data.GuessMyNumber)},
             {"Feed the Fish", Sub(data) FeedTheFish.Run(data.FeedTheFish, Sub() SaveData(data))},
             {"Moneyface", Sub(data) MoneyFace.Run(data.MoneyFace)},
-            {"Game04", AddressOf ThisGameIsAStub},
+            {"Queen's Puzzle", Sub(data) QueensPuzzle.Run(data.QueensPuzzle)},
             {"Game05", AddressOf ThisGameIsAStub},
             {"Game06", AddressOf ThisGameIsAStub},
             {"Game07", AddressOf ThisGameIsAStub},

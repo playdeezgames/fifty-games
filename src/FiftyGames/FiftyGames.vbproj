@@ -5,7 +5,7 @@
     <RootNamespace>FiftyGames</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
-    <ImportedNamespaces>Common=False,FeedTheFish=False,GuessMyNumber=False,MoneyFace=False,Spectre.Console=False,System.IO=False,System.Text.Json=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,FiftyGames=True</ImportedNamespaces>
+    <ImportedNamespaces>Common=False,FeedTheFish=False,GuessMyNumber=False,MoneyFace=False,QueensPuzzle=False,Spectre.Console=False,System.IO=False,System.Text.Json=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,FiftyGames=True</ImportedNamespaces>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -26,6 +26,7 @@
     <Import Include="FeedTheFish" />
     <Import Include="GuessMyNumber" />
     <Import Include="MoneyFace" />
+    <Import Include="QueensPuzzle" />
     <Import Include="Spectre.Console" />
     <Import Include="System.IO" />
     <Import Include="System.Text.Json" />
@@ -35,6 +36,7 @@
     <ProjectReference Include="..\FeedTheFish\FeedTheFish.vbproj" />
     <ProjectReference Include="..\GuessMyNumber\GuessMyNumber.vbproj" />
     <ProjectReference Include="..\MoneyFace\MoneyFace.vbproj" />
+    <ProjectReference Include="..\QueensPuzzle\QueensPuzzle.vbproj" />
   </ItemGroup>
 
 </Project>
