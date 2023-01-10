@@ -8,7 +8,7 @@ Module Program
             {"Feed the Fish", Sub(data) FeedTheFish.Run(data.FeedTheFish, Sub() SaveData(data))},
             {"Moneyface", Sub(data) MoneyFace.Run(data.MoneyFace)},
             {"Queen's Puzzle", Sub(data) QueensPuzzle.Run(data.QueensPuzzle)},
-            {"Game05", AddressOf ThisGameIsAStub},
+            {"Infinite Runner", Sub(data) InfiniteRunner.Run(data.InfiniteRunner)},
             {"Game06", AddressOf ThisGameIsAStub},
             {"Game07", AddressOf ThisGameIsAStub},
             {"Game08", AddressOf ThisGameIsAStub},

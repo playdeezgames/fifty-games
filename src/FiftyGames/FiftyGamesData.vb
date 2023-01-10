@@ -3,4 +3,5 @@
     Public Property FeedTheFish As New FeedTheFishData
     Public Property MoneyFace As New MoneyFaceData
     Public Property QueensPuzzle As New QueensPuzzleData
+    Public Property InfiniteRunner As New InfiniteRunnerData
 End Class
