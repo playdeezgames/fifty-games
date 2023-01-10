@@ -8,4 +8,12 @@ In which I make fifty games. In fifty weeks.
 - 03 Moneyface
 - 04 Queen's Puzzle
 - 05 Infinite Runner
+- 06 Interstellar Interloper
+
+## Interstellar Interloper
+
+- Stars
+  - X,Y,Player,Ships
+- Fleets
+  - X,Y,Destination,Player,Ships
 

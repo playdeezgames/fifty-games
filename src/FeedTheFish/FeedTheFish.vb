@@ -19,7 +19,7 @@ Public Module FeedTheFish
                     If data.FedUntil.Value < DateTimeOffset.Now Then
                         data.FishDied = data.FedUntil
                         data.FishesStarved += 1
-                        AnsiConsole.MarkupLine("Yer fish is has starved to death!")
+                        AnsiConsole.MarkupLine("Yer fish has starved to death!")
                         prompt.AddChoice(NewFishText)
                     Else
                         AnsiConsole.MarkupLine("Yer fish is alive!")
