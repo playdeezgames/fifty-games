@@ -18,8 +18,17 @@ Public Module InterstellarInterloper
     End Sub
 
     Private Sub PlayGame(data As InterstellarInterloperData)
-        AnsiConsole.MarkupLine("TODO: Implement game!")
-        OkPrompt()
+        Do
+            If data.TurnsRemaining > 0 Then
+                If Not PlayGameHandler.Run(data) Then
+                    Exit Do
+                End If
+            Else
+                If Not GameOverHandler.Run(data) Then
+                    Exit Do
+                End If
+            End If
+        Loop
     End Sub
 
     Private Sub ShowInstructions()

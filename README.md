@@ -17,3 +17,6 @@ In which I make fifty games. In fifty weeks.
 - Fleets
   - X,Y,Destination,Player,Ships
 
+## Audio
+
+- Beeps and boops are needful
