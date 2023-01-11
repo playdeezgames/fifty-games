@@ -1,6 +1,11 @@
 ﻿Friend Module PlayGameHandler
     Friend Function Run(data As InterstellarInterloperData) As Boolean
-        'TODO: handle "nothing" owners after all owners have moved
+        If data.OwnersTurn >= data.Owners.Count Then
+            NeutralTurnHandler.Run(data)
+            FleetUpdateHandler.Run(data)
+            data.TurnsRemaining -= 1
+            Return True
+        End If
         Dim owner = data.Owners(data.OwnersTurn)
         If owner.IsHuman Then
             Return PlayHumanTurnHandler.Run(data)

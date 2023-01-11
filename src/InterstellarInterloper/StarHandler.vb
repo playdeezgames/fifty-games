@@ -11,6 +11,8 @@
                 prompt.AddChoice(SendFleetText)
             End If
             Select Case AnsiConsole.Prompt(prompt)
+                Case SendFleetText
+                    SendFleetHandler.Run(data, starIndex)
                 Case NeverMindText
                     Exit Do
             End Select

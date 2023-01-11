@@ -3,9 +3,19 @@
         AnsiConsole.Clear()
         Dim prompt As New SelectionPrompt(Of String) With {.Title = $"[olive]Player #{data.OwnersTurn + 1}:[/]"}
         prompt.AddChoice(StarsText)
+        If data.Fleets.Any(Function(fleet) fleet.Owner = data.OwnersTurn) Then
+            prompt.AddChoice(FleetsText)
+        End If
         prompt.AddChoice(MapText)
+        prompt.AddChoice(EndTurnText)
         prompt.AddChoice(QuitText)
         Select Case AnsiConsole.Prompt(prompt)
+            Case EndTurnText
+                If Confirm("[olive]Are you sure you want to end yer turn?[/]") Then
+                    data.OwnersTurn += 1
+                End If
+            Case FleetsText
+                FleetsHandler.Run(data)
             Case StarsText
                 StarsHandler.Run(data)
             Case MapText
