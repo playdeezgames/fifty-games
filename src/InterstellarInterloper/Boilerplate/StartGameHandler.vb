@@ -2,8 +2,7 @@
     Private Const StarCount = 20
     Private Const TotalTurns = 20
     Private Const InitialShips = 10
-    Friend Sub Run(data As InterstellarInterloperData)
-        Dim random As New Random
+    Friend Sub Run(data As InterstellarInterloperData, random As Random)
         'TODO: allow for customization of number of worlds, players, etc
         data.TurnsRemaining = TotalTurns
         data.OwnersTurn = 0
@@ -28,7 +27,15 @@
             New OwnerData With {.IsHuman = True},
             New OwnerData With {.IsHuman = False}
         }
-        data.Stars(0).Owner = 0
-        data.Stars(1).Owner = 1
+        SpawnOwners(data, random)
+    End Sub
+
+    Private Sub SpawnOwners(data As InterstellarInterloperData, random As Random)
+        Dim ownerIndex = 0
+        For Each owner In data.Owners
+            Dim available = data.Stars.Where(Function(star) star.Owner Is Nothing).ToList
+            available(random.Next(available.Count)).Owner = ownerIndex
+            ownerIndex += 1
+        Next
     End Sub
 End Module

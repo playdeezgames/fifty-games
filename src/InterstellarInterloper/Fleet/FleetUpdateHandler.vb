@@ -1,29 +1,28 @@
 ﻿Friend Module FleetUpdateHandler
-    Friend Sub Run(data As InterstellarInterloperData)
+    Friend Sub Run(data As InterstellarInterloperData, random As Random)
         For Each fleet In data.Fleets
             fleet.Distance -= fleet.Speed
         Next
         Dim arrivedFleets = data.Fleets.Where(Function(fleet) fleet.Distance <= 0).ToList
         data.Fleets = data.Fleets.Where(Function(fleet) fleet.Distance > 0).ToList
         For Each fleet In arrivedFleets
-            HandleArrival(data, fleet)
+            HandleArrival(data, fleet, random)
         Next
     End Sub
 
-    Private Sub HandleArrival(data As InterstellarInterloperData, fleet As FleetData)
+    Private Sub HandleArrival(data As InterstellarInterloperData, fleet As FleetData, random As Random)
         Dim destination = data.Stars(fleet.Destination)
         If destination.Owner = fleet.Owner Then
             HandleFriendlyArrival(destination, fleet)
         Else
-            HandleEnemyArrival(destination, fleet)
+            HandleEnemyArrival(destination, fleet, random)
         End If
     End Sub
 
-    Private Sub HandleEnemyArrival(destination As StarData, fleet As FleetData)
+    Private Sub HandleEnemyArrival(destination As StarData, fleet As FleetData, random As Random)
         Dim defenderName = If(destination.Owner.HasValue, $"Player #{destination.Owner.Value + 1:d2}", "Neutral Player")
         Dim attackerName = $"Player #{fleet.Owner + 1:d2}"
         AnsiConsole.MarkupLine($"{attackerName} attacks Star #{fleet.Destination + 1:d2} with {fleet.Ships} ships, currently owned by {defenderName} and defended by {destination.Ships} ships.")
-        Dim random As New Random
         Dim round = 1
         While fleet.Ships > 0 AndAlso destination.Ships > 0
             Dim attack = Math.Min(random.Next(0, fleet.Ships + 1), destination.Ships)

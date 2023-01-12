@@ -1,5 +1,5 @@
 ﻿Friend Module GameOverHandler
-    Friend Function Run(data As InterstellarInterloperData) As Boolean
+    Friend Function Run(data As InterstellarInterloperData, random As Random) As Boolean
         AnsiConsole.Clear()
         Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]No Game In Progress![/]"}
         If data.Owners.Any Then
@@ -9,7 +9,7 @@
         prompt.AddChoice(QuitText)
         Select Case AnsiConsole.Prompt(prompt)
             Case StartGameText
-                StartGameHandler.Run(data)
+                StartGameHandler.Run(data, random)
             Case QuitText
                 If ConfirmQuit() Then
                     Return False

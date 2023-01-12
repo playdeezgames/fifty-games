@@ -1,35 +1,22 @@
 Public Module InterstellarInterloper
     Public Sub Run(data As InterstellarInterloperData)
-        Do
-            AnsiConsole.Clear()
-            Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Interstellar Interloper[/]"}
-            prompt.AddChoices(PlayText, HowToPlayText, QuitText)
-            Select Case AnsiConsole.Prompt(prompt)
-                Case PlayText
-                    PlayGame(data)
-                Case HowToPlayText
-                    ShowInstructions()
-                Case QuitText
-                    If ConfirmQuit() Then
-                        Exit Do
-                    End If
-            End Select
+        Dim random As New Random
+        Do While PlayGame(data, random)
         Loop
     End Sub
 
-    Private Sub PlayGame(data As InterstellarInterloperData)
-        Do
-            If data.TurnsRemaining > 0 Then
-                If Not PlayGameHandler.Run(data) Then
-                    Exit Do
-                End If
-            Else
-                If Not GameOverHandler.Run(data) Then
-                    Exit Do
-                End If
+    Private Function PlayGame(data As InterstellarInterloperData, random As Random) As Boolean
+        If data.TurnsRemaining > 0 Then
+            If Not PlayGameHandler.Run(data, random) Then
+                Return False
             End If
-        Loop
-    End Sub
+        Else
+            If Not GameOverHandler.Run(data, random) Then
+                Return False
+            End If
+        End If
+        Return True
+    End Function
 
     Private Sub ShowInstructions()
         AnsiConsole.Clear()

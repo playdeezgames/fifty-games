@@ -1,6 +1,5 @@
 ﻿Friend Module PlayComputerTurnHandler
-    Friend Sub Run(data As InterstellarInterloperData)
-        Dim random As New Random
+    Friend Sub Run(data As InterstellarInterloperData, random As Random)
         Dim stars = data.Stars.Where(Function(star) star.Owner.HasValue AndAlso star.Owner.Value = data.OwnersTurn)
         Dim destinations = data.Stars.Where(Function(star) Not star.Owner.HasValue OrElse star.Owner.Value <> data.OwnersTurn)
         If destinations.Any Then
