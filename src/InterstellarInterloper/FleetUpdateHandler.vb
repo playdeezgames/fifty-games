@@ -36,6 +36,7 @@
             AnsiConsole.MarkupLine($"The attack fleet has {fleet.Ships} ships remaining!")
             AnsiConsole.MarkupLine($"The star has {destination.Ships} remaining!")
             OkPrompt()
+            round += 1
         End While
         If fleet.Ships > 0 Then
             AnsiConsole.MarkupLine($"{attackerName} takes over Star #{fleet.Destination + 1:d2}!")
