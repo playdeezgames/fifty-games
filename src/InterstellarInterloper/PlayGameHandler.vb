@@ -1,8 +1,9 @@
 ﻿Friend Module PlayGameHandler
     Friend Function Run(data As InterstellarInterloperData) As Boolean
         If data.OwnersTurn >= data.Owners.Count Then
-            NeutralTurnHandler.Run(data)
             FleetUpdateHandler.Run(data)
+            ShipProductionHandler.Run(data)
+            data.OwnersTurn = 0
             data.TurnsRemaining -= 1
             Return True
         End If

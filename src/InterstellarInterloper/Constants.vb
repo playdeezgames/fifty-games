@@ -1,4 +1,5 @@
 ﻿Friend Module Constants
+    Friend Const AbandonGameText = "Abandon Game"
     Friend Const EndTurnText = "End Turn"
     Friend Const FleetsText = "Fleets"
     Friend Const MapColumns = 20
