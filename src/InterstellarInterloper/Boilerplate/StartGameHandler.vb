@@ -25,8 +25,10 @@
             End If
         End While
         data.Owners = New List(Of OwnerData) From {
-            New OwnerData With {.IsHuman = True}
+            New OwnerData With {.IsHuman = True},
+            New OwnerData With {.IsHuman = False}
         }
         data.Stars(0).Owner = 0
+        data.Stars(1).Owner = 1
     End Sub
 End Module
