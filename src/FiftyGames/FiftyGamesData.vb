@@ -5,4 +5,5 @@
     Public Property QueensPuzzle As New QueensPuzzleData
     Public Property InfiniteRunner As New InfiniteRunnerData
     Public Property InterstellarInterloper As New InterstellarInterloperData
+    Public Property LandyMcLanderface As New LandyMcLanderfaceData
 End Class

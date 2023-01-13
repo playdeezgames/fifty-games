@@ -10,7 +10,7 @@ Module Program
             {"Queen's Puzzle", Sub(data) QueensPuzzle.Run(data.QueensPuzzle)},
             {"Infinite Runner", Sub(data) InfiniteRunner.Run(data.InfiniteRunner)},
             {"Interstellar Interloper", Sub(data) InterstellarInterloper.Run(data.InterstellarInterloper)},
-            {"Game07", AddressOf ThisGameIsAStub},
+            {"Landy McLanderface", Sub(data) LandyMcLanderface.Run(data.LandyMcLanderface)},
             {"Game08", AddressOf ThisGameIsAStub},
             {"Game09", AddressOf ThisGameIsAStub},
             {"Game10", AddressOf ThisGameIsAStub},
