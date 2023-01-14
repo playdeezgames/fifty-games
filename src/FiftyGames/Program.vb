@@ -11,7 +11,7 @@ Module Program
             {"Infinite Runner", Sub(data) InfiniteRunner.Run(data.InfiniteRunner)},
             {"Interstellar Interloper", Sub(data) InterstellarInterloper.Run(data.InterstellarInterloper)},
             {"Landy McLanderface", Sub(data) LandyMcLanderface.Run(data.LandyMcLanderface)},
-            {"Game08", AddressOf ThisGameIsAStub},
+            {"Lights Out", Sub(data) LightsOut.Run(data.LightsOut)},
             {"Game09", AddressOf ThisGameIsAStub},
             {"Game10", AddressOf ThisGameIsAStub},
             {"Game11", AddressOf ThisGameIsAStub},

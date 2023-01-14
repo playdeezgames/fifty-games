@@ -41,6 +41,7 @@
     <ProjectReference Include="..\InfiniteRunner\InfiniteRunner.vbproj" />
     <ProjectReference Include="..\InterstellarInterloper\InterstellarInterloper.vbproj" />
     <ProjectReference Include="..\LandyMcLanderface\LandyMcLanderface.vbproj" />
+    <ProjectReference Include="..\LightsOut\LightsOut.vbproj" />
     <ProjectReference Include="..\MoneyFace\MoneyFace.vbproj" />
     <ProjectReference Include="..\QueensPuzzle\QueensPuzzle.vbproj" />
   </ItemGroup>
