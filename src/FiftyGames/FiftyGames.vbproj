@@ -5,7 +5,7 @@
     <RootNamespace>FiftyGames</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
-    <ImportedNamespaces>Common=False,FeedTheFish=False,GuessMyNumber=False,InfiniteRunner=False,InterstellarInterloper=False,LandyMcLanderface=False,MoneyFace=False,QueensPuzzle=False,Spectre.Console=False,System.IO=False,System.Text.Json=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,FiftyGames=True</ImportedNamespaces>
+    <ImportedNamespaces>CoinFlip=False,Common=False,FeedTheFish=False,GuessMyNumber=False,InfiniteRunner=False,InterstellarInterloper=False,LandyMcLanderface=False,LightsOut=False,MoneyFace=False,QueensPuzzle=False,Spectre.Console=False,System.IO=False,System.Text.Json=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,FiftyGames=True</ImportedNamespaces>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,12 +22,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Import Include="CoinFlip" />
     <Import Include="Common" />
     <Import Include="FeedTheFish" />
     <Import Include="GuessMyNumber" />
     <Import Include="InfiniteRunner" />
     <Import Include="InterstellarInterloper" />
     <Import Include="LandyMcLanderface" />
+    <Import Include="LightsOut" />
     <Import Include="MoneyFace" />
     <Import Include="QueensPuzzle" />
     <Import Include="Spectre.Console" />
@@ -36,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CoinFlip\CoinFlip.vbproj" />
     <ProjectReference Include="..\FeedTheFish\FeedTheFish.vbproj" />
     <ProjectReference Include="..\GuessMyNumber\GuessMyNumber.vbproj" />
     <ProjectReference Include="..\InfiniteRunner\InfiniteRunner.vbproj" />

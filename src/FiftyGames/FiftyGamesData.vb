@@ -9,4 +9,5 @@ Public Class FiftyGamesData
     Public Property InterstellarInterloper As New InterstellarInterloperData
     Public Property LandyMcLanderface As New LandyMcLanderfaceData
     Public Property LightsOut As New LightsOutData
+    Public Property CoinFlip As New CoinFlipData
 End Class

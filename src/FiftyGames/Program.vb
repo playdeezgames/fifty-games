@@ -12,7 +12,7 @@ Module Program
             {"Interstellar Interloper", Sub(data) InterstellarInterloper.Run(data.InterstellarInterloper)},
             {"Landy McLanderface", Sub(data) LandyMcLanderface.Run(data.LandyMcLanderface)},
             {"Lights Out", Sub(data) LightsOut.Run(data.LightsOut)},
-            {"Game09", AddressOf ThisGameIsAStub},
+            {"Coin Flip", Sub(data) CoinFlip.Run(data.CoinFlip)},
             {"Game10", AddressOf ThisGameIsAStub},
             {"Game11", AddressOf ThisGameIsAStub},
             {"Game12", AddressOf ThisGameIsAStub},
