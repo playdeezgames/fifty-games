@@ -28,6 +28,13 @@
     Function AnyLit() As Boolean
         Return _cells.Any(Function(cell) cell)
     End Function
+    Sub MakeMove(column As Integer, row As Integer)
+        Toggle(column, row)
+        Toggle(column + 1, row)
+        Toggle(column - 1, row)
+        Toggle(column, row + 1)
+        Toggle(column, row - 1)
+    End Sub
     Sub GenerateBoard(level As Integer, random As Random)
         Dim chosen As New HashSet(Of (Integer, Integer))
         For index = 1 To level
@@ -38,11 +45,7 @@
                 row = random.Next(0, _rows)
             Loop
             chosen.Add((column, row))
-            Toggle(column, row)
-            Toggle(column + 1, row)
-            Toggle(column - 1, row)
-            Toggle(column, row + 1)
-            Toggle(column, row - 1)
+            MakeMove(column, row)
         Next
     End Sub
 End Class

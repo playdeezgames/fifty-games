@@ -27,21 +27,23 @@ Public Module LightsOut
         Do
             board.GenerateBoard(level, random)
             Dim movesLeft = level
+            Dim column As Integer = GridColumns \ 2
+            Dim row As Integer = GridRows \ 2
             While movesLeft > 0 AndAlso board.AnyLit
                 AnsiConsole.Clear()
                 AnsiConsole.MarkupLine($"Level: {level}, Moves Remaining: {movesLeft}")
                 ShowBoard(board)
-                Dim column = ChooseColumn()
-                Dim row = ChooseRow()
-                board.Toggle(column, row)
-                board.Toggle(column - 1, row)
-                board.Toggle(column + 1, row)
-                board.Toggle(column, row - 1)
-                board.Toggle(column, row + 1)
+                Dim cell = ChooseCell(column, row)
+                column = cell.Item1
+                row = cell.Item2
+                board.MakeMove(column, row)
                 movesLeft -= 1
             End While
             gameover = board.AnyLit
             If Not gameover Then
+                AnsiConsole.Clear()
+                AnsiConsole.MarkupLine($"Level: {level}, Moves Remaining: {movesLeft}")
+                ShowBoard(board)
                 AnsiConsole.MarkupLine("You beat the level!")
                 level += 1
                 OkPrompt()
@@ -52,6 +54,62 @@ Public Module LightsOut
         ShowBoard(board)
         OkPrompt()
     End Sub
+
+    Private Function ChooseCell(column As Integer, row As Integer) As (Integer, Integer)
+        AnsiConsole.Cursor.Hide
+        Do
+            'draw outline of cell
+            AnsiConsole.Cursor.SetPosition(column * 2 + 3, row * 2 + 3)
+            AnsiConsole.Markup("[lime]+-+[/]")
+            AnsiConsole.Cursor.SetPosition(column * 2 + 3, row * 2 + 5)
+            AnsiConsole.Markup("[lime]+-+[/]")
+            AnsiConsole.Cursor.SetPosition(column * 2 + 3, row * 2 + 4)
+            AnsiConsole.Markup("[lime]|[/]")
+            AnsiConsole.Cursor.SetPosition(column * 2 + 5, row * 2 + 4)
+            AnsiConsole.Markup("[lime]|[/]")
+            'wait for key
+            Dim key As ConsoleKey
+            Do
+                Dim info = AnsiConsole.Console.Input.ReadKey(True)
+                If info.HasValue Then
+                    key = info.Value.Key
+                    Select Case info.Value.Key
+                        Case ConsoleKey.UpArrow,
+                            ConsoleKey.DownArrow,
+                            ConsoleKey.LeftArrow,
+                            ConsoleKey.RightArrow,
+                            ConsoleKey.Spacebar,
+                            ConsoleKey.Enter
+                            Exit Do
+                    End Select
+                End If
+            Loop
+            'undraw outline of cell
+            AnsiConsole.Cursor.SetPosition(column * 2 + 3, row * 2 + 3)
+            AnsiConsole.Markup("[silver]+-+[/]")
+            AnsiConsole.Cursor.SetPosition(column * 2 + 3, row * 2 + 5)
+            AnsiConsole.Markup("[silver]+-+[/]")
+            AnsiConsole.Cursor.SetPosition(column * 2 + 3, row * 2 + 4)
+            AnsiConsole.Markup("[silver]|[/]")
+            AnsiConsole.Cursor.SetPosition(column * 2 + 5, row * 2 + 4)
+            AnsiConsole.Markup("[silver]|[/]")
+            'process key
+            Select Case key
+                Case ConsoleKey.UpArrow
+                    row = (row + GridRows - 1) Mod GridRows
+                Case ConsoleKey.DownArrow
+                    row = (row + 1) Mod GridRows
+                Case ConsoleKey.LeftArrow
+                    column = (column + GridColumns - 1) Mod GridColumns
+                Case ConsoleKey.RightArrow
+                    column = (column + 1) Mod GridColumns
+                Case Else
+                    AnsiConsole.Cursor.Show
+                    Return (column, row)
+            End Select
+        Loop
+    End Function
+
 
     Private Function ChooseColumn() As Integer
         Do
