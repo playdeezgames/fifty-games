@@ -2,6 +2,7 @@
     None
     Floor
     Ladder
+    WalkedFloor
 End Enum
 Friend Enum ItemType
     None
@@ -21,6 +22,11 @@ Friend Class Board
     Private _rows As Integer
     Private _columns As Integer
     Private _cells As New List(Of BoardCell)
+    Friend ReadOnly Property IsCompleted As Boolean
+        Get
+            Return Not _cells.Any(Function(cell) cell.TerrainType = TerrainType.Floor)
+        End Get
+    End Property
     Friend ReadOnly Property Rows As Integer
         Get
             Return _rows
@@ -39,6 +45,9 @@ Friend Class Board
             Return Nothing
         End If
         Return _cells(row * _columns + column)
+    End Function
+    Friend Function GetCell(position As (Integer, Integer)) As BoardCell
+        Return GetCell(position.Item1, position.Item2)
     End Function
 
     Private Sub LoadData(data As IEnumerable(Of String))
@@ -85,13 +94,23 @@ Friend Class Board
         If Not IsInBounds(nextPosition.Item1, nextPosition.Item2) Then
             Return
         End If
-        Dim fromCell = GetCell(position.Item1, position.Item2)
-        Dim toCell = GetCell(nextPosition.Item1, nextPosition.Item2)
+        Dim fromCell = GetCell(position)
+        Dim toCell = GetCell(nextPosition)
         Dim characterType = fromCell.CharacterType
         toCell.CharacterType = characterType
         toCell.IsDirty = True
         fromCell.CharacterType = CharacterType.None
         fromCell.IsDirty = True
+        If characterType <> CharacterType.Player Then
+            Return
+        End If
+        Dim underCell = GetCell(nextPosition.Item1, nextPosition.Item2 + 1)
+        If underCell IsNot Nothing Then
+            If underCell.TerrainType = TerrainType.Floor Then
+                underCell.TerrainType = TerrainType.WalkedFloor
+                underCell.IsDirty = True
+            End If
+        End If
     End Sub
 
     Private Function GetPlayerPosition() As (Integer, Integer)
@@ -102,6 +121,26 @@ Friend Class Board
     Friend Sub MovePlayerRight()
         Dim position As (Integer, Integer) = GetPlayerPosition()
         Dim nextPosition = (position.Item1 + 1, position.Item2)
+        MoveCharacter(position, nextPosition)
+    End Sub
+
+    Friend Sub MovePlayerUp()
+        Dim position As (Integer, Integer) = GetPlayerPosition()
+        Dim cell = GetCell(position.Item1, position.Item2)
+        If cell.TerrainType <> TerrainType.Ladder Then
+            Return
+        End If
+        Dim nextPosition = (position.Item1, position.Item2 - 1)
+        MoveCharacter(position, nextPosition)
+    End Sub
+
+    Friend Sub MovePlayerDown()
+        Dim position As (Integer, Integer) = GetPlayerPosition()
+        Dim nextPosition = (position.Item1, position.Item2 + 1)
+        Dim cell = GetCell(nextPosition.Item1, nextPosition.Item2)
+        If cell.TerrainType <> TerrainType.Ladder Then
+            Return
+        End If
         MoveCharacter(position, nextPosition)
     End Sub
 End Class

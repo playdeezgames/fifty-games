@@ -21,23 +21,23 @@ The goal is to have walked on all of the platforms to complete the level before 
         New List(Of String) From
         {
             "                                                  ",
+            "     $                     $                      ",
             "                                                  ",
-            "                                                  ",
-            "==================================================",
-            "                                                  ",
-            "                                                  ",
-            "==================================================",
-            "                                                  ",
-            "                                                  ",
-            "==================================================",
-            "                                                  ",
-            "                                                  ",
-            "==================================================",
-            "                                                  ",
-            "                                                  ",
-            "==================================================",
-            "                                              $   ",
-            "                                                  ",
+            "===========================================|======",
+            "                           $               |      ",
+            "                                           |      ",
+            "====|=============================================",
+            "    |                             $               ",
+            "    |                                             ",
+            "===========================================|======",
+            "          $                                |      ",
+            "                                           |      ",
+            "====|=============================================",
+            "    |                           $                 ",
+            "    |                                             ",
+            "===========================================|======",
+            "            $                              |  $   ",
+            "                                           |      ",
             "=====|============================================",
             "     |                                     $      ",
             "     |                                            ",
@@ -58,9 +58,13 @@ The goal is to have walked on all of the platforms to complete the level before 
                         board.MovePlayerLeft()
                     Case ConsoleKey.RightArrow
                         board.MovePlayerRight()
+                    Case ConsoleKey.UpArrow
+                        board.MovePlayerUp()
+                    Case ConsoleKey.DownArrow
+                        board.MovePlayerDown()
                 End Select
             End If
-        Loop
+        Loop Until board.IsCompleted
         AnsiConsole.Cursor.Show
     End Sub
 
@@ -83,7 +87,9 @@ The goal is to have walked on all of the platforms to complete the level before 
                             Case Else
                                 Select Case cell.TerrainType
                                     Case TerrainType.Floor
-                                        AnsiConsole.Markup("[blue]=[/]")
+                                        AnsiConsole.Markup("[blue on black]=[/]")
+                                    Case TerrainType.WalkedFloor
+                                        AnsiConsole.Markup("[black on blue]=[/]")
                                     Case TerrainType.Ladder
                                         AnsiConsole.Markup("[silver]|[/]")
                                     Case Else
