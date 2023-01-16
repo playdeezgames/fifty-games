@@ -9,6 +9,9 @@ In which I make fifty games. In fifty weeks.
 - 04 Queen's Puzzle
 - 05 Infinite Runner
 - 06 Interstellar Interloper
+- 07 Landy McLanderface
+- 08 Lights Out
+- 09 Coin Flip
 
 ## Interstellar Interloper
 
