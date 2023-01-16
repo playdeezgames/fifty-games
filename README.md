@@ -14,12 +14,9 @@ In which I make fifty games. In fifty weeks.
 - 09 Coin Flip
 - 10 Platformer
 
-## Interstellar Interloper
+## Platformer
 
-- Stars
-  - X,Y,Player,Ships
-- Fleets
-  - X,Y,Destination,Player,Ships
+falling logic
 
 ## Audio
 

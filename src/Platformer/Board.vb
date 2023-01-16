@@ -14,6 +14,7 @@ Friend Enum CharacterType
 End Enum
 Friend Class Character
     Property CharacterType As CharacterType
+    Property IsFalling As Boolean
 End Class
 Friend Class BoardCell
     Property TerrainType As TerrainType
@@ -127,10 +128,16 @@ Friend Class Board
         End If
         Dim underCell = GetCell(characterCell.Column, characterCell.Row + 1)
         If underCell IsNot Nothing Then
-            If underCell.TerrainType = TerrainType.Floor Then
-                underCell.TerrainType = TerrainType.WalkedFloor
-                underCell.IsDirty = True
-            End If
+            Select Case underCell.TerrainType
+                Case TerrainType.None
+                    characterCell.Character.IsFalling = True
+                Case TerrainType.Floor
+                    characterCell.Character.IsFalling = False
+                    underCell.TerrainType = TerrainType.WalkedFloor
+                    underCell.IsDirty = True
+                Case TerrainType.Ladder
+                    characterCell.Character.IsFalling = False
+            End Select
         End If
     End Sub
 
