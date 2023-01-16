@@ -12,11 +12,16 @@ Friend Enum CharacterType
     None
     Player
 End Enum
+Friend Class Character
+    Property CharacterType As CharacterType
+End Class
 Friend Class BoardCell
     Property TerrainType As TerrainType
     Property ItemType As ItemType
-    Property CharacterType As CharacterType
+    Property Character As Character
     Property IsDirty As Boolean
+    Property Column As Integer
+    Property Row As Integer
 End Class
 Friend Class Board
     Private _rows As Integer
@@ -54,27 +59,33 @@ Friend Class Board
         _rows = data.Count
         _columns = data.First.Count
         _cells.Clear()
+        Dim row As Integer = 0
         For Each line In data
+            Dim column As Integer = 0
             For Each character In line
                 Dim cell As New BoardCell With
                     {
                         .TerrainType = TerrainType.None,
                         .ItemType = ItemType.None,
-                        .CharacterType = CharacterType.None,
-                        .IsDirty = True
+                        .Character = Nothing,
+                        .IsDirty = True,
+                        .Column = column,
+                        .Row = row
                     }
+                column += 1
                 Select Case character
                     Case "="c
                         cell.TerrainType = TerrainType.Floor
                     Case "$"c
                         cell.ItemType = ItemType.Money
                     Case "@"c
-                        cell.CharacterType = CharacterType.Player
+                        cell.Character = New Character With {.CharacterType = CharacterType.Player}
                     Case "|"c
                         cell.TerrainType = TerrainType.Ladder
                 End Select
                 _cells.Add(cell)
             Next
+            row += 1
         Next
     End Sub
 
@@ -96,15 +107,25 @@ Friend Class Board
         End If
         Dim fromCell = GetCell(position)
         Dim toCell = GetCell(nextPosition)
-        Dim characterType = fromCell.CharacterType
-        toCell.CharacterType = characterType
+        Dim character = fromCell.Character
+        toCell.Character = character
         toCell.IsDirty = True
-        fromCell.CharacterType = CharacterType.None
+        fromCell.Character = Nothing
         fromCell.IsDirty = True
-        If characterType <> CharacterType.Player Then
+    End Sub
+
+    Friend Sub UpdateCharacters()
+        Dim characterCells = _cells.Where(Function(x) x.Character IsNot Nothing)
+        For Each characterCell In characterCells
+            UpdateCharacterCell(characterCell)
+        Next
+    End Sub
+
+    Private Sub UpdateCharacterCell(characterCell As BoardCell)
+        If characterCell.Character.CharacterType <> CharacterType.Player Then
             Return
         End If
-        Dim underCell = GetCell(nextPosition.Item1, nextPosition.Item2 + 1)
+        Dim underCell = GetCell(characterCell.Column, characterCell.Row + 1)
         If underCell IsNot Nothing Then
             If underCell.TerrainType = TerrainType.Floor Then
                 underCell.TerrainType = TerrainType.WalkedFloor
@@ -114,7 +135,7 @@ Friend Class Board
     End Sub
 
     Private Function GetPlayerPosition() As (Integer, Integer)
-        Dim index = _cells.FindIndex(Function(cell) cell.CharacterType = CharacterType.Player)
+        Dim index = _cells.FindIndex(Function(cell) cell.Character IsNot Nothing AndAlso cell.Character.CharacterType = CharacterType.Player)
         Return (index Mod _columns, index \ _columns)
     End Function
 
