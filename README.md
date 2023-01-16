@@ -12,6 +12,7 @@ In which I make fifty games. In fifty weeks.
 - 07 Landy McLanderface
 - 08 Lights Out
 - 09 Coin Flip
+- 10 Platformer
 
 ## Interstellar Interloper
 

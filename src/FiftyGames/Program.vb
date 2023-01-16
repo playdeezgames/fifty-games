@@ -13,7 +13,7 @@ Module Program
             {"Landy McLanderface", Sub(data) LandyMcLanderface.Run(data.LandyMcLanderface)},
             {"Lights Out", Sub(data) LightsOut.Run(data.LightsOut)},
             {"Coin Flip", Sub(data) CoinFlip.Run(data.CoinFlip)},
-            {"Game10", AddressOf ThisGameIsAStub},
+            {"Platformer", Sub(data) Platformer.Run(data.Platformer)},
             {"Game11", AddressOf ThisGameIsAStub},
             {"Game12", AddressOf ThisGameIsAStub},
             {"Game13", AddressOf ThisGameIsAStub},
