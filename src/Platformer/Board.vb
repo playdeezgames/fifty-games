@@ -29,6 +29,8 @@ Friend Class Board
     Private _rows As Integer
     Private _columns As Integer
     Private _cells As New List(Of BoardCell)
+    Friend Property ShouldUpdateHeader As Boolean
+    Friend Property Score As Integer
     Friend ReadOnly Property IsCompleted As Boolean
         Get
             Return Not _cells.Any(Function(cell) cell.TerrainType = TerrainType.Floor)
@@ -46,6 +48,7 @@ Friend Class Board
     End Property
     Sub New(data As IEnumerable(Of String))
         LoadData(data)
+        ShouldUpdateHeader = True
     End Sub
     Friend Function GetCell(column As Integer, row As Integer) As BoardCell
         If Not IsInBounds(column, row) Then
@@ -112,6 +115,8 @@ Friend Class Board
         Dim character = fromCell.Character
         Select Case toCell.ItemType
             Case ItemType.Money
+                Score += 1
+                ShouldUpdateHeader = True
                 toCell.ItemType = ItemType.None
         End Select
         toCell.Character = Character
@@ -132,20 +137,26 @@ Friend Class Board
         If underCell IsNot Nothing Then
             Select Case underCell.TerrainType
                 Case TerrainType.None
-                    If characterCell.Character.IsFalling Then
-                        underCell.Character = characterCell.Character
-                        underCell.IsDirty = True
-                        characterCell.Character = Nothing
-                        characterCell.IsDirty = True
-                    Else
-                        characterCell.Character.IsFalling = True
+                    If characterCell.TerrainType <> TerrainType.Ladder Then
+                        If characterCell.Character.IsFalling Then
+                            underCell.Character = characterCell.Character
+                            underCell.IsDirty = True
+                            characterCell.Character = Nothing
+                            characterCell.IsDirty = True
+                        Else
+                            characterCell.Character.IsFalling = True
+                        End If
                     End If
-                Case TerrainType.Floor
+                Case TerrainType.Floor, TerrainType.WalkedFloor
                     characterCell.Character.IsFalling = False
                     characterCell.Character.HasJumped = False
                     If characterCell.Character.CharacterType = CharacterType.Player Then
+                        Dim oldPercentage = CompletionPercentage
                         underCell.TerrainType = TerrainType.WalkedFloor
                         underCell.IsDirty = True
+                        If CompletionPercentage <> oldPercentage Then
+                            ShouldUpdateHeader = True
+                        End If
                     End If
                 Case TerrainType.Ladder
                     characterCell.Character.IsFalling = False
@@ -178,7 +189,7 @@ Friend Class Board
         Dim position As (Integer, Integer) = GetPlayerPosition()
         Dim nextPosition = (position.Item1, position.Item2 + 1)
         Dim cell = GetCell(nextPosition.Item1, nextPosition.Item2)
-        If cell.TerrainType <> TerrainType.Ladder Then
+        If cell.TerrainType <> TerrainType.Ladder AndAlso cell.TerrainType <> TerrainType.None Then
             Return
         End If
         MoveCharacter(position, nextPosition)
@@ -197,4 +208,11 @@ Friend Class Board
         characterCell.Character.HasJumped = True
         MoveCharacter((characterCell.Column, characterCell.Row), nextPosition)
     End Sub
+    Friend ReadOnly Property CompletionPercentage As Integer
+        Get
+            Dim complete = _cells.Where(Function(x) x.TerrainType = TerrainType.WalkedFloor).Count
+            Dim total = complete + _cells.Where(Function(x) x.TerrainType = TerrainType.Floor).Count
+            Return 100 * complete \ total
+        End Get
+    End Property
 End Class

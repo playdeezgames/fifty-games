@@ -23,18 +23,18 @@ The goal is to have walked on all of the platforms to complete the level before 
             "                                                  ",
             "     $                     $                      ",
             "                                                  ",
-            "===========================================|======",
-            "                           $               |      ",
-            "                                           |      ",
-            "====|=============================================",
+            "======================|====================|======",
+            "                      |    $$$$            |      ",
+            "                      |                    |      ",
+            "====|===================== =======================",
             "    |                             $               ",
             "    |                                             ",
-            "===========================================|======",
+            "==========================|================|===== ",
             "          $                                |      ",
             "                                           |      ",
-            "====|=============================================",
-            "    |                           $                 ",
-            "    |                                             ",
+            "====|===================================== | =====",
+            "    |                           $          |      ",
+            "    |                                      |      ",
             "================================|==========|======",
             "            $                   |          |  $   ",
             "                                |          |      ",
@@ -72,6 +72,7 @@ The goal is to have walked on all of the platforms to complete the level before 
     End Sub
 
     Private Sub DrawBoard(board As Board)
+        DrawHeader(board)
         For row = 0 To board.Rows - 1
             For column = 0 To board.Columns - 1
                 Dim cell = board.GetCell(column, row)
@@ -79,7 +80,7 @@ The goal is to have walked on all of the platforms to complete the level before 
                     Continue For
                 End If
                 cell.IsDirty = False
-                AnsiConsole.Cursor.SetPosition(column + 1, row + 1)
+                AnsiConsole.Cursor.SetPosition(column + 1, row + 2)
                 If cell.Character IsNot Nothing Then
                     Select Case cell.Character.CharacterType
                         Case CharacterType.Player
@@ -105,5 +106,16 @@ The goal is to have walked on all of the platforms to complete the level before 
                 End If
             Next
         Next
+    End Sub
+
+    Private Sub DrawHeader(board As Board)
+        If board.ShouldUpdateHeader Then
+            board.ShouldUpdateHeader = False
+            AnsiConsole.Cursor.SetPosition(1, 1)
+            AnsiConsole.Markup("[black on olive]                                                  [/]")
+            AnsiConsole.Cursor.SetPosition(1, 1)
+            AnsiConsole.Markup($"[black on olive]{board.CompletionPercentage}% Complete [/]")
+            AnsiConsole.Markup($"[black on olive]| ${board.Score} [/]")
+        End If
     End Sub
 End Module
