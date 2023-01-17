@@ -1,4 +1,4 @@
-Public Module Platformer
+﻿Public Module Platformer
     Sub Run(data As PlatformerData)
         MainMenu("Platformer", data, AddressOf PlayGame, AddressOf ShowInstructions)
     End Sub
@@ -63,6 +63,8 @@ The goal is to have walked on all of the platforms to complete the level before 
                         board.MovePlayerUp()
                     Case ConsoleKey.DownArrow
                         board.MovePlayerDown()
+                    Case ConsoleKey.Spacebar
+                        board.PlayerJump()
                 End Select
             End If
         Loop Until board.IsCompleted
@@ -81,7 +83,7 @@ The goal is to have walked on all of the platforms to complete the level before 
                 If cell.Character IsNot Nothing Then
                     Select Case cell.Character.CharacterType
                         Case CharacterType.Player
-                            AnsiConsole.Markup("[white]@[/]")
+                            AnsiConsole.Markup("[white]☺[/]")
                         Case Else
                     End Select
                 Else
@@ -91,11 +93,11 @@ The goal is to have walked on all of the platforms to complete the level before 
                         Case Else
                             Select Case cell.TerrainType
                                 Case TerrainType.Floor
-                                    AnsiConsole.Markup("[blue on black]=[/]")
+                                    AnsiConsole.Markup("[blue on black]═[/]")
                                 Case TerrainType.WalkedFloor
-                                    AnsiConsole.Markup("[black on blue]=[/]")
+                                    AnsiConsole.Markup("[black on blue]═[/]")
                                 Case TerrainType.Ladder
-                                    AnsiConsole.Markup("[silver]|[/]")
+                                    AnsiConsole.Markup("[silver]‡[/]")
                                 Case Else
                                     AnsiConsole.Markup(" ")
                             End Select

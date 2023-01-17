@@ -15,6 +15,7 @@ End Enum
 Friend Class Character
     Property CharacterType As CharacterType
     Property IsFalling As Boolean
+    Property HasJumped As Boolean
 End Class
 Friend Class BoardCell
     Property TerrainType As TerrainType
@@ -109,32 +110,43 @@ Friend Class Board
         Dim fromCell = GetCell(position)
         Dim toCell = GetCell(nextPosition)
         Dim character = fromCell.Character
-        toCell.Character = character
+        Select Case toCell.ItemType
+            Case ItemType.Money
+                toCell.ItemType = ItemType.None
+        End Select
+        toCell.Character = Character
         toCell.IsDirty = True
         fromCell.Character = Nothing
         fromCell.IsDirty = True
     End Sub
 
     Friend Sub UpdateCharacters()
-        Dim characterCells = _cells.Where(Function(x) x.Character IsNot Nothing)
+        Dim characterCells = _cells.Where(Function(x) x.Character IsNot Nothing).ToList
         For Each characterCell In characterCells
             UpdateCharacterCell(characterCell)
         Next
     End Sub
 
     Private Sub UpdateCharacterCell(characterCell As BoardCell)
-        If characterCell.Character.CharacterType <> CharacterType.Player Then
-            Return
-        End If
         Dim underCell = GetCell(characterCell.Column, characterCell.Row + 1)
         If underCell IsNot Nothing Then
             Select Case underCell.TerrainType
                 Case TerrainType.None
-                    characterCell.Character.IsFalling = True
+                    If characterCell.Character.IsFalling Then
+                        underCell.Character = characterCell.Character
+                        underCell.IsDirty = True
+                        characterCell.Character = Nothing
+                        characterCell.IsDirty = True
+                    Else
+                        characterCell.Character.IsFalling = True
+                    End If
                 Case TerrainType.Floor
                     characterCell.Character.IsFalling = False
-                    underCell.TerrainType = TerrainType.WalkedFloor
-                    underCell.IsDirty = True
+                    characterCell.Character.HasJumped = False
+                    If characterCell.Character.CharacterType = CharacterType.Player Then
+                        underCell.TerrainType = TerrainType.WalkedFloor
+                        underCell.IsDirty = True
+                    End If
                 Case TerrainType.Ladder
                     characterCell.Character.IsFalling = False
             End Select
@@ -170,5 +182,19 @@ Friend Class Board
             Return
         End If
         MoveCharacter(position, nextPosition)
+    End Sub
+
+    Friend Sub PlayerJump()
+        Dim characterCell = GetCell(GetPlayerPosition())
+        If characterCell.Character.IsFalling OrElse characterCell.Character.HasJumped Then
+            Return
+        End If
+        Dim nextPosition = (characterCell.Column, characterCell.Row - 1)
+        Dim cell = GetCell(nextPosition.Item1, nextPosition.Item2)
+        If cell.TerrainType <> TerrainType.None Then
+            Return
+        End If
+        characterCell.Character.HasJumped = True
+        MoveCharacter((characterCell.Column, characterCell.Row), nextPosition)
     End Sub
 End Class
