@@ -29,8 +29,20 @@ Friend Class Board
     Private _rows As Integer
     Private _columns As Integer
     Private _cells As New List(Of BoardCell)
+    Private _timeRemaining As Double
     Friend Property ShouldUpdateHeader As Boolean
     Friend Property Score As Integer
+    Friend Property TimeRemaining As Double
+        Get
+            Return _timeRemaining
+        End Get
+        Set(value As Double)
+            If CInt(value) <> CInt(_timeRemaining) Then
+                ShouldUpdateHeader = True
+            End If
+            _timeRemaining = value
+        End Set
+    End Property
     Friend ReadOnly Property IsCompleted As Boolean
         Get
             Return Not _cells.Any(Function(cell) cell.TerrainType = TerrainType.Floor)

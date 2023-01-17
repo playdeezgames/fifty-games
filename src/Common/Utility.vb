@@ -12,9 +12,10 @@ Public Module Utility
     Public Function ConfirmQuit() As Boolean
         Return Common.Confirm("[red]Are you sure you want to quit?[/]")
     End Function
-    Public Sub MainMenu(Of TData)(title As String, data As TData, playGameAction As Action(Of TData), instructionAction As Action)
+    Public Sub MainMenu(Of TData)(title As String, data As TData, playGameAction As Action(Of TData), instructionAction As Action, statsAction As Action)
         Do
             AnsiConsole.Clear()
+            statsAction()
             Dim prompt As New SelectionPrompt(Of String) With {.Title = $"[olive]{title}[/]"}
             prompt.AddChoices(PlayText, HowToPlayText, QuitText)
             Select Case AnsiConsole.Prompt(prompt)
