@@ -14,7 +14,7 @@ Module Program
             {"Lights Out", Sub(data) LightsOut.Run(data.LightsOut)},
             {"Coin Flip", Sub(data) CoinFlip.Run(data.CoinFlip)},
             {"Platformer", Sub(data) Platformer.Run(data.Platformer)},
-            {"Game11", AddressOf ThisGameIsAStub},
+            {"WanderMaze", Sub(data) WanderMaze.Run(data.WanderMaze)},
             {"Game12", AddressOf ThisGameIsAStub},
             {"Game13", AddressOf ThisGameIsAStub},
             {"Game14", AddressOf ThisGameIsAStub},

@@ -11,4 +11,5 @@ Public Class FiftyGamesData
     Public Property LightsOut As New LightsOutData
     Public Property CoinFlip As New CoinFlipData
     Public Property Platformer As New PlatformerData
+    Public Property WanderMaze As New WanderMazeData
 End Class
