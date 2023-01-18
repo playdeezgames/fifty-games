@@ -12,5 +12,5 @@ Public Class FiftyGamesData
     Public Property CoinFlip As New CoinFlipData
     Public Property Platformer As New PlatformerData
     Public Property WanderMaze As New WanderMazeData
-    Public Property ItinerantSlayerOfSPLORR As New ItinerantSlayerOfSPLORRData
+    Public Property ItinerantSlayerOfSPLORR As New WorldData
 End Class
