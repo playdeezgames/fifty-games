@@ -15,7 +15,7 @@ Module Program
             {"Coin Flip", Sub(data) CoinFlip.Run(data.CoinFlip)},
             {"Platformer", Sub(data) Platformer.Run(data.Platformer)},
             {"WanderMaze", Sub(data) WanderMaze.Run(data.WanderMaze)},
-            {"Game12", AddressOf ThisGameIsAStub},
+            {"Itinerant Slayer of SPLORR!!", Sub(data) ItinerantSlayerOfSPLORR.Run(data.ItinerantSlayerOfSPLORR)},
             {"Game13", AddressOf ThisGameIsAStub},
             {"Game14", AddressOf ThisGameIsAStub},
             {"Game15", AddressOf ThisGameIsAStub},

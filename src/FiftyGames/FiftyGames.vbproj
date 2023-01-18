@@ -5,7 +5,7 @@
     <RootNamespace>FiftyGames</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
-    <ImportedNamespaces>CoinFlip=False,Common=False,FeedTheFish=False,GuessMyNumber=False,InfiniteRunner=False,InterstellarInterloper=False,LandyMcLanderface=False,LightsOut=False,MoneyFace=False,Platformer=False,QueensPuzzle=False,Spectre.Console=False,System.IO=False,System.Text.Json=False,WanderMaze=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,FiftyGames=True</ImportedNamespaces>
+    <ImportedNamespaces>CoinFlip=False,Common=False,FeedTheFish=False,GuessMyNumber=False,InfiniteRunner=False,InterstellarInterloper=False,ItinerantSlayerOfSPLORR=False,LandyMcLanderface=False,LightsOut=False,MoneyFace=False,Platformer=False,QueensPuzzle=False,Spectre.Console=False,System.IO=False,System.Text.Json=False,WanderMaze=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,FiftyGames=True</ImportedNamespaces>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -28,6 +28,7 @@
     <Import Include="GuessMyNumber" />
     <Import Include="InfiniteRunner" />
     <Import Include="InterstellarInterloper" />
+    <Import Include="ItinerantSlayerOfSPLORR" />
     <Import Include="LandyMcLanderface" />
     <Import Include="LightsOut" />
     <Import Include="MoneyFace" />
@@ -45,6 +46,7 @@
     <ProjectReference Include="..\GuessMyNumber\GuessMyNumber.vbproj" />
     <ProjectReference Include="..\InfiniteRunner\InfiniteRunner.vbproj" />
     <ProjectReference Include="..\InterstellarInterloper\InterstellarInterloper.vbproj" />
+    <ProjectReference Include="..\ItinerantSlayerOfSPLORR\ItinerantSlayerOfSPLORR.vbproj" />
     <ProjectReference Include="..\LandyMcLanderface\LandyMcLanderface.vbproj" />
     <ProjectReference Include="..\LightsOut\LightsOut.vbproj" />
     <ProjectReference Include="..\MoneyFace\MoneyFace.vbproj" />

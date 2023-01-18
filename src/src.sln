@@ -36,6 +36,8 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Platformer", "Platformer\Pl
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "WanderMaze", "WanderMaze\WanderMaze.vbproj", "{4608B558-F041-4AB6-9CB9-A00C6ED2067D}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ItinerantSlayerOfSPLORR", "ItinerantSlayerOfSPLORR\ItinerantSlayerOfSPLORR.vbproj", "{7581811E-EAED-41BA-AAA5-97DE0237DE6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +96,10 @@ Global
 		{4608B558-F041-4AB6-9CB9-A00C6ED2067D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4608B558-F041-4AB6-9CB9-A00C6ED2067D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4608B558-F041-4AB6-9CB9-A00C6ED2067D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7581811E-EAED-41BA-AAA5-97DE0237DE6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7581811E-EAED-41BA-AAA5-97DE0237DE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7581811E-EAED-41BA-AAA5-97DE0237DE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7581811E-EAED-41BA-AAA5-97DE0237DE6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
