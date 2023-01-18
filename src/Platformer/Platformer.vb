@@ -1,6 +1,6 @@
 ﻿Public Module Platformer
     Sub Run(data As PlatformerData)
-        MainMenu("Platformer", data, AddressOf PlayGame, AddressOf ShowInstructions, Sub() ShowStats(data))
+        MainMenu("Platformer", data, AddressOf PlayGame, AddressOf ShowInstructions, AddressOf ShowStats)
     End Sub
 
     Private Sub ShowStats(data As PlatformerData)
