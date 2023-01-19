@@ -1,6 +1,6 @@
 ﻿Friend Class Character
     Implements ICharacter
-    Private _data As CharacterData
+    Friend _data As CharacterData
     Sub New(data As CharacterData)
         _data = data
     End Sub

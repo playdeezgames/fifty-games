@@ -6,4 +6,8 @@
     ReadOnly Property Player As IPlayer
     Sub StartGame()
     Sub AbandonGame()
+    Sub MoveNorth()
+    Sub MoveSouth()
+    Sub MoveWest()
+    Sub MoveEast()
 End Interface

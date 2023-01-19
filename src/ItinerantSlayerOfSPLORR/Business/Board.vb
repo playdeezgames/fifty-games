@@ -5,6 +5,12 @@
         _data = data
     End Sub
 
+    Public ReadOnly Property DefaultTerrain As TerrainType Implements IBoard.DefaultTerrain
+        Get
+            Return _data.DefaultTerrain
+        End Get
+    End Property
+
     Public Function GetCell(column As Integer, row As Integer) As IBoardCell Implements IBoard.GetCell
         If column < 0 OrElse column >= _data.BoardColumns.Count Then
             Return Nothing

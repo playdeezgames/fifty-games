@@ -11,12 +11,23 @@
         End Get
     End Property
 
-    Public ReadOnly Property Character As ICharacter Implements IBoardCell.Character
+    Public Property Character As ICharacter Implements IBoardCell.Character
         Get
             If _data.Character Is Nothing Then
                 Return Nothing
             End If
             Return New Character(_data.Character)
         End Get
+        Set(value As ICharacter)
+            If value Is Nothing Then
+                _data.Character = Nothing
+                Return
+            End If
+            Dim fromCharacter = TryCast(value, Character)
+            If fromCharacter Is Nothing Then
+                Throw New NotImplementedException
+            End If
+            _data.Character = fromCharacter._data
+        End Set
     End Property
 End Class

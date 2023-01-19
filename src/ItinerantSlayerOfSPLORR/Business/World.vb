@@ -79,6 +79,7 @@
     Private Function CreateBoard(columns As Integer, rows As Integer) As IBoard
         Dim boardData As New BoardData()
         _data.Boards.Add(boardData)
+        boardData.DefaultTerrain = TerrainType.Water
         While boardData.BoardColumns.Count < columns
             Dim column = boardData.BoardColumns.Count
             Dim boardColumnData As New BoardColumnData
@@ -105,5 +106,37 @@
     Friend Sub AbandonGame() Implements IWorld.AbandonGame
         _data.Boards.Clear()
         _data.PlayerData = Nothing
+    End Sub
+
+    Public Sub MoveNorth() Implements IWorld.MoveNorth
+        MovePlayer(0, -1)
+    End Sub
+
+    Private Sub MovePlayer(deltaX As Integer, deltaY As Integer)
+        Dim currentCell = PlayerBoard.GetCell(Player.X, Player.Y)
+        Dim nextCell = PlayerBoard.GetCell(Player.X + deltaX, Player.Y + deltaY)
+        If nextCell Is Nothing Then
+            Return
+        End If
+        Select Case nextCell.Terrain
+            Case TerrainType.Water
+                Return
+        End Select
+        nextCell.Character = currentCell.Character
+        currentCell.Character = Nothing
+        Player.X += deltaX
+        Player.Y += deltaY
+    End Sub
+
+    Public Sub MoveSouth() Implements IWorld.MoveSouth
+        MovePlayer(0, 1)
+    End Sub
+
+    Public Sub MoveWest() Implements IWorld.MoveWest
+        MovePlayer(-1, 0)
+    End Sub
+
+    Public Sub MoveEast() Implements IWorld.MoveEast
+        MovePlayer(1, 0)
     End Sub
 End Class

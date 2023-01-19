@@ -8,6 +8,14 @@ Friend Module InPlayHandler
             ShowPlayerBoard(world)
             Dim key = WaitForKey()
             Select Case key
+                Case ConsoleKey.UpArrow
+                    world.MoveNorth()
+                Case ConsoleKey.DownArrow
+                    world.MoveSouth()
+                Case ConsoleKey.LeftArrow
+                    world.MoveWest()
+                Case ConsoleKey.RightArrow
+                    world.MoveEast()
                 Case ConsoleKey.Escape
                     Exit Do
             End Select
@@ -30,7 +38,7 @@ Friend Module InPlayHandler
                 AnsiConsole.Cursor.SetPosition(plotX, plotY)
                 Dim cell = board.GetCell(x, y)
                 If cell Is Nothing Then
-                    AnsiConsole.Markup("[navy on blue]≈[/]")
+                    RenderTerrain(board.DefaultTerrain)
                     Continue For
                 End If
                 Dim character = cell.Character
@@ -41,15 +49,18 @@ Friend Module InPlayHandler
                     End Select
                     Continue For
                 End If
-                Dim terrain As TerrainType = cell.Terrain
-                Select Case terrain
-                    Case TerrainType.Grass
-                        AnsiConsole.Markup("[green on black].[/]")
-                    Case TerrainType.Water
-                        AnsiConsole.Markup("[navy on blue]≈[/]")
-                End Select
+                RenderTerrain(cell.Terrain)
             Next
         Next
+    End Sub
+
+    Private Sub RenderTerrain(terrain As TerrainType)
+        Select Case terrain
+            Case TerrainType.Grass
+                AnsiConsole.Markup("[green on black].[/]")
+            Case TerrainType.Water
+                AnsiConsole.Markup("[navy on blue]≈[/]")
+        End Select
     End Sub
 
     Friend Function WaitForKey() As ConsoleKey

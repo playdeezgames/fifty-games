@@ -5,15 +5,21 @@
         _data = data
     End Sub
 
-    Public ReadOnly Property X As Integer Implements IPlayer.X
+    Public Property X As Integer Implements IPlayer.X
         Get
             Return _data.BoardColumn
         End Get
+        Set(value As Integer)
+            _data.BoardColumn = value
+        End Set
     End Property
 
-    Public ReadOnly Property Y As Integer Implements IPlayer.Y
+    Public Property Y As Integer Implements IPlayer.Y
         Get
             Return _data.BoardRow
         End Get
+        Set(value As Integer)
+            _data.BoardRow = value
+        End Set
     End Property
 End Class
