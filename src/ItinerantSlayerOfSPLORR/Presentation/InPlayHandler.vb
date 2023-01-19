@@ -14,7 +14,7 @@ Friend Module InPlayHandler
         Loop
         AnsiConsole.Cursor.Show
     End Sub
-    Private Const HorizontalFieldOfView = 12
+    Private Const HorizontalFieldOfView = 24
     Private Const VerticalFieldOfView = 12
     Private Sub ShowPlayerBoard(world As IWorld)
         Dim board As IBoard = world.PlayerBoard
@@ -30,6 +30,7 @@ Friend Module InPlayHandler
                 AnsiConsole.Cursor.SetPosition(plotX, plotY)
                 Dim cell = board.GetCell(x, y)
                 If cell Is Nothing Then
+                    AnsiConsole.Markup("[navy on blue]≈[/]")
                     Continue For
                 End If
                 Dim character = cell.Character
