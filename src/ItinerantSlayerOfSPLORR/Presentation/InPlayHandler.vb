@@ -46,16 +46,29 @@ Friend Module InPlayHandler
                     RenderCharacter(character)
                     Continue For
                 End If
+                Dim item = cell.Item
+                If item IsNot Nothing Then
+                    RenderItem(item)
+                    Continue For
+                End If
                 RenderTerrain(cell.Terrain)
             Next
         Next
     End Sub
+
+    Private Sub RenderItem(item As IItem)
+        Select Case item.ItemType
+            Case ItemType.Dollar
+                AnsiConsole.Markup("[yellow on black]$[/]")
+        End Select
+    End Sub
+
     Private Sub RenderCharacter(character As ICharacter)
         Select Case character.CharacterType
             Case CharacterType.Dude
                 AnsiConsole.Markup("[white on black]☺[/]")
             Case Else
-                AnsiConsole.Markup("[white on black]?[/]")
+                AnsiConsole.Markup("[white on black]☻[/]")
         End Select
     End Sub
 
@@ -65,6 +78,8 @@ Friend Module InPlayHandler
                 AnsiConsole.Markup("[green on black].[/]")
             Case TerrainType.Water
                 AnsiConsole.Markup("[navy on blue]≈[/]")
+            Case TerrainType.Home
+                AnsiConsole.Markup("[white on black]■[/]")
             Case Else
                 Throw New NotImplementedException
         End Select

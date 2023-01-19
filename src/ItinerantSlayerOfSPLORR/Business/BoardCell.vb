@@ -30,4 +30,16 @@
             _data.Character = fromCharacter._data
         End Set
     End Property
+
+    Public Property Item As IItem Implements IBoardCell.Item
+        Get
+            If _data.Item Is Nothing Then
+                Return Nothing
+            End If
+            Return New Item(_data.Item)
+        End Get
+        Set(value As IItem)
+            Throw New NotImplementedException()
+        End Set
+    End Property
 End Class
