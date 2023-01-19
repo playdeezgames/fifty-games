@@ -4,6 +4,7 @@ Module Program
     Private ReadOnly gameTable As IReadOnlyDictionary(Of String, Action(Of FiftyGamesData)) =
         New Dictionary(Of String, Action(Of FiftyGamesData)) From
         {
+            {"Itinerant Slayer of SPLORR!!", Sub(data) ItinerantSlayerOfSPLORR.Run(data.ItinerantSlayerOfSPLORR)},
             {"Guess My Number", Sub(data) GuessMyNumber.Run(data.GuessMyNumber)},
             {"Feed the Fish", Sub(data) FeedTheFish.Run(data.FeedTheFish, Sub() SaveData(data))},
             {"Moneyface", Sub(data) MoneyFace.Run(data.MoneyFace)},
@@ -15,7 +16,6 @@ Module Program
             {"Coin Flip", Sub(data) CoinFlip.Run(data.CoinFlip)},
             {"Platformer", Sub(data) Platformer.Run(data.Platformer)},
             {"WanderMaze", Sub(data) WanderMaze.Run(data.WanderMaze)},
-            {"Itinerant Slayer of SPLORR!!", Sub(data) ItinerantSlayerOfSPLORR.Run(data.ItinerantSlayerOfSPLORR)},
             {"Game13", AddressOf ThisGameIsAStub},
             {"Game14", AddressOf ThisGameIsAStub},
             {"Game15", AddressOf ThisGameIsAStub},

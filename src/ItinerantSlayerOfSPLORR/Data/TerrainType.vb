@@ -1,3 +1,4 @@
 ﻿Public Enum TerrainType
-    None
+    Grass
+    Water
 End Enum

@@ -1,5 +1,5 @@
 ﻿Friend Module MainMenuHandler
-    Friend Sub Run(world As World)
+    Friend Sub Run(world As IWorld)
         Do
             AnsiConsole.Clear()
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Main Menu:[/]"}
