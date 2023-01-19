@@ -32,6 +32,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property PlayerCharacter As ICharacter Implements IWorld.PlayerCharacter
+        Get
+            Return PlayerBoard.GetCell(Player.X, Player.Y).Character
+        End Get
+    End Property
+
     Friend Sub StartGame() Implements IWorld.StartGame
         AbandonGame()
         InitializeBoards()
@@ -248,7 +254,15 @@
             Case TerrainType.Water
                 Return
         End Select
-        nextCell.Character = currentCell.Character
+        Dim character = currentCell.Character
+        If nextCell.Item IsNot Nothing Then
+            If Not character.CanTake(nextCell.Item) Then
+                Return
+            End If
+            character.Take(nextCell.Item)
+            nextCell.Item = Nothing
+        End If
+        nextCell.Character = character
         currentCell.Character = Nothing
         Player.X += deltaX
         Player.Y += deltaY

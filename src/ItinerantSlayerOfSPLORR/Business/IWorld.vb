@@ -10,4 +10,5 @@
     Sub MoveSouth()
     Sub MoveWest()
     Sub MoveEast()
+    ReadOnly Property PlayerCharacter As ICharacter
 End Interface

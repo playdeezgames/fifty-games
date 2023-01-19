@@ -39,7 +39,15 @@
             Return New Item(_data.Item)
         End Get
         Set(value As IItem)
-            Throw New NotImplementedException()
+            If value Is Nothing Then
+                _data.Item = Nothing
+                Return
+            End If
+            Dim actualItem = DirectCast(value, Item)
+            If actualItem Is Nothing Then
+                Throw New NotImplementedException
+            End If
+            _data.Item = actualItem._data
         End Set
     End Property
 End Class

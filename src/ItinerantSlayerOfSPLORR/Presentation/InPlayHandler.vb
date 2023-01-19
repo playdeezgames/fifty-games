@@ -5,7 +5,9 @@ Friend Module InPlayHandler
         AnsiConsole.Clear()
         AnsiConsole.Cursor.Hide
         Do
+            AnsiConsole.Cursor.SetPosition(1, 1)
             ShowPlayerBoard(world)
+            ShowPlayerInventory(world)
             Dim key = WaitForKey()
             Select Case key
                 Case ConsoleKey.UpArrow
@@ -22,6 +24,13 @@ Friend Module InPlayHandler
         Loop
         AnsiConsole.Cursor.Show
     End Sub
+
+    Private Sub ShowPlayerInventory(world As IWorld)
+        Dim character As ICharacter = world.PlayerCharacter
+        AnsiConsole.Cursor.SetPosition(50, 1)
+        AnsiConsole.Markup($"Items: {character.Items.Count}   ")
+    End Sub
+
     Private Const HorizontalFieldOfView = 24
     Private Const VerticalFieldOfView = 12
     Private Sub ShowPlayerBoard(world As IWorld)

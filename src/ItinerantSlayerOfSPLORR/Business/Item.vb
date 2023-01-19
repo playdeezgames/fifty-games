@@ -1,7 +1,7 @@
 ﻿Friend Class Item
     Implements IItem
 
-    Private _data As ItemData
+    Friend _data As ItemData
 
     Public Sub New(item As ItemData)
         Me._data = item
