@@ -43,15 +43,20 @@ Friend Module InPlayHandler
                 End If
                 Dim character = cell.Character
                 If character IsNot Nothing Then
-                    Select Case character.CharacterType
-                        Case CharacterType.Dude
-                            AnsiConsole.Markup("[white on black]☺[/]")
-                    End Select
+                    RenderCharacter(character)
                     Continue For
                 End If
                 RenderTerrain(cell.Terrain)
             Next
         Next
+    End Sub
+    Private Sub RenderCharacter(character As ICharacter)
+        Select Case character.CharacterType
+            Case CharacterType.Dude
+                AnsiConsole.Markup("[white on black]☺[/]")
+            Case Else
+                AnsiConsole.Markup("[white on black]?[/]")
+        End Select
     End Sub
 
     Private Sub RenderTerrain(terrain As TerrainType)
@@ -60,6 +65,8 @@ Friend Module InPlayHandler
                 AnsiConsole.Markup("[green on black].[/]")
             Case TerrainType.Water
                 AnsiConsole.Markup("[navy on blue]≈[/]")
+            Case Else
+                Throw New NotImplementedException
         End Select
     End Sub
 
