@@ -7,7 +7,6 @@ Friend Module InPlayHandler
         Do
             AnsiConsole.Cursor.SetPosition(1, 1)
             ShowPlayerBoard(world)
-            ShowPlayerInventory(world)
             Dim key = WaitForKey()
             Select Case key
                 Case ConsoleKey.UpArrow
@@ -23,12 +22,6 @@ Friend Module InPlayHandler
             End Select
         Loop
         AnsiConsole.Cursor.Show
-    End Sub
-
-    Private Sub ShowPlayerInventory(world As IWorld)
-        Dim character As ICharacter = world.PlayerCharacter
-        AnsiConsole.Cursor.SetPosition(50, 1)
-        AnsiConsole.Markup($"Items: {character.Items.Count}   ")
     End Sub
 
     Private Const HorizontalFieldOfView = 24
@@ -55,21 +48,9 @@ Friend Module InPlayHandler
                     RenderCharacter(character)
                     Continue For
                 End If
-                Dim item = cell.Item
-                If item IsNot Nothing Then
-                    RenderItem(item)
-                    Continue For
-                End If
                 RenderTerrain(cell.Terrain)
             Next
         Next
-    End Sub
-
-    Private Sub RenderItem(item As IItem)
-        Select Case item.ItemType
-            Case ItemType.Dollar
-                AnsiConsole.Markup("[yellow on black]$[/]")
-        End Select
     End Sub
 
     Private Sub RenderCharacter(character As ICharacter)

@@ -31,23 +31,12 @@
         End Set
     End Property
 
-    Public Property Item As IItem Implements IBoardCell.Item
+    Public ReadOnly Property Trigger As ITrigger Implements IBoardCell.Trigger
         Get
-            If _data.Item Is Nothing Then
+            If _data.Trigger Is Nothing Then
                 Return Nothing
             End If
-            Return New Item(_data.Item)
+            Return New Trigger(_data.Trigger)
         End Get
-        Set(value As IItem)
-            If value Is Nothing Then
-                _data.Item = Nothing
-                Return
-            End If
-            Dim actualItem = DirectCast(value, Item)
-            If actualItem Is Nothing Then
-                Throw New NotImplementedException
-            End If
-            _data.Item = actualItem._data
-        End Set
     End Property
 End Class
