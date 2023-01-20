@@ -128,4 +128,19 @@
         {
             (CharacterType.Dude, 6, 3)
         }
+    Friend triggers As IReadOnlyList(Of (TriggerData, Integer, Integer)) =
+        New List(Of (TriggerData, Integer, Integer)) From
+        {
+            (New TriggerData With
+                {
+                    .TriggerType = TriggerType.Teleport,
+                    .Teleport = New TeleportData With
+                    {
+                        .DestinationX = 10,
+                        .DestinationY = 10,
+                        .DestinationBoard = 0
+                    }
+                },
+                6, 3)
+        }
 End Module

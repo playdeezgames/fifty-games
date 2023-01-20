@@ -1,7 +1,9 @@
 ﻿Friend Class BoardCell
     Implements IBoardCell
+    Private _worldData As WorldData
     Private _data As BoardCellData
-    Sub New(data As BoardCellData)
+    Sub New(worldData As WorldData, data As BoardCellData)
+        _worldData = worldData
         _data = data
     End Sub
 
@@ -36,7 +38,7 @@
             If _data.Trigger Is Nothing Then
                 Return Nothing
             End If
-            Return New Trigger(_data.Trigger)
+            Return New Trigger(_worldData, _data.Trigger)
         End Get
     End Property
 End Class
