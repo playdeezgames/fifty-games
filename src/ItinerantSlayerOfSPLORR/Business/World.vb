@@ -51,18 +51,19 @@
         _data.PlayerData = New PlayerData With {.BoardIndex = 0, .BoardColumn = 6, .BoardRow = 3}
     End Sub
     Private Sub InitializeBoards()
-        Dim board As IBoard = CreateBoard(Overworld.map, Overworld.characters, Overworld.triggers)
+        CreateBoard(Overworld.defaultTerrain, Overworld.map, Overworld.characters, Overworld.triggers)
+        CreateBoard(Town.defaultTerrain, Town.map, Town.characters, Town.triggers)
 
     End Sub
 
-    Private Function CreateBoard(map As IReadOnlyList(Of String), characters As IReadOnlyList(Of (CharacterType, Integer, Integer)), triggers As IReadOnlyList(Of (TriggerData, Integer, Integer))) As IBoard
+    Private Function CreateBoard(defaultTerrain As TerrainType, map As IReadOnlyList(Of String), characters As IReadOnlyList(Of (CharacterType, Integer, Integer)), triggers As IReadOnlyList(Of (TriggerData, Integer, Integer))) As IBoard
         Dim columns = map(0).Length
         Dim rows = map.Count
         Dim random As New Random
         Dim boardData As New BoardData()
         Dim boardIndex = _data.Boards.Count
         _data.Boards.Add(boardData)
-        boardData.DefaultTerrain = TerrainType.Water
+        boardData.DefaultTerrain = defaultTerrain
         While boardData.BoardColumns.Count < columns
             Dim column = boardData.BoardColumns.Count
             Dim boardColumnData As New BoardColumnData
@@ -78,6 +79,12 @@
                         boardCellData.Terrain = TerrainType.Water
                     Case "!"c
                         boardCellData.Terrain = TerrainType.Home
+                    Case "#"c
+                        boardCellData.Terrain = TerrainType.Wall
+                    Case " "c
+                        boardCellData.Terrain = TerrainType.Empty
+                    Case ","c
+                        boardCellData.Terrain = TerrainType.Road
                     Case Else
                         Throw New NotImplementedException
                 End Select
@@ -117,7 +124,7 @@
             Return
         End If
         Select Case nextCell.Terrain
-            Case TerrainType.Water
+            Case TerrainType.Water, TerrainType.Wall
                 Return
         End Select
         If nextCell.Trigger IsNot Nothing Then

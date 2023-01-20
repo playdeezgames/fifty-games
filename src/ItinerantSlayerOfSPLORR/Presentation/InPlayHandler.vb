@@ -70,6 +70,12 @@ Friend Module InPlayHandler
                 AnsiConsole.Markup("[navy on blue]≈[/]")
             Case TerrainType.Home
                 AnsiConsole.Markup("[white on black]■[/]")
+            Case TerrainType.Wall
+                AnsiConsole.Markup("[black on grey]#[/]")
+            Case TerrainType.Empty
+                AnsiConsole.Markup("[black on black] [/]")
+            Case TerrainType.Road
+                AnsiConsole.Markup("[grey on black]░[/]")
             Case Else
                 Throw New NotImplementedException
         End Select

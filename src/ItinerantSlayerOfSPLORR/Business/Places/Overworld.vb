@@ -136,11 +136,12 @@
                     .TriggerType = TriggerType.Teleport,
                     .Teleport = New TeleportData With
                     {
-                        .DestinationX = 10,
-                        .DestinationY = 10,
-                        .DestinationBoard = 0
+                        .DestinationX = 24,
+                        .DestinationY = 23,
+                        .DestinationBoard = 1
                     }
                 },
                 6, 3)
         }
+    Friend ReadOnly defaultTerrain As TerrainType = TerrainType.Water
 End Module
