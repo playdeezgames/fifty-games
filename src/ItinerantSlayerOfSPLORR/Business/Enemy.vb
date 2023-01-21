@@ -13,4 +13,30 @@
             Return _data.EnemyType.ToDescriptor().Name
         End Get
     End Property
+
+    Public ReadOnly Property HitPoints As Integer Implements IEnemy.HitPoints
+        Get
+            Return Math.Clamp(MaximumHitPoints - _data.Wounds, 0, MaximumHitPoints)
+        End Get
+    End Property
+
+    Public ReadOnly Property MaximumHitPoints As Integer Implements IEnemy.MaximumHitPoints
+        Get
+            Return _data.EnemyType.ToDescriptor().HitPoints
+        End Get
+    End Property
+
+    Public ReadOnly Property IsDead As Boolean Implements IEnemy.IsDead
+        Get
+            Return HitPoints = 0
+        End Get
+    End Property
+
+    Public Sub TakeDamage(damage As Integer) Implements IEnemy.TakeDamage
+        _data.Wounds += damage
+    End Sub
+
+    Public Function RollDefend(random As Random) As Integer Implements IEnemy.RollDefend
+        Return random.Next(_data.EnemyType.ToDescriptor().Defend)
+    End Function
 End Class

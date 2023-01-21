@@ -3,4 +3,5 @@
     Friend Const StartGameText = "Start Game"
     Friend Const AbandonGameText = "Abandon Game"
     Friend Const FleeText = "Flee"
+    Friend Const FightText = "Fight!"
 End Module

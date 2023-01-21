@@ -4,7 +4,7 @@
         AnsiConsole.Clear()
         Do
             If world.IsInAnEncounter Then
-                ShowEncounter(world)
+                ShowEncounter(random, world)
             Else
                 If ShowBoard(random, world) Then
                     Exit Do
@@ -13,25 +13,47 @@
         Loop
     End Sub
 
-    Private Sub ShowEncounter(world As IWorld)
-        'run
+    Private Sub ShowEncounter(random As Random, world As IWorld)
         'fight
         'use item
         AnsiConsole.Clear()
-        AnsiConsole.MarkupLine($"Encounter Type: {world.Encounter.EncounterType}")
+        AnsiConsole.MarkupLine($"Encounter!")
+        AnsiConsole.WriteLine()
+
         Dim index = 1
         For Each enemy In world.Encounter.Enemies
-            AnsiConsole.MarkupLine($"Enemy #{index}: {enemy.Name}")
+            AnsiConsole.MarkupLine($"Enemy #{index}: {enemy.Name} ({enemy.HitPoints}/{enemy.MaximumHitPoints})")
             index += 1
         Next
+
+        AnsiConsole.WriteLine()
         Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
+        prompt.AddChoice(FightText)
         prompt.AddChoice(FleeText)
+
         Select Case AnsiConsole.Prompt(prompt)
+            Case FightText
+                Dim messages = world.Attack(If(world.Encounter.Enemies.Count = 1, world.Encounter.Enemies.Single, PickEnemy(world.Encounter.Enemies)), random)
+                For Each message In messages
+                    AnsiConsole.MarkupLine(message)
+                Next
+                OkPrompt()
             Case FleeText
                 world.FleeEncounter()
         End Select
-        AnsiConsole.Clear()
+
     End Sub
+
+    Private Function PickEnemy(enemies As IEnumerable(Of IEnemy)) As IEnemy
+        Dim table As New Dictionary(Of String, IEnemy)
+        Dim index = 1
+        For Each enemy In enemies
+            table.Add($"#{index}: {enemy.Name} ({enemy.HitPoints}/{enemy.MaximumHitPoints})", enemy)
+        Next
+        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Which One?[/]"}
+        prompt.AddChoices(table.Keys)
+        Return table(AnsiConsole.Prompt(prompt))
+    End Function
 
     Private Function ShowBoard(random As Random, world As IWorld) As Boolean
         AnsiConsole.Cursor.Hide
