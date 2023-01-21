@@ -155,6 +155,15 @@
                 .Top = 0,
                 .Right = Integer.MaxValue,
                 .Bottom = Integer.MaxValue
+            },
+            New EncounterZoneData With
+            {
+                .EncounterZoneType = EncounterType.Blob,
+                .Weight = 10,
+                .Left = 0,
+                .Top = 0,
+                .Right = 20,
+                .Bottom = 20
             }
         }
 End Module

@@ -42,7 +42,7 @@
             generated -= candidate.Weight
             If generated < 0 Then
                 If candidate.EncounterZoneType.HasValue Then
-                    Return New Encounter(New EncounterData With {.EncounterType = candidate.EncounterZoneType.Value})
+                    Return New Encounter(_worldData, New EncounterData With {.EncounterType = candidate.EncounterZoneType.Value})
                 End If
                 Return Nothing
             End If

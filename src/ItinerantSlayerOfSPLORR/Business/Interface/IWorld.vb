@@ -11,5 +11,7 @@
     Sub MoveSouth(random As Random)
     Sub MoveWest(random As Random)
     Sub MoveEast(random As Random)
+    Sub FleeEncounter()
     ReadOnly Property PlayerCharacter As ICharacter
+    ReadOnly Property IsInAnEncounter As Boolean
 End Interface

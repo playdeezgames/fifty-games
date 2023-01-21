@@ -2,26 +2,51 @@
     Friend Sub Run(world As IWorld)
         Dim random As New Random
         AnsiConsole.Clear()
-        AnsiConsole.Cursor.Hide
         Do
-            AnsiConsole.Cursor.SetPosition(1, 1)
-            ShowPlayerBoard(world)
-            Dim key = WaitForKey()
-            Select Case key
-                Case ConsoleKey.UpArrow
-                    world.MoveNorth(random)
-                Case ConsoleKey.DownArrow
-                    world.MoveSouth(random)
-                Case ConsoleKey.LeftArrow
-                    world.MoveWest(random)
-                Case ConsoleKey.RightArrow
-                    world.MoveEast(random)
-                Case ConsoleKey.Escape
+            If world.IsInAnEncounter Then
+                ShowEncounter(world)
+            Else
+                If ShowBoard(random, world) Then
                     Exit Do
-            End Select
+                End If
+            End If
         Loop
-        AnsiConsole.Cursor.Show
     End Sub
+
+    Private Sub ShowEncounter(world As IWorld)
+        'run
+        'fight
+        'use item
+        AnsiConsole.Clear()
+        AnsiConsole.MarkupLine($"Encounter Type: {world.Encounter.EncounterType}")
+        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
+        prompt.AddChoice(FleeText)
+        Select Case AnsiConsole.Prompt(prompt)
+            Case FleeText
+                world.FleeEncounter()
+        End Select
+        AnsiConsole.Clear()
+    End Sub
+
+    Private Function ShowBoard(random As Random, world As IWorld) As Boolean
+        AnsiConsole.Cursor.Hide
+        AnsiConsole.Cursor.SetPosition(1, 1)
+        ShowPlayerBoard(world)
+        Dim key = WaitForKey()
+        Select Case key
+            Case ConsoleKey.UpArrow
+                world.MoveNorth(random)
+            Case ConsoleKey.DownArrow
+                world.MoveSouth(random)
+            Case ConsoleKey.LeftArrow
+                world.MoveWest(random)
+            Case ConsoleKey.RightArrow
+                world.MoveEast(random)
+            Case ConsoleKey.Escape
+                Return True
+        End Select
+        Return False
+    End Function
 
     Private Const HorizontalFieldOfView = 24
     Private Const VerticalFieldOfView = 12

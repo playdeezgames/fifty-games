@@ -46,15 +46,21 @@
             If _data.Encounter Is Nothing Then
                 Return Nothing
             End If
-            Throw New NotImplementedException()
+            Return New Encounter(_data, _data.Encounter)
         End Get
         Set(value As IEncounter)
             If value Is Nothing Then
                 _data.Encounter = Nothing
                 Return
             End If
-            Throw New NotImplementedException()
+            _data.Encounter = DirectCast(value, Encounter)._data
         End Set
+    End Property
+
+    Public ReadOnly Property IsInAnEncounter As Boolean Implements IWorld.IsInAnEncounter
+        Get
+            Return _data.Encounter IsNot Nothing
+        End Get
     End Property
 
     Friend Sub StartGame() Implements IWorld.StartGame
@@ -171,5 +177,13 @@
 
     Public Sub MoveEast(random As Random) Implements IWorld.MoveEast
         MovePlayer(random, 1, 0)
+    End Sub
+
+    Public Sub FleeEncounter() Implements IWorld.FleeEncounter
+        If Not IsInAnEncounter Then
+            Return
+        End If
+        'TODO: roll some dice or something
+        Encounter = Nothing
     End Sub
 End Class
