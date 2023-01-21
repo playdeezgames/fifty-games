@@ -13,4 +13,10 @@
             Return _data.EncounterType
         End Get
     End Property
+
+    Public ReadOnly Property Enemies As IEnumerable(Of IEnemy) Implements IEncounter.Enemies
+        Get
+            Return _data.Enemies.Select(Function(x) New Enemy(_worldData, x))
+        End Get
+    End Property
 End Class

@@ -41,12 +41,23 @@
         For Each candidate In candidates
             generated -= candidate.Weight
             If generated < 0 Then
-                If candidate.EncounterZoneType.HasValue Then
-                    Return New Encounter(_worldData, New EncounterData With {.EncounterType = candidate.EncounterZoneType.Value})
+                If candidate.EncounterType.HasValue Then
+                    Return GenerateEncounter(random, candidate.EncounterType.Value)
                 End If
                 Return Nothing
             End If
         Next
         Return Nothing
+    End Function
+
+    Private Function GenerateEncounter(random As Random, encounterType As EncounterType) As IEncounter
+        Dim encounterData = New EncounterData With {.EncounterType = encounterType}
+        Dim descriptor = encounterType.ToDescriptor()
+        Dim enemyType = descriptor.EnemyType
+        Dim enemyCount = descriptor.Generator.Generate(random)
+        While encounterData.Enemies.Count < enemyCount
+            encounterData.Enemies.Add(New EnemyData With {.EnemyType = enemyType, .Wounds = 0})
+        End While
+        Return New Encounter(_worldData, encounterData)
     End Function
 End Class

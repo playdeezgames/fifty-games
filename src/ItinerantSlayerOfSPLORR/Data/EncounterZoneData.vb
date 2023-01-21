@@ -1,5 +1,5 @@
 ﻿Public Class EncounterZoneData
-    Public Property EncounterZoneType As EncounterType?
+    Public Property EncounterType As EncounterType?
     Public Property Left As Integer
     Public Property Top As Integer
     Public Property Right As Integer

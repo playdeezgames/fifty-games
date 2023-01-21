@@ -149,7 +149,7 @@
         {
             New EncounterZoneData With
             {
-                .EncounterZoneType = Nothing,
+                .EncounterType = Nothing,
                 .Weight = 100,
                 .Left = 0,
                 .Top = 0,
@@ -158,7 +158,7 @@
             },
             New EncounterZoneData With
             {
-                .EncounterZoneType = EncounterType.Blob,
+                .EncounterType = EncounterType.Blob,
                 .Weight = 10,
                 .Left = 0,
                 .Top = 0,

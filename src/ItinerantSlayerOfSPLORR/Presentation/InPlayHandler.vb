@@ -19,6 +19,11 @@
         'use item
         AnsiConsole.Clear()
         AnsiConsole.MarkupLine($"Encounter Type: {world.Encounter.EncounterType}")
+        Dim index = 1
+        For Each enemy In world.Encounter.Enemies
+            AnsiConsole.MarkupLine($"Enemy #{index}: {enemy.Name}")
+            index += 1
+        Next
         Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
         prompt.AddChoice(FleeText)
         Select Case AnsiConsole.Prompt(prompt)

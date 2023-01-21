@@ -1,4 +1,17 @@
+Imports System.Runtime.CompilerServices
+
 Public Module Utility
+    <Extension>
+    Public Function Generate(Of TGenerated)(table As IReadOnlyDictionary(Of TGenerated, Integer), random As Random) As TGenerated
+        Dim generated = random.Next(table.Values.Sum())
+        For Each entry In table
+            generated -= entry.Value
+            If generated < 0 Then
+                Return entry.Key
+            End If
+        Next
+        Throw New NotImplementedException
+    End Function
     Public Sub OkPrompt()
         Dim prompt As New SelectionPrompt(Of String) With {.Title = ""}
         prompt.AddChoice(OkText)
