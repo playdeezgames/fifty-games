@@ -1,7 +1,6 @@
-﻿Imports System.Security
-
-Friend Module InPlayHandler
+﻿Friend Module InPlayHandler
     Friend Sub Run(world As IWorld)
+        Dim random As New Random
         AnsiConsole.Clear()
         AnsiConsole.Cursor.Hide
         Do
@@ -10,13 +9,13 @@ Friend Module InPlayHandler
             Dim key = WaitForKey()
             Select Case key
                 Case ConsoleKey.UpArrow
-                    world.MoveNorth()
+                    world.MoveNorth(random)
                 Case ConsoleKey.DownArrow
-                    world.MoveSouth()
+                    world.MoveSouth(random)
                 Case ConsoleKey.LeftArrow
-                    world.MoveWest()
+                    world.MoveWest(random)
                 Case ConsoleKey.RightArrow
-                    world.MoveEast()
+                    world.MoveEast(random)
                 Case ConsoleKey.Escape
                     Exit Do
             End Select

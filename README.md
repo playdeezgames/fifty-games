@@ -13,10 +13,16 @@ In which I make fifty games. In fifty weeks.
 - 08 Lights Out
 - 09 Coin Flip
 - 10 Platformer
+- 11 Wandermaze
+- 12 Itinerant Slayer of SPLORR!!
 
-## Platformer
+## Itinerant Slayer of SPLORR!!
 
-falling logic
+* Fighting
+* Quest
+* Equipment
+* Starving to death
+* Money
 
 ## Audio
 

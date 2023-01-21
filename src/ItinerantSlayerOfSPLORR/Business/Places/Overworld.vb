@@ -126,7 +126,7 @@
     Friend characters As IReadOnlyList(Of (CharacterType, Integer, Integer)) =
         New List(Of (CharacterType, Integer, Integer)) From
         {
-            (CharacterType.Dude, 6, 3)
+            (CharacterType.Dude, 7, 3)
         }
     Friend triggers As IReadOnlyList(Of (TriggerData, Integer, Integer)) =
         New List(Of (TriggerData, Integer, Integer)) From
@@ -144,4 +144,17 @@
                 6, 3)
         }
     Friend ReadOnly defaultTerrain As TerrainType = TerrainType.Water
+    Friend ReadOnly encounterZones As IReadOnlyList(Of EncounterZoneData) =
+        New List(Of EncounterZoneData) From
+        {
+            New EncounterZoneData With
+            {
+                .EncounterZoneType = Nothing,
+                .Weight = 100,
+                .Left = 0,
+                .Top = 0,
+                .Right = Integer.MaxValue,
+                .Bottom = Integer.MaxValue
+            }
+        }
 End Module

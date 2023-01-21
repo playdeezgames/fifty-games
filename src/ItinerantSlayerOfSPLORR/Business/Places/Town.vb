@@ -45,4 +45,6 @@
                 24, 24)
         }
     Friend ReadOnly defaultTerrain As TerrainType = TerrainType.Grass
+    Friend ReadOnly encounterZones As IReadOnlyList(Of EncounterZoneData) =
+        New List(Of EncounterZoneData)
 End Module

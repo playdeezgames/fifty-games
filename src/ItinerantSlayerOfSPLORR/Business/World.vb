@@ -41,6 +41,22 @@
         End Get
     End Property
 
+    Public Property Encounter As IEncounter Implements IWorld.Encounter
+        Get
+            If _data.Encounter Is Nothing Then
+                Return Nothing
+            End If
+            Throw New NotImplementedException()
+        End Get
+        Set(value As IEncounter)
+            If value Is Nothing Then
+                _data.Encounter = Nothing
+                Return
+            End If
+            Throw New NotImplementedException()
+        End Set
+    End Property
+
     Friend Sub StartGame() Implements IWorld.StartGame
         AbandonGame()
         InitializeBoards()
@@ -48,19 +64,18 @@
     End Sub
 
     Private Sub InitializePlayer()
-        _data.PlayerData = New PlayerData With {.BoardIndex = 0, .BoardColumn = 6, .BoardRow = 3}
+        _data.PlayerData = New PlayerData With {.BoardIndex = 0, .BoardColumn = 7, .BoardRow = 3}
     End Sub
     Private Sub InitializeBoards()
-        CreateBoard(Overworld.defaultTerrain, Overworld.map, Overworld.characters, Overworld.triggers)
-        CreateBoard(Town.defaultTerrain, Town.map, Town.characters, Town.triggers)
-
+        CreateBoard(Overworld.defaultTerrain, Overworld.map, Overworld.characters, Overworld.triggers, Overworld.encounterZones)
+        CreateBoard(Town.defaultTerrain, Town.map, Town.characters, Town.triggers, Town.encounterZones)
     End Sub
 
-    Private Function CreateBoard(defaultTerrain As TerrainType, map As IReadOnlyList(Of String), characters As IReadOnlyList(Of (CharacterType, Integer, Integer)), triggers As IReadOnlyList(Of (TriggerData, Integer, Integer))) As IBoard
+    Private Function CreateBoard(defaultTerrain As TerrainType, map As IReadOnlyList(Of String), characters As IReadOnlyList(Of (CharacterType, Integer, Integer)), triggers As IReadOnlyList(Of (TriggerData, Integer, Integer)), encounterZones As IReadOnlyList(Of EncounterZoneData)) As IBoard
         Dim columns = map(0).Length
         Dim rows = map.Count
         Dim random As New Random
-        Dim boardData As New BoardData()
+        Dim boardData As New BoardData() With {.EncounterZones = encounterZones.ToList}
         Dim boardIndex = _data.Boards.Count
         _data.Boards.Add(boardData)
         boardData.DefaultTerrain = defaultTerrain
@@ -107,11 +122,11 @@
         _data.PlayerData = Nothing
     End Sub
 
-    Public Sub MoveNorth() Implements IWorld.MoveNorth
-        MovePlayer(0, -1)
+    Public Sub MoveNorth(random As Random) Implements IWorld.MoveNorth
+        MovePlayer(random, 0, -1)
     End Sub
 
-    Private Sub MovePlayer(deltaX As Integer, deltaY As Integer)
+    Private Sub MovePlayer(random As Random, deltaX As Integer, deltaY As Integer)
         Dim currentCell = PlayerBoard.GetCell(Player.X, Player.Y)
         Dim nextBoard = PlayerBoard
         Dim nextX = Player.X + deltaX
@@ -143,17 +158,18 @@
         PlayerBoard = nextBoard
         Player.X = nextX
         Player.Y = nextY
+        Encounter = PlayerBoard.CheckForEncounter(random, Player.X, Player.Y)
     End Sub
 
-    Public Sub MoveSouth() Implements IWorld.MoveSouth
-        MovePlayer(0, 1)
+    Public Sub MoveSouth(random As Random) Implements IWorld.MoveSouth
+        MovePlayer(random, 0, 1)
     End Sub
 
-    Public Sub MoveWest() Implements IWorld.MoveWest
-        MovePlayer(-1, 0)
+    Public Sub MoveWest(random As Random) Implements IWorld.MoveWest
+        MovePlayer(random, -1, 0)
     End Sub
 
-    Public Sub MoveEast() Implements IWorld.MoveEast
-        MovePlayer(1, 0)
+    Public Sub MoveEast(random As Random) Implements IWorld.MoveEast
+        MovePlayer(random, 1, 0)
     End Sub
 End Class

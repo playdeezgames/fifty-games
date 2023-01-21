@@ -30,4 +30,23 @@
         End If
         Return New BoardCell(_worldData, _data.BoardColumns(column).Cells(row))
     End Function
+
+    Public Function CheckForEncounter(random As Random, x As Integer, y As Integer) As IEncounter Implements IBoard.CheckForEncounter
+        Dim candidates = _data.EncounterZones.Where(Function(zone) x >= zone.Left AndAlso y >= zone.Top AndAlso x <= zone.Right AndAlso y < zone.Bottom)
+        If Not candidates.Any Then
+            Return Nothing
+        End If
+        Dim totalWeight = candidates.Sum(Function(zone) zone.Weight)
+        Dim generated = random.Next(totalWeight)
+        For Each candidate In candidates
+            generated -= candidate.Weight
+            If generated < 0 Then
+                If candidate.EncounterZoneType.HasValue Then
+                    Return New Encounter(New EncounterData With {.EncounterType = candidate.EncounterZoneType.Value})
+                End If
+                Return Nothing
+            End If
+        Next
+        Return Nothing
+    End Function
 End Class
