@@ -17,6 +17,16 @@
         End Get
     End Property
 
+    Public ReadOnly Property XP As Integer Implements ICharacter.XP
+        Get
+            Return _data.XP
+        End Get
+    End Property
+
+    Public Sub AddXP(amount As Integer) Implements ICharacter.AddXP
+        _data.XP += amount
+    End Sub
+
     Public Function RollAttack(random As Random) As Integer Implements ICharacter.RollAttack
         Return random.Next(_data.CharacterType.ToDescriptor().Attack)
     End Function

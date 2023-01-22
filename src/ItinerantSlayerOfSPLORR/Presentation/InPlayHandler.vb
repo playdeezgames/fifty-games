@@ -59,6 +59,7 @@
         AnsiConsole.Cursor.Hide
         AnsiConsole.Cursor.SetPosition(1, 1)
         ShowPlayerBoard(world)
+        ShowPlayerStatistics(world)
         Dim key = WaitForKey()
         Select Case key
             Case ConsoleKey.UpArrow
@@ -74,6 +75,11 @@
         End Select
         Return False
     End Function
+
+    Private Sub ShowPlayerStatistics(world As IWorld)
+        AnsiConsole.Cursor.SetPosition(50, 1)
+        AnsiConsole.Markup($"XP: {world.PlayerCharacter.XP}")
+    End Sub
 
     Private Const HorizontalFieldOfView = 24
     Private Const VerticalFieldOfView = 12

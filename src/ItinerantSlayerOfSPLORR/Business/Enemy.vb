@@ -32,6 +32,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property XP As Integer Implements IEnemy.XP
+        Get
+            Return _data.EnemyType.ToDescriptor().XP
+        End Get
+    End Property
+
     Public Sub TakeDamage(damage As Integer) Implements IEnemy.TakeDamage
         _data.Wounds += damage
     End Sub

@@ -16,7 +16,8 @@ Friend Module EnemyTypeExtensions
                     .Defend = 5,
                     .Agility = 5,
                     .Morale = 5,
-                    .Name = "Blob"
+                    .Name = "Blob",
+                    .XP = 1
                 }
             }
         }

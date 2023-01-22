@@ -199,12 +199,22 @@
             enemy.TakeDamage(attackRoll - defendRoll)
             If enemy.IsDead Then
                 messages.Add($"{character.Name} kills {enemy.Name}!")
-                'TODO: experience points
+                If enemy.XP > 0 Then
+                    messages.Add($"{character.Name} gets {enemy.XP} XP!")
+                    character.AddXP(enemy.XP)
+                End If
+                'TODO: loot drop
             End If
         Else
             messages.Add($"{character.Name} misses!")
         End If
-        'TODO: enemies counter attack
+        Encounter.PurgeCorpses()
+        If Encounter.Enemies.Any Then
+            'TODO: enemies counter attack
+        Else
+            messages.Add($"{character.Name} has defeated all enemies!")
+            _data.Encounter = Nothing
+        End If
         Return messages
     End Function
 End Class

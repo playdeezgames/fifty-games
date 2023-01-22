@@ -5,4 +5,5 @@
     Public Property Agility As Integer
     Public Property Morale As Integer
     Public Property Name As String
+    Public Property XP As Integer
 End Class
