@@ -3,7 +3,10 @@
         Dim random As New Random
         AnsiConsole.Clear()
         Do
-            If world.IsInAnEncounter Then
+            If world.PlayerCharacter.IsDead Then
+                ShowGameOver(world)
+                Exit Do
+            ElseIf world.IsInAnEncounter Then
                 ShowEncounter(random, world)
             Else
                 If ShowBoard(random, world) Then
@@ -11,6 +14,12 @@
                 End If
             End If
         Loop
+    End Sub
+
+    Private Sub ShowGameOver(world As IWorld)
+        AnsiConsole.Clear()
+        AnsiConsole.MarkupLine("Game Over!")
+        OkPrompt()
     End Sub
 
     Private Sub ShowEncounter(random As Random, world As IWorld)
