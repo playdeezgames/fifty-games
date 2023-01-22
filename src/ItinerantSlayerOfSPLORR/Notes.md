@@ -13,4 +13,15 @@
     * attack increase?
     * defend increase?
 
+## Core Functionality TODO
+
+* Main Quest: acquire the macguffin and defeat the big bad
+    * Quest Giver
+    * Big Bad
+    * Macguffin
+    * Initially inaccessible resting place where the macguffin is
+    * Quest Giver gives access to where macguffin is
+    * Having macguffin gives access to where big bad is
+    * After defeating big bad, return to quest giver for end game
+
 
