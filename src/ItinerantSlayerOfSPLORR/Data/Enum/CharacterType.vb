@@ -12,7 +12,9 @@ Friend Module CharacterTypeExtensions
                 New CharacterTypeDescriptor With
                 {
                     .Name = "yer character",
-                    .Attack = 10
+                    .Attack = 5,
+                    .Defend = 5,
+                    .HitPoints = 5
                 }
             }
         }

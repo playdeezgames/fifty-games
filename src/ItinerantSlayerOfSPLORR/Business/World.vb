@@ -190,27 +190,10 @@
     Public Function Attack(enemy As IEnemy, random As Random) As IEnumerable(Of String) Implements IWorld.Attack
         Dim messages As New List(Of String)
         Dim character = PlayerCharacter
-        Dim attackRoll = character.RollAttack(random)
-        messages.Add($"{character.Name} rolls an attack of {attackRoll}.")
-        Dim defendRoll = enemy.RollDefend(random)
-        messages.Add($"{enemy.Name} rolls a defend of {defendRoll}")
-        If attackRoll > defendRoll Then
-            messages.Add($"{character.Name} hits!")
-            enemy.TakeDamage(attackRoll - defendRoll)
-            If enemy.IsDead Then
-                messages.Add($"{character.Name} kills {enemy.Name}!")
-                If enemy.XP > 0 Then
-                    messages.Add($"{character.Name} gets {enemy.XP} XP!")
-                    character.AddXP(enemy.XP)
-                End If
-                'TODO: loot drop
-            End If
-        Else
-            messages.Add($"{character.Name} misses!")
-        End If
+        messages.AddRange(character.Attack(enemy, random))
         Encounter.PurgeCorpses()
         If Encounter.Enemies.Any Then
-            'TODO: enemies counter attack
+            messages.AddRange(Encounter.CounterAttack(character, random))
         Else
             messages.Add($"{character.Name} has defeated all enemies!")
             _data.Encounter = Nothing

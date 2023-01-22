@@ -20,6 +20,9 @@
         AnsiConsole.MarkupLine($"Encounter!")
         AnsiConsole.WriteLine()
 
+        Dim character = world.PlayerCharacter
+        AnsiConsole.MarkupLine($"{character.Name} HP {character.HitPoints}/{character.MaximumHitPoints}")
+        AnsiConsole.WriteLine()
         Dim index = 1
         For Each enemy In world.Encounter.Enemies
             AnsiConsole.MarkupLine($"Enemy #{index}: {enemy.Name} ({enemy.HitPoints}/{enemy.MaximumHitPoints})")
@@ -77,8 +80,11 @@
     End Function
 
     Private Sub ShowPlayerStatistics(world As IWorld)
+        Dim character = world.PlayerCharacter
         AnsiConsole.Cursor.SetPosition(50, 1)
-        AnsiConsole.Markup($"XP: {world.PlayerCharacter.XP}")
+        AnsiConsole.Markup($"HP: {character.HitPoints}/{character.MaximumHitPoints}")
+        AnsiConsole.Cursor.SetPosition(50, 2)
+        AnsiConsole.Markup($"XP: {character.XP}")
     End Sub
 
     Private Const HorizontalFieldOfView = 24

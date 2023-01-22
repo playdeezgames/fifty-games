@@ -12,6 +12,18 @@
         _data.Enemies = _data.Enemies.Where(Function(x) x.Wounds < x.EnemyType.ToDescriptor.HitPoints).ToList
     End Sub
 
+    Public Function CounterAttack(character As ICharacter, random As Random) As IEnumerable(Of String) Implements IEncounter.CounterAttack
+        Dim messages As New List(Of String)
+        For Each enemy In Enemies
+            messages.AddRange(enemy.Attack(character, random))
+            If character.IsDead Then
+                messages.Add($"{character.Name} has been slain by {enemy.Name}.")
+                Exit For
+            End If
+        Next
+        Return messages
+    End Function
+
     Public ReadOnly Property EncounterType As EncounterType Implements IEncounter.EncounterType
         Get
             Return _data.EncounterType

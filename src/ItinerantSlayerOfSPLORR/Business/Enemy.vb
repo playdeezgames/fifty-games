@@ -43,6 +43,26 @@
     End Sub
 
     Public Function RollDefend(random As Random) As Integer Implements IEnemy.RollDefend
-        Return random.Next(_data.EnemyType.ToDescriptor().Defend)
+        Return random.Next(_data.EnemyType.ToDescriptor().Defend) + 1
+    End Function
+
+    Public Function Attack(character As ICharacter, random As Random) As IEnumerable(Of String) Implements IEnemy.Attack
+        Dim messages As New List(Of String)
+        Dim attackRoll = RollAttack(random)
+        messages.Add($"{Name} rolls an attack of {attackRoll}!")
+        Dim defendRoll = character.RollDefend(random)
+        messages.Add($"{character.Name} rolls a defend of {defendRoll}!")
+        If attackRoll > defendRoll Then
+            Dim damage = attackRoll - defendRoll
+            messages.Add($"{Name} hits for {damage} damage!")
+            character.TakeDamage(damage)
+        Else
+            messages.Add($"{Name} misses!")
+        End If
+        Return messages
+    End Function
+
+    Private Function RollAttack(random As Random) As Integer
+        Return random.Next(_data.EnemyType.ToDescriptor.Attack) + 1
     End Function
 End Class
