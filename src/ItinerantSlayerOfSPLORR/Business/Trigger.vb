@@ -23,4 +23,13 @@
             Return New Teleport(_worldData, _data.Teleport)
         End Get
     End Property
+
+    Public ReadOnly Property Inn As IInn Implements ITrigger.Inn
+        Get
+            If _data.Inn Is Nothing Then
+                Return Nothing
+            End If
+            Return New Inn(_worldData, _data.Inn)
+        End Get
+    End Property
 End Class

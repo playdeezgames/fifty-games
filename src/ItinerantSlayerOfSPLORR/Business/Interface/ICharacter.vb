@@ -7,7 +7,10 @@
     ReadOnly Property IsDead As Boolean
     ReadOnly Property HitPoints As Integer
     ReadOnly Property MaximumHitPoints As Integer
+    Property IsInInn As Boolean
     Function Attack(enemy As IEnemy, random As Random) As IEnumerable(Of String)
     Function RollDefend(random As Random) As Integer
     Sub TakeDamage(damage As Integer)
+    ReadOnly Property Jools As Integer
+    Sub RestAtInn(inn As IInn)
 End Interface

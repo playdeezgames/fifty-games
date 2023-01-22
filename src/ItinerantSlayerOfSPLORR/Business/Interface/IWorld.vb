@@ -13,6 +13,7 @@
     Sub MoveEast(random As Random)
     Sub FleeEncounter()
     Function Attack(enemy As IEnemy, random As Random) As IEnumerable(Of String)
+    ReadOnly Property Inn As IInn
     ReadOnly Property PlayerCharacter As ICharacter
     ReadOnly Property IsInAnEncounter As Boolean
 End Interface

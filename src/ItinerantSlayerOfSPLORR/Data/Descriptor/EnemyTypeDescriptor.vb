@@ -6,4 +6,6 @@
     Public Property Morale As Integer
     Public Property Name As String
     Public Property XP As Integer
+    Public Property MinimumJools As Integer
+    Public Property MaximumJools As Integer
 End Class

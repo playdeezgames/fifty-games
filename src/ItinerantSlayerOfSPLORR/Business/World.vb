@@ -63,6 +63,19 @@
         End Get
     End Property
 
+    Public ReadOnly Property Inn As IInn Implements IWorld.Inn
+        Get
+            If Not PlayerCharacter.IsInInn Then
+                Return Nothing
+            End If
+            Dim cell = PlayerBoard.GetCell(_data.PlayerData.BoardColumn, _data.PlayerData.BoardRow)
+            If cell.Trigger Is Nothing Then
+                Return Nothing
+            End If
+            Return cell.Trigger.Inn
+        End Get
+    End Property
+
     Friend Sub StartGame() Implements IWorld.StartGame
         AbandonGame()
         InitializeBoards()
@@ -148,6 +161,7 @@
             Case TerrainType.Water, TerrainType.Wall
                 Return
         End Select
+        Dim character = currentCell.Character
         If nextCell.Trigger IsNot Nothing Then
             Select Case nextCell.Trigger.TriggerType
                 Case TriggerType.Teleport
@@ -155,11 +169,11 @@
                     nextX = nextCell.Trigger.Teleport.DestinationX
                     nextY = nextCell.Trigger.Teleport.DestinationY
                     nextCell = nextBoard.GetCell(nextX, nextY)
-                Case TriggerType.GiveItem
+                Case TriggerType.Inn
+                    character.IsInInn = True
             End Select
         End If
-        Dim character = currentCell.Character
-        nextCell.Character = character
+        nextCell.Character = Character
         currentCell.Character = Nothing
         PlayerBoard = nextBoard
         Player.X = nextX

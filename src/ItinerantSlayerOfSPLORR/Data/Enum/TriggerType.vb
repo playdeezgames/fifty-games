@@ -1,4 +1,4 @@
 ﻿Public Enum TriggerType
     Teleport
-    GiveItem
+    Inn
 End Enum

@@ -11,13 +11,15 @@ Friend Module EnemyTypeExtensions
                 EnemyType.Blob,
                 New EnemyTypeDescriptor With
                 {
-                    .HitPoints = 5,
-                    .Attack = 5,
+                    .HitPoints = 2,
+                    .Attack = 3,
                     .Defend = 5,
                     .Agility = 5,
                     .Morale = 5,
                     .Name = "Blob",
-                    .XP = 1
+                    .XP = 1,
+                    .MinimumJools = 1,
+                    .MaximumJools = 3
                 }
             }
         }

@@ -41,12 +41,32 @@
         End Get
     End Property
 
+    Public Property IsInInn As Boolean Implements ICharacter.IsInInn
+        Get
+            Return _data.IsInInn
+        End Get
+        Set(value As Boolean)
+            _data.IsInInn = value
+        End Set
+    End Property
+
+    Public ReadOnly Property Jools As Integer Implements ICharacter.Jools
+        Get
+            Return _data.Jools
+        End Get
+    End Property
+
     Public Sub AddXP(amount As Integer) Implements ICharacter.AddXP
         _data.XP += amount
     End Sub
 
     Public Sub TakeDamage(damage As Integer) Implements ICharacter.TakeDamage
         _data.Wounds += damage
+    End Sub
+
+    Public Sub RestAtInn(inn As IInn) Implements ICharacter.RestAtInn
+        _data.Jools -= inn.Price
+        _data.Wounds = 0
     End Sub
 
     Public Function RollAttack(random As Random) As Integer Implements ICharacter.RollAttack
@@ -60,21 +80,30 @@
         Dim defendRoll = enemy.RollDefend(random)
         messages.Add($"{enemy.Name} rolls a defend of {defendRoll}")
         If attackRoll > defendRoll Then
-            messages.Add($"{Name} hits!")
-            enemy.TakeDamage(attackRoll - defendRoll)
+            Dim damage = attackRoll - defendRoll
+            messages.Add($"{Name} hits for {damage} damage!")
+            enemy.TakeDamage(damage)
             If enemy.IsDead Then
                 messages.Add($"{Name} kills {enemy.Name}!")
                 If enemy.XP > 0 Then
                     messages.Add($"{Name} gets {enemy.XP} XP!")
                     AddXP(enemy.XP)
                 End If
-                'TODO: loot drop
+                Dim jools = enemy.RollJools(random)
+                If jools > 0 Then
+                    AddJools(jools)
+                    messages.Add($"{Name} gets {jools} jools!")
+                End If
             End If
         Else
             messages.Add($"{Name} misses!")
         End If
         Return messages
     End Function
+
+    Private Sub AddJools(jools As Integer)
+        _data.Jools += jools
+    End Sub
 
     Public Function RollDefend(random As Random) As Integer Implements ICharacter.RollDefend
         Return random.Next(_data.CharacterType.ToDescriptor().Defend) + 1

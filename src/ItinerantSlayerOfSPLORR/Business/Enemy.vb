@@ -62,6 +62,10 @@
         Return messages
     End Function
 
+    Public Function RollJools(random As Random) As Integer Implements IEnemy.RollJools
+        Return random.Next(_data.EnemyType.ToDescriptor.MinimumJools, _data.EnemyType.ToDescriptor.MaximumJools + 1)
+    End Function
+
     Private Function RollAttack(random As Random) As Integer
         Return random.Next(_data.EnemyType.ToDescriptor.Attack) + 1
     End Function

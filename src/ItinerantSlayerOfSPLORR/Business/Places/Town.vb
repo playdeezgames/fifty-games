@@ -42,7 +42,17 @@
                         .DestinationBoard = 0
                     }
                 },
-                24, 24)
+                24, 24),
+            (New TriggerData With
+                {
+                    .TriggerType = TriggerType.Inn,
+                    .Inn = New InnData With
+                    {
+                        .Name = "Hometown Inn",
+                        .Price = 3
+                    }
+                },
+                22, 3)
         }
     Friend ReadOnly defaultTerrain As TerrainType = TerrainType.Grass
     Friend ReadOnly encounterZones As IReadOnlyList(Of EncounterZoneData) =
