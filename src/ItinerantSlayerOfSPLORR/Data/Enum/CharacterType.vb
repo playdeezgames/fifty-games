@@ -14,7 +14,18 @@ Friend Module CharacterTypeExtensions
                     .Name = "yer character",
                     .Attack = 5,
                     .Defend = 5,
-                    .HitPoints = 5
+                    .HitPoints = 5,
+                    .XPGoal = Function(level)
+                                  Dim result = 10
+                                  While level > 1
+                                      result *= 2
+                                      level -= 1
+                                  End While
+                                  Return result
+                              End Function,
+                    .HitPointIncrease = 5,
+                    .AttackStrengthIncrease = 1,
+                    .DefendStrengthIncrease = 1
                 }
             }
         }

@@ -37,7 +37,7 @@
 
     Public ReadOnly Property MaximumHitPoints As Integer Implements ICharacter.MaximumHitPoints
         Get
-            Return _data.CharacterType.ToDescriptor.HitPoints
+            Return _data.CharacterType.ToDescriptor.HitPoints + _data.MaximumHitPoints
         End Get
     End Property
 
@@ -58,13 +58,49 @@
 
     Public ReadOnly Property AttackStrength As Integer Implements ICharacter.AttackStrength
         Get
-            Return _data.CharacterType.ToDescriptor().Attack
+            Return _data.CharacterType.ToDescriptor().Attack + _data.AttackStrength
         End Get
     End Property
 
     Public ReadOnly Property DefendStrength As Integer Implements ICharacter.DefendStrength
         Get
-            Return _data.CharacterType.ToDescriptor().Defend
+            Return _data.CharacterType.ToDescriptor().Defend + _data.DefendStrength
+        End Get
+    End Property
+
+    Public ReadOnly Property Level As Integer Implements ICharacter.Level
+        Get
+            Return _data.Level
+        End Get
+    End Property
+
+    Public ReadOnly Property XPGoal As Integer Implements ICharacter.XPGoal
+        Get
+            Return _data.CharacterType.ToDescriptor.XPGoal(Level)
+        End Get
+    End Property
+
+    Public ReadOnly Property HasLeveledUp As Boolean Implements ICharacter.HasLeveledUp
+        Get
+            Return XP >= XPGoal
+        End Get
+    End Property
+
+    Public ReadOnly Property HitPointIncrease As Integer Implements ICharacter.HitPointIncrease
+        Get
+            Return _data.CharacterType.ToDescriptor.HitPointIncrease
+        End Get
+    End Property
+
+    Public ReadOnly Property AttackStrengthIncrease As Integer Implements ICharacter.AttackStrengthIncrease
+        Get
+            Return _data.CharacterType.ToDescriptor.AttackStrengthIncrease
+        End Get
+    End Property
+
+    Public ReadOnly Property DefendStrengthIncrease As Integer Implements ICharacter.DefendStrengthIncrease
+        Get
+            Return _data.CharacterType.ToDescriptor.DefendStrengthIncrease
         End Get
     End Property
 
@@ -120,4 +156,33 @@
     Public Function RollDefend(random As Random) As Integer Implements ICharacter.RollDefend
         Return random.Next(DefendStrength) + 1
     End Function
+
+    Public Sub LevelUpHitPoints() Implements ICharacter.LevelUpHitPoints
+        If Not HasLeveledUp Then
+            Return
+        End If
+        _data.MaximumHitPoints += HitPointIncrease
+        IncreaseXPLevel()
+    End Sub
+
+    Private Sub IncreaseXPLevel()
+        _data.XP -= XPGoal
+        _data.Level += 1
+    End Sub
+
+    Public Sub LevelUpDefendStrength() Implements ICharacter.LevelUpDefendStrength
+        If Not HasLeveledUp Then
+            Return
+        End If
+        _data.DefendStrength += DefendStrengthIncrease
+        IncreaseXPLevel()
+    End Sub
+
+    Public Sub LevelUpAttackStrength() Implements ICharacter.LevelUpAttackStrength
+        If Not HasLeveledUp Then
+            Return
+        End If
+        _data.AttackStrength += AttackStrengthIncrease
+        IncreaseXPLevel()
+    End Sub
 End Class

@@ -113,10 +113,16 @@
     Private Sub ShowPlayerStatistics(world As IWorld)
         Dim character = world.PlayerCharacter
         AnsiConsole.Cursor.SetPosition(50, 1)
-        AnsiConsole.Markup($"HP: {character.HitPoints}/{character.MaximumHitPoints}")
+        AnsiConsole.Markup($"Level: {character.Level}")
         AnsiConsole.Cursor.SetPosition(50, 2)
-        AnsiConsole.Markup($"XP: {character.XP}")
+        AnsiConsole.Markup($"HP: {character.HitPoints}/{character.MaximumHitPoints}")
         AnsiConsole.Cursor.SetPosition(50, 3)
+        If character.HasLeveledUp Then
+            AnsiConsole.Markup($"XP: LEVEL UP!")
+        Else
+            AnsiConsole.Markup($"XP: {character.XP}/{character.XPGoal}")
+        End If
+        AnsiConsole.Cursor.SetPosition(50, 4)
         AnsiConsole.Markup($"Jools: {character.Jools}")
     End Sub
 

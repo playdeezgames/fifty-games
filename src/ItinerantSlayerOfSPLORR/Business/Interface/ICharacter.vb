@@ -4,6 +4,8 @@
     Sub AddXP(amount As Integer)
     ReadOnly Property Name As String
     ReadOnly Property XP As Integer
+    ReadOnly Property XPGoal As Integer
+    ReadOnly Property Level As Integer
     ReadOnly Property IsDead As Boolean
     ReadOnly Property HitPoints As Integer
     ReadOnly Property MaximumHitPoints As Integer
@@ -13,6 +15,13 @@
     Sub TakeDamage(damage As Integer)
     ReadOnly Property Jools As Integer
     Sub RestAtInn(inn As IInn)
+    Sub LevelUpHitPoints()
+    Sub LevelUpDefendStrength()
+    Sub LevelUpAttackStrength()
+    ReadOnly Property HasLeveledUp As Boolean
     ReadOnly Property AttackStrength As Integer
     ReadOnly Property DefendStrength As Integer
+    ReadOnly Property HitPointIncrease As Integer
+    ReadOnly Property AttackStrengthIncrease As Integer
+    ReadOnly Property DefendStrengthIncrease As Integer
 End Interface

@@ -127,7 +127,15 @@
         For Each character In characters
             boardData.BoardColumns(character.Item2).Cells(character.Item3).Character = New CharacterData() With
             {
-                .CharacterType = character.Item1
+                .CharacterType = character.Item1,
+                .XP = 0,
+                .IsInInn = False,
+                .Jools = 0,
+                .Wounds = 0,
+                .Level = 1,
+                .MaximumHitPoints = 0,
+                .AttackStrength = 0,
+                .DefendStrength = 0
             }
         Next
         For Each trigger In triggers
