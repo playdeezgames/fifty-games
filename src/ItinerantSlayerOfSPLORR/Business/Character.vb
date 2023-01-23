@@ -56,6 +56,18 @@
         End Get
     End Property
 
+    Public ReadOnly Property AttackStrength As Integer Implements ICharacter.AttackStrength
+        Get
+            Return _data.CharacterType.ToDescriptor().Attack
+        End Get
+    End Property
+
+    Public ReadOnly Property DefendStrength As Integer Implements ICharacter.DefendStrength
+        Get
+            Return _data.CharacterType.ToDescriptor().Defend
+        End Get
+    End Property
+
     Public Sub AddXP(amount As Integer) Implements ICharacter.AddXP
         _data.XP += amount
     End Sub
@@ -70,7 +82,7 @@
     End Sub
 
     Public Function RollAttack(random As Random) As Integer Implements ICharacter.RollAttack
-        Return random.Next(_data.CharacterType.ToDescriptor().Attack) + 1
+        Return random.Next(AttackStrength) + 1
     End Function
 
     Public Function Attack(enemy As IEnemy, random As Random) As IEnumerable(Of String) Implements ICharacter.Attack
@@ -106,6 +118,6 @@
     End Sub
 
     Public Function RollDefend(random As Random) As Integer Implements ICharacter.RollDefend
-        Return random.Next(_data.CharacterType.ToDescriptor().Defend) + 1
+        Return random.Next(DefendStrength) + 1
     End Function
 End Class

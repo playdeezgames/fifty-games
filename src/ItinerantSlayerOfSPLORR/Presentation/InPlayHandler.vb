@@ -105,7 +105,7 @@
             Case ConsoleKey.RightArrow
                 world.MoveEast(random)
             Case ConsoleKey.Escape
-                Return True
+                Return InGameMenuHandler.Run(world)
         End Select
         Return False
     End Function

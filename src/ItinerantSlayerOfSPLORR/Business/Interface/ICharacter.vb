@@ -13,4 +13,6 @@
     Sub TakeDamage(damage As Integer)
     ReadOnly Property Jools As Integer
     Sub RestAtInn(inn As IInn)
+    ReadOnly Property AttackStrength As Integer
+    ReadOnly Property DefendStrength As Integer
 End Interface
