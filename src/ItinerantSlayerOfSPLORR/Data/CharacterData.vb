@@ -9,4 +9,5 @@
     Public Property DefendStrength As Integer
     Public Property AttackStrength As Integer
     Public Property IsInShoppe As Boolean
+    Public Property Inventory As New Dictionary(Of ItemType, Integer)
 End Class

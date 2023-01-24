@@ -14,4 +14,16 @@
             Return _data.Name
         End Get
     End Property
+
+    Public ReadOnly Property SellsThings As Boolean Implements IShoppe.SellsThings
+        Get
+            Return _data.Prices.Any
+        End Get
+    End Property
+
+    Public ReadOnly Property Prices As IReadOnlyDictionary(Of ItemType, Integer) Implements IShoppe.Prices
+        Get
+            Return _data.Prices
+        End Get
+    End Property
 End Class

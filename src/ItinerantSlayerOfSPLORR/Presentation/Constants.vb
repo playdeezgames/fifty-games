@@ -11,4 +11,7 @@
     Friend Const MainMenuText = "Main Menu"
     Friend Const StartGameText = "Start Game"
     Friend Const StatusText = "Status"
+    Friend Const BuyText = "Buy"
+    Friend Const LeaveText = "Leave"
+    Friend Const NeverMindText = "Never Mind"
 End Module

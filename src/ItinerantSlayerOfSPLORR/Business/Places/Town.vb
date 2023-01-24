@@ -58,7 +58,11 @@
                     .TriggerType = TriggerType.Shoppe,
                     .Shoppe = New ShoppeData With
                     {
-                        .Name = "Märten's Nihilist Healing Supplies"
+                        .Name = "Märten's Nihilist Healing Supplies",
+                        .Prices = New Dictionary(Of ItemType, Integer) From
+                        {
+                            {ItemType.Potion, 5}
+                        }
                     }
                 },
                 5, 19)

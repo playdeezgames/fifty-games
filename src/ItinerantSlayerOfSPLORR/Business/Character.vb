@@ -194,4 +194,14 @@
         _data.AttackStrength += AttackStrengthIncrease
         IncreaseXPLevel()
     End Sub
+
+    Public Sub BuyItems(shoppe As IShoppe, itemType As ItemType, quantity As Integer) Implements ICharacter.BuyItems
+        _data.Jools -= shoppe.Prices(itemType) * quantity
+        AddItems(itemType, quantity)
+    End Sub
+
+    Private Sub AddItems(itemType As ItemType, quantity As Integer)
+        quantity += If(_data.Inventory.ContainsKey(itemType), _data.Inventory(itemType), 0)
+        _data.Inventory(itemType) = quantity
+    End Sub
 End Class

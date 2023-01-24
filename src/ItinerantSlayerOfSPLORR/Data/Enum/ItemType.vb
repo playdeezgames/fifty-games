@@ -1,3 +1,3 @@
 ﻿Public Enum ItemType
-    Dollar
+    Potion
 End Enum

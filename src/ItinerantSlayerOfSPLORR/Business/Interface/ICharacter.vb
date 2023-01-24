@@ -18,6 +18,7 @@
     Sub LevelUpHitPoints()
     Sub LevelUpDefendStrength()
     Sub LevelUpAttackStrength()
+    Sub BuyItems(shoppe As IShoppe, itemType As ItemType, quantity As Integer)
     ReadOnly Property HasLeveledUp As Boolean
     ReadOnly Property AttackStrength As Integer
     ReadOnly Property DefendStrength As Integer
