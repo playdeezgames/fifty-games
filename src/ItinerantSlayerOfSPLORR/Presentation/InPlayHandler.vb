@@ -22,7 +22,9 @@
 
     Private Sub ShowShoppe(world As IWorld)
         AnsiConsole.Clear()
-        AnsiConsole.MarkupLine("Yer in a shoppe!")
+        Dim character = world.PlayerCharacter
+        Dim shoppe As IShoppe = world.Shoppe
+        AnsiConsole.MarkupLine($"{character.Name} enters {shoppe.Name}.")
         OkPrompt()
         world.PlayerCharacter.IsInShoppe = False
     End Sub

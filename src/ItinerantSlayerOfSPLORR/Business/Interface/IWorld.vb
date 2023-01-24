@@ -16,4 +16,5 @@
     ReadOnly Property Inn As IInn
     ReadOnly Property PlayerCharacter As ICharacter
     ReadOnly Property IsInAnEncounter As Boolean
+    ReadOnly Property Shoppe As IShoppe
 End Interface

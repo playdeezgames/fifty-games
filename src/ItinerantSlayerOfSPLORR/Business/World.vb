@@ -76,6 +76,19 @@
         End Get
     End Property
 
+    Public ReadOnly Property Shoppe As IShoppe Implements IWorld.Shoppe
+        Get
+            If Not PlayerCharacter.IsInShoppe Then
+                Return Nothing
+            End If
+            Dim cell = PlayerBoard.GetCell(_data.PlayerData.BoardColumn, _data.PlayerData.BoardRow)
+            If cell.Trigger Is Nothing Then
+                Return Nothing
+            End If
+            Return cell.Trigger.Shoppe
+        End Get
+    End Property
+
     Friend Sub StartGame() Implements IWorld.StartGame
         AbandonGame()
         InitializeBoards()

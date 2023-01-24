@@ -32,4 +32,13 @@
             Return New Inn(_worldData, _data.Inn)
         End Get
     End Property
+
+    Public ReadOnly Property Shoppe As IShoppe Implements ITrigger.Shoppe
+        Get
+            If _data.Shoppe Is Nothing Then
+                Return Nothing
+            End If
+            Return New Shoppe(_worldData, _data.Shoppe)
+        End Get
+    End Property
 End Class

@@ -48,14 +48,18 @@
                     .TriggerType = TriggerType.Inn,
                     .Inn = New InnData With
                     {
-                        .Name = "Hometown Inn",
+                        .Name = "Graham's Inn (Sometimes)",
                         .Price = 3
                     }
                 },
                 22, 3),
             (New TriggerData With
                 {
-                    .TriggerType = TriggerType.Shoppe
+                    .TriggerType = TriggerType.Shoppe,
+                    .Shoppe = New ShoppeData With
+                    {
+                        .Name = "Märten's Nihilist Healing Supplies"
+                    }
                 },
                 5, 19)
         }
