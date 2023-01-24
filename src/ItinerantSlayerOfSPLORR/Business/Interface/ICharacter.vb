@@ -24,4 +24,5 @@
     ReadOnly Property HitPointIncrease As Integer
     ReadOnly Property AttackStrengthIncrease As Integer
     ReadOnly Property DefendStrengthIncrease As Integer
+    Property IsInShoppe As Boolean
 End Interface

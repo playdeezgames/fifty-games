@@ -41,6 +41,15 @@
         End Get
     End Property
 
+    Public Property IsInShoppe As Boolean Implements ICharacter.IsInShoppe
+        Get
+            Return _data.IsInShoppe
+        End Get
+        Set(value As Boolean)
+            _data.IsInShoppe = value
+        End Set
+    End Property
+
     Public Property IsInInn As Boolean Implements ICharacter.IsInInn
         Get
             Return _data.IsInInn

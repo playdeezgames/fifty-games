@@ -179,6 +179,8 @@
                     nextCell = nextBoard.GetCell(nextX, nextY)
                 Case TriggerType.Inn
                     character.IsInInn = True
+                Case TriggerType.Shoppe
+                    character.IsInShoppe = True
             End Select
         End If
         nextCell.Character = Character

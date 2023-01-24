@@ -8,6 +8,8 @@
                 Exit Do
             ElseIf world.PlayerCharacter.IsInInn Then
                 ShowInn(world)
+            ElseIf world.PlayerCharacter.IsInShoppe Then
+                ShowShoppe(world)
             ElseIf world.IsInAnEncounter Then
                 ShowEncounter(random, world)
             Else
@@ -16,6 +18,13 @@
                 End If
             End If
         Loop
+    End Sub
+
+    Private Sub ShowShoppe(world As IWorld)
+        AnsiConsole.Clear()
+        AnsiConsole.MarkupLine("Yer in a shoppe!")
+        OkPrompt()
+        world.PlayerCharacter.IsInShoppe = False
     End Sub
 
     Private Sub ShowInn(world As IWorld)
