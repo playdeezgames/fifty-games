@@ -46,8 +46,9 @@
     Private Sub BuyItems(shoppe As IShoppe, character As ICharacter)
         Do
             AnsiConsole.Clear()
+            AnsiConsole.MarkupLine($"{character.Name} currently has {character.Jools} jools.")
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]What would you like to buy?[/]"}
-            Dim table = shoppe.Prices.ToDictionary(Function(x) $"{x.Key.Name}(cost: {x.Value})", Function(x) x.Key)
+            Dim table = shoppe.Prices.ToDictionary(Function(x) $"{x.Key.Name}(cost {x.Value}, have {character.ItemCount(x.Key)})", Function(x) x.Key)
             prompt.AddChoices(table.Keys)
             prompt.AddChoice(NeverMindText)
             Dim answer = AnsiConsole.Prompt(prompt)

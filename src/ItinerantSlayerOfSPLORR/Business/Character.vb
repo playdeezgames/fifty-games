@@ -125,6 +125,15 @@
         End Get
     End Property
 
+    Public ReadOnly Property ItemCount(itemType As ItemType) As Integer Implements ICharacter.ItemCount
+        Get
+            If Not _data.Inventory.ContainsKey(itemType) Then
+                Return 0
+            End If
+            Return _data.Inventory(itemType)
+        End Get
+    End Property
+
     Public Sub AddXP(amount As Integer) Implements ICharacter.AddXP
         _data.XP += amount
     End Sub

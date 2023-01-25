@@ -3,14 +3,14 @@
 ## TODOs
 
 * see my inventory?
+* sell back empty bottles to shoppe
 
 ## Combat
 
 * Do an agility v. agility check before fleeing
 * Do morale check for enemy at the outset of the combat
 * Shoppe
-* Items
-    * Potions
+    * Selling
 * Spells
 * Equipment
 

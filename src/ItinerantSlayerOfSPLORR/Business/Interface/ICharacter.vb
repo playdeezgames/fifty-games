@@ -33,4 +33,5 @@
     ReadOnly Property AttackStrengthIncrease As Integer
     ReadOnly Property DefendStrengthIncrease As Integer
     Property IsInShoppe As Boolean
+    ReadOnly Property ItemCount(itemType As ItemType) As Integer
 End Interface
