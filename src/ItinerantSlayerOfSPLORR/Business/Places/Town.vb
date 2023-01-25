@@ -61,7 +61,11 @@
                         .Name = "Märten's Nihilist Healing Supplies",
                         .Prices = New Dictionary(Of ItemType, Integer) From
                         {
-                            {ItemType.Potion, 5}
+                            {ItemType.Potion, 6}
+                        },
+                        .Offers = New Dictionary(Of ItemType, Integer) From
+                        {
+                            {ItemType.EmptyBottle, 1}
                         }
                     }
                 },

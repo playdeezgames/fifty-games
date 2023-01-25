@@ -14,6 +14,7 @@
     Friend Const LevelUpText = "LEVEL UP!"
     Friend Const MainMenuText = "Main Menu"
     Friend Const NeverMindText = "Never Mind"
+    Friend Const SellText = "Sell"
     Friend Const StartGameText = "Start Game"
     Friend Const StatusText = "Status"
     Friend Const UseText = "Use"

@@ -271,4 +271,9 @@
         End If
         _data.Inventory(itemType) = currentQuantity - quantity
     End Sub
+
+    Public Sub SellItems(shoppe As IShoppe, itemType As ItemType, quantity As Integer) Implements ICharacter.SellItems
+        _data.Jools += shoppe.Offers(itemType) * quantity
+        RemoveItems(itemType, quantity)
+    End Sub
 End Class

@@ -24,4 +24,8 @@
     * Having macguffin gives access to where big bad is
     * After defeating big bad, return to quest giver for end game
 
+## Feature Creep
+
+* trophy items dropped by slain creatures? 
+
 
