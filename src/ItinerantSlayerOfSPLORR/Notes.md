@@ -2,16 +2,12 @@
 
 ## TODOs
 
-* sell back empty bottles to shoppe
-
 ## Combat
 
-* Do an agility v. agility check before fleeing
-* Do morale check for enemy at the outset of the combat
-* Shoppe
-    * Selling
-* Spells
 * Equipment
+* Do an agility v. agility check before fleeing
+* Do morale check for enemy at the outset of the combat?
+* Spells
 
 ## Core Functionality TODO
 
