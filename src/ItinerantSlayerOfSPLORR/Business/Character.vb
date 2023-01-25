@@ -113,6 +113,18 @@
         End Get
     End Property
 
+    Public ReadOnly Property CanUseItem As Boolean Implements ICharacter.CanUseItem
+        Get
+            Return _data.Inventory.Keys.Any(Function(x) x.CanUse)
+        End Get
+    End Property
+
+    Public ReadOnly Property UsableItems As IEnumerable(Of ItemType) Implements ICharacter.UsableItems
+        Get
+            Return _data.Inventory.Keys.Where(Function(x) x.CanUse)
+        End Get
+    End Property
+
     Public Sub AddXP(amount As Integer) Implements ICharacter.AddXP
         _data.XP += amount
     End Sub
@@ -200,8 +212,42 @@
         AddItems(itemType, quantity)
     End Sub
 
-    Private Sub AddItems(itemType As ItemType, quantity As Integer)
+    Public Sub AddItems(itemType As ItemType, quantity As Integer) Implements ICharacter.AddItems
         quantity += If(_data.Inventory.ContainsKey(itemType), _data.Inventory(itemType), 0)
         _data.Inventory(itemType) = quantity
+    End Sub
+
+    Public Function HasItem(itemType As ItemType) As Boolean Implements ICharacter.HasItem
+        Return _data.Inventory.ContainsKey(itemType)
+    End Function
+
+    Public Function UseItem(itemType As ItemType) As IEnumerable(Of String) Implements ICharacter.UseItem
+        Dim messages As New List(Of String)
+        If Not HasItem(itemType) Then
+            messages.Add($"{Name} has no {itemType.Name} to use!")
+            Return messages
+        End If
+        If Not itemType.CanUse Then
+            messages.Add($"{Name} cannot use {itemType.Name}!")
+            Return messages
+        End If
+        messages.AddRange(itemType.UseBy(Me))
+        Return messages
+    End Function
+
+    Public Sub Heal(healingAmount As Integer) Implements ICharacter.Heal
+        TakeDamage(-healingAmount)
+    End Sub
+
+    Public Sub RemoveItems(itemType As ItemType, quantity As Integer) Implements ICharacter.RemoveItems
+        If Not _data.Inventory.ContainsKey(itemType) Then
+            Return
+        End If
+        Dim currentQuantity = _data.Inventory(itemType)
+        If quantity >= currentQuantity Then
+            _data.Inventory.Remove(itemType)
+            Return
+        End If
+        _data.Inventory(itemType) = currentQuantity - quantity
     End Sub
 End Class

@@ -228,6 +228,14 @@
         Dim messages As New List(Of String)
         Dim character = PlayerCharacter
         messages.AddRange(character.Attack(enemy, random))
+        EnemyResponse(random, messages, character)
+        Return messages
+    End Function
+
+    Private Sub EnemyResponse(random As Random, messages As List(Of String), character As ICharacter)
+        If Encounter Is Nothing Then
+            Return
+        End If
         Encounter.PurgeCorpses()
         If Encounter.Enemies.Any Then
             messages.AddRange(Encounter.CounterAttack(character, random))
@@ -235,6 +243,13 @@
             messages.Add($"{character.Name} has defeated all enemies!")
             _data.Encounter = Nothing
         End If
+    End Sub
+
+    Public Function UseItem(itemType As ItemType, random As Random) As IEnumerable(Of String) Implements IWorld.UseItem
+        Dim messages As New List(Of String)
+        Dim character = PlayerCharacter
+        messages.AddRange(character.UseItem(itemType))
+        EnemyResponse(random, messages, character)
         Return messages
     End Function
 End Class

@@ -19,6 +19,13 @@
     Sub LevelUpDefendStrength()
     Sub LevelUpAttackStrength()
     Sub BuyItems(shoppe As IShoppe, itemType As ItemType, quantity As Integer)
+    Function HasItem(itemType As ItemType) As Boolean
+    Function UseItem(itemType As ItemType) As IEnumerable(Of String)
+    Sub Heal(healingAmount As Integer)
+    Sub AddItems(emptyBottle As ItemType, quantity As Integer)
+    Sub RemoveItems(itemType As ItemType, quantity As Integer)
+    ReadOnly Property UsableItems As IEnumerable(Of ItemType)
+    ReadOnly Property CanUseItem As Boolean
     ReadOnly Property HasLeveledUp As Boolean
     ReadOnly Property AttackStrength As Integer
     ReadOnly Property DefendStrength As Integer

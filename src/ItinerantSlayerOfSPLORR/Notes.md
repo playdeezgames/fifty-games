@@ -1,5 +1,9 @@
 ﻿# Itinerant Slayer of SPLORR!!
 
+## TODOs
+
+* see my inventory?
+
 ## Combat
 
 * Do an agility v. agility check before fleeing
