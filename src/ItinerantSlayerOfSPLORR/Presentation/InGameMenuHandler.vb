@@ -1,5 +1,5 @@
 ﻿Module InGameMenuHandler
-    Friend Function Run(world As IWorld) As Boolean
+    Friend Function Run(world As IWorld, random As Random) As Boolean
         AnsiConsole.Clear()
         Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Game Menu:[/]"}
         prompt.AddChoice(CancelText)
@@ -7,12 +7,17 @@
         If world.PlayerCharacter.HasLeveledUp Then
             prompt.AddChoice(LevelUpText)
         End If
+        If world.PlayerCharacter.HasItems Then
+            prompt.AddChoice(InventoryText)
+        End If
         prompt.AddChoice(MainMenuText)
         Select Case AnsiConsole.Prompt(prompt)
             Case LevelUpText
                 DoLevelUp(world.PlayerCharacter)
             Case CancelText
                 'do nothing!
+            Case InventoryText
+                ShowInventory(random, world)
             Case MainMenuText
                 Return True
             Case StatusText
@@ -20,6 +25,26 @@
         End Select
         Return False
     End Function
+
+    Private Sub ShowInventory(random As Random, world As IWorld)
+        Dim character = world.PlayerCharacter
+        AnsiConsole.Clear()
+        AnsiConsole.MarkupLine($"{Character.Name}'s Inventory")
+        For Each item In Character.Items
+            AnsiConsole.MarkupLine($"{item.Item1.Name}(x{item.Item2})")
+        Next
+        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
+        prompt.AddChoice(NeverMindText)
+        If Character.CanUseItem Then
+            prompt.AddChoice(UseText)
+        End If
+        Select Case AnsiConsole.Prompt(prompt)
+            Case NeverMindText
+                'do nothing
+            Case UseText
+                UseItem(random, world)
+        End Select
+    End Sub
 
     Private Sub DoLevelUp(character As ICharacter)
         AnsiConsole.Clear()

@@ -24,6 +24,8 @@
     Sub Heal(healingAmount As Integer)
     Sub AddItems(emptyBottle As ItemType, quantity As Integer)
     Sub RemoveItems(itemType As ItemType, quantity As Integer)
+    ReadOnly Property Items As IEnumerable(Of (ItemType, Integer))
+    ReadOnly Property HasItems As Boolean
     ReadOnly Property UsableItems As IEnumerable(Of ItemType)
     ReadOnly Property CanUseItem As Boolean
     ReadOnly Property HasLeveledUp As Boolean

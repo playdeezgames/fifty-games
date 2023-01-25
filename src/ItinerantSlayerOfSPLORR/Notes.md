@@ -2,7 +2,6 @@
 
 ## TODOs
 
-* see my inventory?
 * sell back empty bottles to shoppe
 
 ## Combat

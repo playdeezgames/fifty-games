@@ -8,6 +8,7 @@
     Friend Const FightText = "Fight!"
     Friend Const FleeText = "Flee"
     Friend Const HitPointText = "Hit Point"
+    Friend Const InventoryText = "Inventory"
     Friend Const ItemText = "Item"
     Friend Const LeaveText = "Leave"
     Friend Const LevelUpText = "LEVEL UP!"
@@ -15,4 +16,5 @@
     Friend Const NeverMindText = "Never Mind"
     Friend Const StartGameText = "Start Game"
     Friend Const StatusText = "Status"
+    Friend Const UseText = "Use"
 End Module

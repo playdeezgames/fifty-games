@@ -6,6 +6,8 @@ Friend Module ItemTypeExtensions
         Select Case itemType
             Case ItemType.Potion
                 Return "Potion"
+            Case ItemType.EmptyBottle
+                Return "Empty Bottle"
             Case Else
                 Throw New NotImplementedException
         End Select

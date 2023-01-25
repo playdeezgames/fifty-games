@@ -134,6 +134,18 @@
         End Get
     End Property
 
+    Public ReadOnly Property HasItems As Boolean Implements ICharacter.HasItems
+        Get
+            Return _data.Inventory.Any
+        End Get
+    End Property
+
+    Public ReadOnly Property Items As IEnumerable(Of (ItemType, Integer)) Implements ICharacter.Items
+        Get
+            Return _data.Inventory.Select(Function(x) (x.Key, x.Value))
+        End Get
+    End Property
+
     Public Sub AddXP(amount As Integer) Implements ICharacter.AddXP
         _data.XP += amount
     End Sub

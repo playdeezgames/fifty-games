@@ -29,10 +29,10 @@
             Case FleeText
                 world.FleeEncounter()
             Case ItemText
-                CombatUseItem(random, world)
+                UseItem(random, world)
         End Select
     End Sub
-    Private Sub CombatUseItem(random As Random, world As IWorld)
+    Friend Sub UseItem(random As Random, world As IWorld)
         Dim items As IEnumerable(Of ItemType) = world.PlayerCharacter.UsableItems
         Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Use what?[/]"}
         Dim table = items.ToDictionary(Of String, ItemType)(Function(x) x.Name, Function(x) x)
