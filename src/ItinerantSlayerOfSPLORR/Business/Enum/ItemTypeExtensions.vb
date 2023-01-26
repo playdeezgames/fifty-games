@@ -15,6 +15,17 @@ Friend Module ItemTypeExtensions
         End Select
     End Function
     <Extension>
+    Friend Function CanEquip(itemType As ItemType) As Boolean
+        Select Case itemType
+            Case ItemType.Potion, ItemType.EmptyBottle
+                Return False
+            Case ItemType.Sword
+                Return True
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+    <Extension>
     Friend Function CanUse(itemType As ItemType) As Boolean
         Select Case itemType
             Case ItemType.Potion

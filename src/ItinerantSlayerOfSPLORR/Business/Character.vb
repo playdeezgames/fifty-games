@@ -146,6 +146,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property CanEquipItem As Boolean Implements ICharacter.CanEquipItem
+        Get
+            Return _data.Inventory.Any(Function(x) x.Key.CanEquip)
+        End Get
+    End Property
+
     Public Sub AddXP(amount As Integer) Implements ICharacter.AddXP
         _data.XP += amount
     End Sub

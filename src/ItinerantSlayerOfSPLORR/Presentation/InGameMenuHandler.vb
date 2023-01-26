@@ -26,26 +26,6 @@
         Return False
     End Function
 
-    Private Sub ShowInventory(random As Random, world As IWorld)
-        Dim character = world.PlayerCharacter
-        AnsiConsole.Clear()
-        AnsiConsole.MarkupLine($"{Character.Name}'s Inventory")
-        For Each item In Character.Items
-            AnsiConsole.MarkupLine($"{item.Item1.Name}(x{item.Item2})")
-        Next
-        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
-        prompt.AddChoice(NeverMindText)
-        If Character.CanUseItem Then
-            prompt.AddChoice(UseText)
-        End If
-        Select Case AnsiConsole.Prompt(prompt)
-            Case NeverMindText
-                'do nothing
-            Case UseText
-                UseItem(random, world)
-        End Select
-    End Sub
-
     Private Sub DoLevelUp(character As ICharacter)
         AnsiConsole.Clear()
         Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Level Up...[/]"}

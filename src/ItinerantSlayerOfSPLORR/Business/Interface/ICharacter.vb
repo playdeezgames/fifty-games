@@ -25,6 +25,7 @@
     Sub AddItems(emptyBottle As ItemType, quantity As Integer)
     Sub RemoveItems(itemType As ItemType, quantity As Integer)
     Sub SellItems(shoppe As IShoppe, itemType As ItemType, quantity As Integer)
+    ReadOnly Property CanEquipItem As Boolean
     ReadOnly Property Items As IEnumerable(Of (ItemType, Integer))
     ReadOnly Property HasItems As Boolean
     ReadOnly Property UsableItems As IEnumerable(Of ItemType)
