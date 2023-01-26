@@ -24,7 +24,9 @@ Friend Module ItemTypeExtensions
                 ItemType.Sword,
                 New ItemTypeDescriptor With
                 {
-                    .Name = "Sword"
+                    .Name = "Sword",
+                    .CanEquip = True,
+                    .EquipSlot = EquipSlotType.Weapon
                 }
             }
         }

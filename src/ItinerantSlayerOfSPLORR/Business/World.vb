@@ -252,4 +252,11 @@
         EnemyResponse(random, messages, character)
         Return messages
     End Function
+
+    Public Function EquipItem(itemType As ItemType) As IEnumerable(Of String) Implements IWorld.EquipItem
+        Dim messages As New List(Of String)
+        Dim character = PlayerCharacter
+        messages.AddRange(character.EquipItem(itemType))
+        Return messages
+    End Function
 End Class

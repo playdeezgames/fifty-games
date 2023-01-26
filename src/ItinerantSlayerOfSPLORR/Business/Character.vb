@@ -152,6 +152,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property EquippableItems As IEnumerable(Of ItemType) Implements ICharacter.EquippableItems
+        Get
+            Return _data.Inventory.Keys.Where(Function(x) x.ToDescriptor.CanEquip)
+        End Get
+    End Property
+
     Public Sub AddXP(amount As Integer) Implements ICharacter.AddXP
         _data.XP += amount
     End Sub
@@ -281,5 +287,34 @@
     Public Sub SellItems(shoppe As IShoppe, itemType As ItemType, quantity As Integer) Implements ICharacter.SellItems
         _data.Jools += shoppe.Offers(itemType) * quantity
         RemoveItems(itemType, quantity)
+    End Sub
+
+    Public Function EquipItem(itemType As ItemType) As IEnumerable(Of String) Implements ICharacter.EquipItem
+        Dim messages As New List(Of String)
+        If Not itemType.ToDescriptor.CanEquip Then
+            messages.Add($"{Name} cannot equip {itemType.ToDescriptor.Name}.")
+            Return messages
+        End If
+        If Not HasItem(itemType) Then
+            messages.Add($"{Name} has no {itemType.ToDescriptor.Name} to equip.")
+            Return messages
+        End If
+        Dim equipSlot As EquipSlotType = itemType.ToDescriptor.EquipSlot.Value
+        Equip(equipSlot, itemType)
+        messages.Add($"{Name} equips {itemType.ToDescriptor.Name}.")
+        Return messages
+    End Function
+
+    Private Sub Equip(equipSlot As EquipSlotType, itemType As ItemType)
+        Unequip(equipSlot)
+        RemoveItems(itemType, 1)
+        _data.Equipment.Add(equipSlot, itemType)
+    End Sub
+
+    Private Sub Unequip(equipSlot As EquipSlotType)
+        If _data.Equipment.ContainsKey(equipSlot) Then
+            AddItems(_data.Equipment(equipSlot), 1)
+            _data.Equipment.Remove(equipSlot)
+        End If
     End Sub
 End Class

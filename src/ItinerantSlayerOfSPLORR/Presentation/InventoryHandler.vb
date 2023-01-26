@@ -21,8 +21,23 @@
             Case UseText
                 UseItem(random, world)
             Case EquipText
-                'TODO: equip handler
+                EquipItem(world)
         End Select
     End Sub
-
+    Private Sub EquipItem(world As IWorld)
+        Dim character = world.PlayerCharacter
+        Dim equippableItems As IEnumerable(Of ItemType) = character.EquippableItems
+        AnsiConsole.Clear()
+        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Equip What?[/]"}
+        prompt.AddChoice(NeverMindText)
+        Dim table = equippableItems.ToDictionary(Of String, ItemType)(Function(x) $"{x.ToDescriptor.Name}", Function(x) x)
+        prompt.AddChoices(table.Keys)
+        Dim answer = AnsiConsole.Prompt(prompt)
+        Select Case answer
+            Case NeverMindText
+                'do nothing
+            Case Else
+                ShowMessages(world.EquipItem(table(answer)))
+        End Select
+    End Sub
 End Module

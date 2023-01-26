@@ -25,6 +25,7 @@
     Sub AddItems(emptyBottle As ItemType, quantity As Integer)
     Sub RemoveItems(itemType As ItemType, quantity As Integer)
     Sub SellItems(shoppe As IShoppe, itemType As ItemType, quantity As Integer)
+    Function EquipItem(itemType As ItemType) As IEnumerable(Of String)
     ReadOnly Property CanEquipItem As Boolean
     ReadOnly Property Items As IEnumerable(Of (ItemType, Integer))
     ReadOnly Property HasItems As Boolean
@@ -38,4 +39,5 @@
     ReadOnly Property DefendStrengthIncrease As Integer
     Property IsInShoppe As Boolean
     ReadOnly Property ItemCount(itemType As ItemType) As Integer
+    ReadOnly Property EquippableItems As IEnumerable(Of ItemType)
 End Interface
