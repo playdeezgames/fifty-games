@@ -26,6 +26,8 @@
     Sub RemoveItems(itemType As ItemType, quantity As Integer)
     Sub SellItems(shoppe As IShoppe, itemType As ItemType, quantity As Integer)
     Function EquipItem(itemType As ItemType) As IEnumerable(Of String)
+    ReadOnly Property Equipment As IEnumerable(Of (EquipSlotType, ItemType))
+    ReadOnly Property HasEquipment As Boolean
     ReadOnly Property CanEquipItem As Boolean
     ReadOnly Property Items As IEnumerable(Of (ItemType, Integer))
     ReadOnly Property HasItems As Boolean

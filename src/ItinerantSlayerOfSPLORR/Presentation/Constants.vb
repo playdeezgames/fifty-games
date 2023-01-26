@@ -6,6 +6,7 @@
     Friend Const ContinueGameText = "Continue Game"
     Friend Const DefendStrengthText = "Defend Strength"
     Friend Const EquipText = "Equip"
+    Friend Const EquipmentText = "Equipment"
     Friend Const FightText = "Fight!"
     Friend Const FleeText = "Flee"
     Friend Const HitPointText = "Hit Point"

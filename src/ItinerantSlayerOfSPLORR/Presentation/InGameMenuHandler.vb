@@ -10,6 +10,9 @@
         If world.PlayerCharacter.HasItems Then
             prompt.AddChoice(InventoryText)
         End If
+        If world.PlayerCharacter.HasEquipment Then
+            prompt.AddChoice(EquipmentText)
+        End If
         prompt.AddChoice(MainMenuText)
         Select Case AnsiConsole.Prompt(prompt)
             Case LevelUpText
@@ -22,9 +25,21 @@
                 Return True
             Case StatusText
                 ShowStatus(world)
+            Case EquipmentText
+                ShowEquipment(world)
         End Select
         Return False
     End Function
+
+    Private Sub ShowEquipment(world As IWorld)
+        AnsiConsole.Clear()
+        Dim character = world.PlayerCharacter
+        AnsiConsole.MarkupLine($"{character.Name}'s Equipment:")
+        For Each entry In character.Equipment
+            AnsiConsole.MarkupLine($"{entry.Item1.Name}: {entry.Item2.ToDescriptor.Name}")
+        Next
+        OkPrompt()
+    End Sub
 
     Private Sub DoLevelUp(character As ICharacter)
         AnsiConsole.Clear()

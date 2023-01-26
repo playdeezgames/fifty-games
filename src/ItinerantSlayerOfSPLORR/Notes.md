@@ -5,11 +5,13 @@
 ## Combat
 
 * Equipment
-    * sword
-    * shield
-    * armor
-    * boots
-    * helmet
+    * equipped item buffs
+    * unequip?
+    * equip slots
+        * shield
+        * armor
+        * boots
+        * helmet
 * Do an agility v. agility check before fleeing
 * Do morale check for enemy at the outset of the combat?
 * Spells

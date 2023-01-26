@@ -158,6 +158,18 @@
         End Get
     End Property
 
+    Public ReadOnly Property HasEquipment As Boolean Implements ICharacter.HasEquipment
+        Get
+            Return _data.Equipment.Any
+        End Get
+    End Property
+
+    Public ReadOnly Property Equipment As IEnumerable(Of (EquipSlotType, ItemType)) Implements ICharacter.Equipment
+        Get
+            Return _data.Equipment.Select(Function(x) (x.Key, x.Value))
+        End Get
+    End Property
+
     Public Sub AddXP(amount As Integer) Implements ICharacter.AddXP
         _data.XP += amount
     End Sub
