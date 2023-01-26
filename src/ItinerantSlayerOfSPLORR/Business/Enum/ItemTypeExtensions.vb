@@ -26,7 +26,8 @@ Friend Module ItemTypeExtensions
                 {
                     .Name = "Sword",
                     .CanEquip = True,
-                    .EquipSlot = EquipSlotType.Weapon
+                    .EquipSlot = EquipSlotType.Weapon,
+                    .AttackStrength = 5
                 }
             }
         }

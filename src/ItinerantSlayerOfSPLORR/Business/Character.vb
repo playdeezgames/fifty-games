@@ -65,9 +65,15 @@
         End Get
     End Property
 
+    Private ReadOnly Property EquippedItemAttackStrength As Integer
+        Get
+            Return Equipment.Sum(Function(x) x.Item2.ToDescriptor.AttackStrength)
+        End Get
+    End Property
+
     Public ReadOnly Property AttackStrength As Integer Implements ICharacter.AttackStrength
         Get
-            Return _data.CharacterType.ToDescriptor().Attack + _data.AttackStrength
+            Return _data.CharacterType.ToDescriptor().Attack + _data.AttackStrength + EquippedItemAttackStrength
         End Get
     End Property
 

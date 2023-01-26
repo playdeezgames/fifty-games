@@ -4,4 +4,5 @@
     Public Property CanEquip As Boolean
     Public Property UseBy As Func(Of ICharacter, IEnumerable(Of String))
     Public Property EquipSlot As EquipSlotType?
+    Public Property AttackStrength As Integer
 End Structure
