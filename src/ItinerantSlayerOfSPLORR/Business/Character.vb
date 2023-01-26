@@ -251,11 +251,11 @@
     Public Function UseItem(itemType As ItemType) As IEnumerable(Of String) Implements ICharacter.UseItem
         Dim messages As New List(Of String)
         If Not HasItem(itemType) Then
-            messages.Add($"{Name} has no {itemType.Name} to use!")
+            messages.Add($"{Name} has no {itemType.ToDescriptor.Name} to use!")
             Return messages
         End If
         If Not itemType.CanUse Then
-            messages.Add($"{Name} cannot use {itemType.Name}!")
+            messages.Add($"{Name} cannot use {itemType.ToDescriptor.Name}!")
             Return messages
         End If
         messages.AddRange(itemType.UseBy(Me))

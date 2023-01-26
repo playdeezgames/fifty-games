@@ -35,7 +35,7 @@
     Friend Sub UseItem(random As Random, world As IWorld)
         Dim items As IEnumerable(Of ItemType) = world.PlayerCharacter.UsableItems
         Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Use what?[/]"}
-        Dim table = items.ToDictionary(Of String, ItemType)(Function(x) x.Name, Function(x) x)
+        Dim table = items.ToDictionary(Of String, ItemType)(Function(x) x.ToDescriptor.Name, Function(x) x)
         prompt.AddChoices(table.Keys)
         prompt.AddChoice(NeverMindText)
         Dim answer = AnsiConsole.Prompt(prompt)

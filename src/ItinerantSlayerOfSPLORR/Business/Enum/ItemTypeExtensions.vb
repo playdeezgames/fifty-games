@@ -1,18 +1,36 @@
 ﻿Imports System.Runtime.CompilerServices
 
 Friend Module ItemTypeExtensions
+    Private ReadOnly descriptors As IReadOnlyDictionary(Of ItemType, ItemTypeDescriptor) =
+        New Dictionary(Of ItemType, ItemTypeDescriptor) From
+        {
+            {
+                ItemType.Potion,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "Potion",
+                    .CanUse = True,
+                    .UseBy = AddressOf UsePotion
+                }
+            },
+            {
+                ItemType.EmptyBottle,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "Empty Bottle"
+                }
+            },
+            {
+                ItemType.Sword,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "Sword"
+                }
+            }
+        }
     <Extension>
-    Friend Function Name(itemType As ItemType) As String
-        Select Case itemType
-            Case ItemType.Potion
-                Return "Potion"
-            Case ItemType.EmptyBottle
-                Return "Empty Bottle"
-            Case ItemType.Sword
-                Return "Sword"
-            Case Else
-                Throw New NotImplementedException
-        End Select
+    Friend Function ToDescriptor(itemType As ItemType) As ItemTypeDescriptor
+        Return descriptors(itemType)
     End Function
     <Extension>
     Friend Function CanEquip(itemType As ItemType) As Boolean

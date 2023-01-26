@@ -5,7 +5,7 @@
         AnsiConsole.Clear()
         AnsiConsole.MarkupLine($"{character.Name}'s Inventory")
         For Each item In character.Items
-            AnsiConsole.MarkupLine($"{item.Item1.Name}(x{item.Item2})")
+            AnsiConsole.MarkupLine($"{item.Item1.ToDescriptor.Name}(x{item.Item2})")
         Next
         Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
         prompt.AddChoice(NeverMindText)

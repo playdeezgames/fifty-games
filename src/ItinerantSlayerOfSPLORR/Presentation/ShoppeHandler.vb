@@ -31,7 +31,7 @@
         Do
             AnsiConsole.Clear()
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]What would you like to buy?[/]"}
-            Dim table = shoppe.Offers.ToDictionary(Function(x) $"{x.Key.Name}(offers {x.Value}, have {character.ItemCount(x.Key)})", Function(x) x.Key)
+            Dim table = shoppe.Offers.ToDictionary(Function(x) $"{x.Key.ToDescriptor.Name}(offers {x.Value}, have {character.ItemCount(x.Key)})", Function(x) x.Key)
             prompt.AddChoices(table.Keys)
             prompt.AddChoice(NeverMindText)
             Dim answer = AnsiConsole.Prompt(prompt)
@@ -48,7 +48,7 @@
         Dim maximumQuantity = character.ItemCount(itemType)
         Select Case maximumQuantity
             Case Is <= 0
-                AnsiConsole.MarkupLine($"{character.Name} does have any {itemType.Name} to sell.")
+                AnsiConsole.MarkupLine($"{character.Name} does have any {itemType.ToDescriptor.Name} to sell.")
                 OkPrompt()
             Case 1
                 character.SellItems(shoppe, itemType, 1)
@@ -65,7 +65,7 @@
             AnsiConsole.Clear()
             AnsiConsole.MarkupLine($"{character.Name} currently has {character.Jools} jools.")
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]What would you like to buy?[/]"}
-            Dim table = shoppe.Prices.ToDictionary(Function(x) $"{x.Key.Name}(cost {x.Value}, have {character.ItemCount(x.Key)})", Function(x) x.Key)
+            Dim table = shoppe.Prices.ToDictionary(Function(x) $"{x.Key.ToDescriptor.Name}(cost {x.Value}, have {character.ItemCount(x.Key)})", Function(x) x.Key)
             prompt.AddChoices(table.Keys)
             prompt.AddChoice(NeverMindText)
             Dim answer = AnsiConsole.Prompt(prompt)
