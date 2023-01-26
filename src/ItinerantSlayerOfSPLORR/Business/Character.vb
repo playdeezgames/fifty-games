@@ -115,13 +115,13 @@
 
     Public ReadOnly Property CanUseItem As Boolean Implements ICharacter.CanUseItem
         Get
-            Return _data.Inventory.Keys.Any(Function(x) x.CanUse)
+            Return _data.Inventory.Keys.Any(Function(x) x.ToDescriptor.CanUse)
         End Get
     End Property
 
     Public ReadOnly Property UsableItems As IEnumerable(Of ItemType) Implements ICharacter.UsableItems
         Get
-            Return _data.Inventory.Keys.Where(Function(x) x.CanUse)
+            Return _data.Inventory.Keys.Where(Function(x) x.ToDescriptor.CanUse)
         End Get
     End Property
 
@@ -148,7 +148,7 @@
 
     Public ReadOnly Property CanEquipItem As Boolean Implements ICharacter.CanEquipItem
         Get
-            Return _data.Inventory.Any(Function(x) x.Key.CanEquip)
+            Return _data.Inventory.Any(Function(x) x.Key.ToDescriptor.CanEquip)
         End Get
     End Property
 
@@ -254,7 +254,7 @@
             messages.Add($"{Name} has no {itemType.ToDescriptor.Name} to use!")
             Return messages
         End If
-        If Not itemType.CanUse Then
+        If Not itemType.ToDescriptor.CanUse Then
             messages.Add($"{Name} cannot use {itemType.ToDescriptor.Name}!")
             Return messages
         End If

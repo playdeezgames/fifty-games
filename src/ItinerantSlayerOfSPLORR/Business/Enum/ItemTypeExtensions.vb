@@ -33,30 +33,6 @@ Friend Module ItemTypeExtensions
         Return descriptors(itemType)
     End Function
     <Extension>
-    Friend Function CanEquip(itemType As ItemType) As Boolean
-        Select Case itemType
-            Case ItemType.Potion, ItemType.EmptyBottle
-                Return False
-            Case ItemType.Sword
-                Return True
-            Case Else
-                Throw New NotImplementedException
-        End Select
-    End Function
-    <Extension>
-    Friend Function CanUse(itemType As ItemType) As Boolean
-        Select Case itemType
-            Case ItemType.Potion
-                Return True
-            Case ItemType.EmptyBottle
-                Return False
-            Case ItemType.Sword
-                Return False
-            Case Else
-                Throw New NotImplementedException
-        End Select
-    End Function
-    <Extension>
     Friend Function UseBy(itemType As ItemType, character As ICharacter) As IEnumerable(Of String)
         character.RemoveItems(itemType, 1)
         Select Case itemType
