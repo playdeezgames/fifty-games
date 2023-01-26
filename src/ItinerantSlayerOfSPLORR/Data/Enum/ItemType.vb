@@ -1,5 +1,5 @@
 ﻿Public Enum ItemType
     Potion
     EmptyBottle
-    Sword
+    RustyDagger
 End Enum

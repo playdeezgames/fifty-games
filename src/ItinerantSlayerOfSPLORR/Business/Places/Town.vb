@@ -78,11 +78,11 @@
                         .Name = "Samuli's Blacksmithery",
                         .Prices = New Dictionary(Of ItemType, Integer) From
                         {
-                            {ItemType.Sword, 25}
+                            {ItemType.RustyDagger, 0}
                         },
                         .Offers = New Dictionary(Of ItemType, Integer) From
                         {
-                            {ItemType.Sword, 12}
+                            {ItemType.RustyDagger, 0}
                         }
                     }
                 },

@@ -2,6 +2,9 @@
 
 ## TODOs
 
+* Shoppe quantity of items available
+* level up hp should show MAX hp increase
+
 ## Combat
 
 * Equipment
@@ -30,5 +33,6 @@
 ## Feature Creep
 
 * trophy items dropped by slain creatures? 
+* equipment breakage/durability?
 
 

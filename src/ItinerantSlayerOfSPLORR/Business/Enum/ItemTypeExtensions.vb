@@ -21,10 +21,10 @@ Friend Module ItemTypeExtensions
                 }
             },
             {
-                ItemType.Sword,
+                ItemType.RustyDagger,
                 New ItemTypeDescriptor With
                 {
-                    .Name = "Sword",
+                    .Name = "Rusty Dagger",
                     .CanEquip = True,
                     .EquipSlot = EquipSlotType.Weapon,
                     .AttackStrength = 5
