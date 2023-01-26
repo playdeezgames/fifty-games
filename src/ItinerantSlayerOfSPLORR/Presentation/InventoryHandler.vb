@@ -20,6 +20,8 @@
                 'do nothing
             Case UseText
                 UseItem(random, world)
+            Case EquipText
+                'TODO: equip handler
         End Select
     End Sub
 

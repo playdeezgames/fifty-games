@@ -32,17 +32,6 @@ Friend Module ItemTypeExtensions
     Friend Function ToDescriptor(itemType As ItemType) As ItemTypeDescriptor
         Return descriptors(itemType)
     End Function
-    <Extension>
-    Friend Function UseBy(itemType As ItemType, character As ICharacter) As IEnumerable(Of String)
-        character.RemoveItems(itemType, 1)
-        Select Case itemType
-            Case ItemType.Potion
-                Return UsePotion(character)
-            Case Else
-                Throw New NotImplementedException
-        End Select
-    End Function
-
     Private Function UsePotion(character As ICharacter) As IEnumerable(Of String)
         Dim messages As New List(Of String)
         Const HealingAmount = 5

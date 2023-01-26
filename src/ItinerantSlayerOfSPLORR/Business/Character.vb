@@ -258,7 +258,7 @@
             messages.Add($"{Name} cannot use {itemType.ToDescriptor.Name}!")
             Return messages
         End If
-        messages.AddRange(itemType.UseBy(Me))
+        messages.AddRange(itemType.ToDescriptor.UseBy(Me))
         Return messages
     End Function
 
