@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_STUFF", "_STUFF", "{1B4F301B-37DD-4A9C-A42B-7BD72188E1D2}"
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
+		..\shippit.sh = ..\shippit.sh
 	EndProjectSection
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "GuessMyNumber", "GuessMyNumber\GuessMyNumber.vbproj", "{FF94B8F2-6EAF-4BF0-9AEC-CC16D1A265E8}"
@@ -36,7 +37,7 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Platformer", "Platformer\Pl
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "WanderMaze", "WanderMaze\WanderMaze.vbproj", "{4608B558-F041-4AB6-9CB9-A00C6ED2067D}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ItinerantSlayerOfSPLORR", "ItinerantSlayerOfSPLORR\ItinerantSlayerOfSPLORR.vbproj", "{7581811E-EAED-41BA-AAA5-97DE0237DE6F}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "ItinerantSlayerOfSPLORR", "ItinerantSlayerOfSPLORR\ItinerantSlayerOfSPLORR.vbproj", "{7581811E-EAED-41BA-AAA5-97DE0237DE6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
