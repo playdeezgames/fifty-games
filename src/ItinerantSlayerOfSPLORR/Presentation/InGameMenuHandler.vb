@@ -61,7 +61,7 @@
     End Sub
 
     Private Sub LevelUpHitPoints(character As ICharacter)
-        If AnsiConsole.Confirm($"Increase yer Hit Points from {character.HitPoints} to {character.HitPoints + character.HitPointIncrease}?", False) Then
+        If AnsiConsole.Confirm($"Increase yer Hit Points from {character.MaximumHitPoints} to {character.MaximumHitPoints + character.HitPointIncrease}?", False) Then
             character.LevelUpHitPoints()
         End If
     End Sub

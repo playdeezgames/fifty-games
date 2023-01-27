@@ -2,9 +2,7 @@
 
 ## TODOs
 
-* MAKE THE SHIPPIT SCRIPTS AND SHIPPIT!
 * Shoppe quantity of items available
-* level up hp should show MAX hp increase
 
 ## Combat
 
