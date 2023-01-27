@@ -2,6 +2,8 @@
 
 ## TODOs
 
+* sell item to shoppe optionally restocks
+
 ## Combat
 
 * Equipment

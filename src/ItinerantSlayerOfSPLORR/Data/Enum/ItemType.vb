@@ -3,4 +3,6 @@
     EmptyBottle
     RustyDagger
     Clothes
+    Dagger
+    LeatherArmor
 End Enum

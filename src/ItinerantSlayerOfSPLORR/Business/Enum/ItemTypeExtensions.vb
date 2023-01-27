@@ -31,6 +31,16 @@ Friend Module ItemTypeExtensions
                 }
             },
             {
+                ItemType.Dagger,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "Dagger",
+                    .CanEquip = True,
+                    .EquipSlot = EquipSlotType.Weapon,
+                    .AttackStrength = 10
+                }
+            },
+            {
                 ItemType.Clothes,
                 New ItemTypeDescriptor With
                 {
@@ -38,6 +48,16 @@ Friend Module ItemTypeExtensions
                     .CanEquip = True,
                     .EquipSlot = EquipSlotType.Torso,
                     .DefendStrength = 5
+                }
+            },
+            {
+                ItemType.LeatherArmor,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "Leather Armor",
+                    .CanEquip = True,
+                    .EquipSlot = EquipSlotType.Torso,
+                    .DefendStrength = 10
                 }
             }
         }
