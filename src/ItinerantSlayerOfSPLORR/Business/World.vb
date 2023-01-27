@@ -138,7 +138,7 @@
             End While
         End While
         For Each character In characters
-            boardData.BoardColumns(character.Item2).Cells(character.Item3).Character = New CharacterData() With
+            Dim characterData = New CharacterData() With
             {
                 .CharacterType = character.Item1,
                 .XP = 0,
@@ -150,6 +150,10 @@
                 .AttackStrength = 0,
                 .DefendStrength = 0
             }
+            boardData.BoardColumns(character.Item2).Cells(character.Item3).Character = characterData
+            If characterData.CharacterType = CharacterType.Dude Then
+                characterData.Equipment(EquipSlotType.Torso) = ItemType.Clothes
+            End If
         Next
         For Each trigger In triggers
             boardData.BoardColumns(trigger.Item2).Cells(trigger.Item3).Trigger = trigger.Item1

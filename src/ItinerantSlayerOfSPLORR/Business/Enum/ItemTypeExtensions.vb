@@ -29,6 +29,16 @@ Friend Module ItemTypeExtensions
                     .EquipSlot = EquipSlotType.Weapon,
                     .AttackStrength = 5
                 }
+            },
+            {
+                ItemType.Clothes,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "Clothes",
+                    .CanEquip = True,
+                    .EquipSlot = EquipSlotType.Torso,
+                    .DefendStrength = 5
+                }
             }
         }
     <Extension>

@@ -2,16 +2,12 @@
 
 ## TODOs
 
-* Shoppe quantity of items available
-
 ## Combat
 
 * Equipment
-    * equipped item buffs
     * unequip?
     * equip slots
         * shield
-        * armor
         * boots
         * helmet
 * Do an agility v. agility check before fleeing

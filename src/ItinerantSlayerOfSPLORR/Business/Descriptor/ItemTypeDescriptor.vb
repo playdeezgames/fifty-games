@@ -5,4 +5,5 @@
     Public Property UseBy As Func(Of ICharacter, IEnumerable(Of String))
     Public Property EquipSlot As EquipSlotType?
     Public Property AttackStrength As Integer
+    Public Property DefendStrength As Integer
 End Structure

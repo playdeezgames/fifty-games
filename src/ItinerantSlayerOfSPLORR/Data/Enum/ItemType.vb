@@ -2,4 +2,5 @@
     Potion
     EmptyBottle
     RustyDagger
+    Clothes
 End Enum

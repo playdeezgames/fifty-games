@@ -10,7 +10,7 @@ Friend Module CharacterTypeExtensions
                 {
                     .Name = "yer character",
                     .Attack = 0,
-                    .Defend = 5,
+                    .Defend = 0,
                     .HitPoints = 5,
                     .XPGoal = Function(level)
                                   Dim result = 10

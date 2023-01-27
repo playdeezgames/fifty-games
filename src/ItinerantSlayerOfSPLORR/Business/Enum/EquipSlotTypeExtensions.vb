@@ -6,6 +6,8 @@ Friend Module EquipSlotTypeExtensions
         Select Case equipSlot
             Case EquipSlotType.Weapon
                 Return "Weapon"
+            Case EquipSlotType.Torso
+                Return "Torso"
             Case Else
                 Throw New NotImplementedException
         End Select
