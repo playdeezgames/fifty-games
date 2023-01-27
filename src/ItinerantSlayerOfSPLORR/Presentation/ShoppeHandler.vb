@@ -79,7 +79,7 @@
     End Sub
 
     Private Sub BuyItem(shoppe As IShoppe, character As ICharacter, itemType As ItemType)
-        Dim maximumQuantity = If(shoppe.Prices(itemType) > 0, character.Jools \ shoppe.Prices(itemType), 1)
+        Dim maximumQuantity = If(shoppe.Prices(itemType).Item1 > 0, Math.Min(character.Jools \ shoppe.Prices(itemType).Item1, shoppe.Prices(itemType).Item2), shoppe.Prices(itemType).Item2)
         Select Case maximumQuantity
             Case 0
                 AnsiConsole.MarkupLine("You don't have enough!")

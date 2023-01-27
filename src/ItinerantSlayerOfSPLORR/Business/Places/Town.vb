@@ -59,9 +59,9 @@
                     .Shoppe = New ShoppeData With
                     {
                         .Name = "Märten's Nihilist Healing Supplies",
-                        .Prices = New Dictionary(Of ItemType, Integer) From
+                        .Prices = New Dictionary(Of ItemType, (Integer, Integer)) From
                         {
-                            {ItemType.Potion, 6}
+                            {ItemType.Potion, (6, Integer.MaxValue)}
                         },
                         .Offers = New Dictionary(Of ItemType, Integer) From
                         {
@@ -76,13 +76,12 @@
                     .Shoppe = New ShoppeData With
                     {
                         .Name = "Samuli's Blacksmithery",
-                        .Prices = New Dictionary(Of ItemType, Integer) From
+                        .Prices = New Dictionary(Of ItemType, (Integer, Integer)) From
                         {
-                            {ItemType.RustyDagger, 0}
+                            {ItemType.RustyDagger, (0, 1)}
                         },
                         .Offers = New Dictionary(Of ItemType, Integer) From
                         {
-                            {ItemType.RustyDagger, 0}
                         }
                     }
                 },

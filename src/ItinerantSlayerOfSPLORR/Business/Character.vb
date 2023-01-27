@@ -259,7 +259,8 @@
     End Sub
 
     Public Sub BuyItems(shoppe As IShoppe, itemType As ItemType, quantity As Integer) Implements ICharacter.BuyItems
-        _data.Jools -= shoppe.Prices(itemType) * quantity
+        _data.Jools -= shoppe.Prices(itemType).Item1 * quantity
+        shoppe.ReduceQuantity(itemType, quantity)
         AddItems(itemType, quantity)
     End Sub
 

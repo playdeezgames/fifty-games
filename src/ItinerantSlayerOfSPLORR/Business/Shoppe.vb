@@ -21,7 +21,7 @@
         End Get
     End Property
 
-    Public ReadOnly Property Prices As IReadOnlyDictionary(Of ItemType, Integer) Implements IShoppe.Prices
+    Public ReadOnly Property Prices As IReadOnlyDictionary(Of ItemType, (Integer, Integer)) Implements IShoppe.Prices
         Get
             Return _data.Prices
         End Get
@@ -38,4 +38,15 @@
             Return _data.Offers
         End Get
     End Property
+
+    Public Sub ReduceQuantity(itemType As ItemType, quantity As Integer) Implements IShoppe.ReduceQuantity
+        If Not _data.Prices.ContainsKey(itemType) Then
+            Return
+        End If
+        If _data.Prices(itemType).Item2 <= quantity Then
+            _data.Prices.Remove(itemType)
+            Return
+        End If
+        _data.Prices(itemType) = (_data.Prices(itemType).Item1, _data.Prices(itemType).Item2 - quantity)
+    End Sub
 End Class
