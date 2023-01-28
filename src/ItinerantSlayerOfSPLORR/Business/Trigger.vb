@@ -44,7 +44,16 @@
 
     Public ReadOnly Property IsActive As Boolean Implements ITrigger.IsActive
         Get
-            Return True
+            Select Case _data.Condition
+                Case TriggerConditionType.None
+                    Return True
+                Case TriggerConditionType.WhenFlagClear
+                    Throw New NotImplementedException
+                Case TriggerConditionType.WhenFlagSet
+                    Throw New NotImplementedException
+                Case Else
+                    Throw New NotImplementedException
+            End Select
         End Get
     End Property
 End Class

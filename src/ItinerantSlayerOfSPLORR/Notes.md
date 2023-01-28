@@ -3,6 +3,10 @@
 ## TODOs
 
 * trigger conditions
+    * all the time
+    * if a flag is set
+    * if a flag is clear
+* move to next trigger when the first trigger has been completed
 * sell item to shoppe optionally restocks
 
 ## Combat
