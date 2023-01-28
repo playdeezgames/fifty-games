@@ -69,10 +69,10 @@
                 Return Nothing
             End If
             Dim cell = PlayerBoard.GetCell(_data.PlayerData.BoardColumn, _data.PlayerData.BoardRow)
-            If cell.Trigger Is Nothing Then
+            If cell.Triggers Is Nothing Then
                 Return Nothing
             End If
-            Return cell.Trigger.Inn
+            Return cell.Triggers(Player.TriggerIndex).Inn
         End Get
     End Property
 
@@ -82,10 +82,10 @@
                 Return Nothing
             End If
             Dim cell = PlayerBoard.GetCell(_data.PlayerData.BoardColumn, _data.PlayerData.BoardRow)
-            If cell.Trigger Is Nothing Then
+            If cell.Triggers Is Nothing Then
                 Return Nothing
             End If
-            Return cell.Trigger.Shoppe
+            Return cell.Triggers(Player.TriggerIndex).Shoppe
         End Get
     End Property
 
@@ -103,7 +103,7 @@
         CreateBoard(Town.defaultTerrain, Town.map, Town.characters, Town.triggers, Town.encounterZones)
     End Sub
 
-    Private Function CreateBoard(defaultTerrain As TerrainType, map As IReadOnlyList(Of String), characters As IReadOnlyList(Of (CharacterType, Integer, Integer)), triggers As IReadOnlyList(Of (TriggerData, Integer, Integer)), encounterZones As IReadOnlyList(Of EncounterZoneData)) As IBoard
+    Private Function CreateBoard(defaultTerrain As TerrainType, map As IReadOnlyList(Of String), characters As IReadOnlyList(Of (CharacterType, Integer, Integer)), triggers As IReadOnlyList(Of (IReadOnlyList(Of TriggerData), Integer, Integer)), encounterZones As IReadOnlyList(Of EncounterZoneData)) As IBoard
         Dim columns = map(0).Length
         Dim rows = map.Count
         Dim random As New Random
@@ -156,7 +156,7 @@
             End If
         Next
         For Each trigger In triggers
-            boardData.BoardColumns(trigger.Item2).Cells(trigger.Item3).Trigger = trigger.Item1
+            boardData.BoardColumns(trigger.Item2).Cells(trigger.Item3).Triggers = trigger.Item1.ToList
         Next
         Return New Board(_data, boardIndex, boardData)
     End Function
@@ -187,24 +187,36 @@
                 Return
         End Select
         Dim character = currentCell.Character
-        If nextCell.Trigger IsNot Nothing Then
-            Select Case nextCell.Trigger.TriggerType
-                Case TriggerType.Teleport
-                    nextBoard = nextCell.Trigger.Teleport.DestinationBoard
-                    nextX = nextCell.Trigger.Teleport.DestinationX
-                    nextY = nextCell.Trigger.Teleport.DestinationY
-                    nextCell = nextBoard.GetCell(nextX, nextY)
-                Case TriggerType.Inn
-                    character.IsInInn = True
-                Case TriggerType.Shoppe
-                    character.IsInShoppe = True
-            End Select
+        Dim nextTriggerIndex = 0
+        If nextCell.Triggers IsNot Nothing AndAlso nextCell.Triggers.Any Then
+            For Each trigger In nextCell.Triggers
+                If trigger.IsActive Then
+                    Continue For
+                End If
+                nextTriggerIndex += 1
+            Next
+
+            If nextTriggerIndex < nextCell.Triggers.Count Then
+                Dim nextTrigger = nextCell.Triggers(nextTriggerIndex)
+                Select Case nextTrigger.TriggerType
+                    Case TriggerType.Teleport
+                        nextBoard = nextTrigger.Teleport.DestinationBoard
+                        nextX = nextTrigger.Teleport.DestinationX
+                        nextY = nextTrigger.Teleport.DestinationY
+                        nextCell = nextBoard.GetCell(nextX, nextY)
+                    Case TriggerType.Inn
+                        character.IsInInn = True
+                    Case TriggerType.Shoppe
+                        character.IsInShoppe = True
+                End Select
+            End If
         End If
         nextCell.Character = Character
         currentCell.Character = Nothing
         PlayerBoard = nextBoard
         Player.X = nextX
         Player.Y = nextY
+        Player.TriggerIndex = nextTriggerIndex
         Encounter = PlayerBoard.CheckForEncounter(random, Player.X, Player.Y)
     End Sub
 

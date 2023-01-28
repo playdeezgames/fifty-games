@@ -33,12 +33,9 @@
         End Set
     End Property
 
-    Public ReadOnly Property Trigger As ITrigger Implements IBoardCell.Trigger
+    Public ReadOnly Property Triggers As IEnumerable(Of ITrigger) Implements IBoardCell.Triggers
         Get
-            If _data.Trigger Is Nothing Then
-                Return Nothing
-            End If
-            Return New Trigger(_worldData, _data.Trigger)
+            Return _data.Triggers.Select(Function(x) New Trigger(_worldData, x))
         End Get
     End Property
 End Class

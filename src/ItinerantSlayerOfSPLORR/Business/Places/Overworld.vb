@@ -128,17 +128,21 @@
         {
             (CharacterType.Dude, 7, 3)
         }
-    Friend triggers As IReadOnlyList(Of (TriggerData, Integer, Integer)) =
-        New List(Of (TriggerData, Integer, Integer)) From
+    Friend triggers As IReadOnlyList(Of (IReadOnlyList(Of TriggerData), Integer, Integer)) =
+        New List(Of (IReadOnlyList(Of TriggerData), Integer, Integer)) From
         {
-            (New TriggerData With
+            (
+                New List(Of TriggerData) From
                 {
-                    .TriggerType = TriggerType.Teleport,
-                    .Teleport = New TeleportData With
+                    New TriggerData With
                     {
-                        .DestinationX = 24,
-                        .DestinationY = 23,
-                        .DestinationBoard = 1
+                        .TriggerType = TriggerType.Teleport,
+                        .Teleport = New TeleportData With
+                        {
+                            .DestinationX = 24,
+                            .DestinationY = 23,
+                            .DestinationBoard = 1
+                        }
                     }
                 },
                 6, 3)

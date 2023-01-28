@@ -2,6 +2,7 @@
 
 ## TODOs
 
+* trigger conditions
 * sell item to shoppe optionally restocks
 
 ## Combat

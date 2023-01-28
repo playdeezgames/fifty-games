@@ -22,4 +22,13 @@
             _data.BoardRow = value
         End Set
     End Property
+
+    Public Property TriggerIndex As Integer Implements IPlayer.TriggerIndex
+        Get
+            Return _data.TriggerIndex
+        End Get
+        Set(value As Integer)
+            _data.TriggerIndex = value
+        End Set
+    End Property
 End Class

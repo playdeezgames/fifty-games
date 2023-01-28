@@ -41,4 +41,10 @@
             Return New Shoppe(_worldData, _data.Shoppe)
         End Get
     End Property
+
+    Public ReadOnly Property IsActive As Boolean Implements ITrigger.IsActive
+        Get
+            Return True
+        End Get
+    End Property
 End Class
