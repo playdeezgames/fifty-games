@@ -56,4 +56,13 @@
             End Select
         End Get
     End Property
+
+    Public ReadOnly Property Message As IMessage Implements ITrigger.Message
+        Get
+            If _data.Message Is Nothing Then
+                Return Nothing
+            End If
+            Return New Message(_worldData, _data.Message)
+        End Get
+    End Property
 End Class

@@ -8,8 +8,13 @@
                 Exit Do
             ElseIf world.PlayerCharacter.IsInInn Then
                 ShowInn(world)
+                'TODO: next trigger?
             ElseIf world.PlayerCharacter.IsInShoppe Then
                 ShowShoppe(world)
+                'TODO: next trigger?
+            ElseIf world.PlayerCharacter.IsInMessage Then
+                ShowMessage(world)
+                'TODO: next trigger?
             ElseIf world.IsInAnEncounter Then
                 ShowEncounter(random, world)
             Else
@@ -18,6 +23,15 @@
                 End If
             End If
         Loop
+    End Sub
+
+    Private Sub ShowMessage(world As IWorld)
+        Dim character = world.PlayerCharacter
+        AnsiConsole.Clear()
+        Dim message As IMessage = world.Message
+        AnsiConsole.MarkupLine(message.Text)
+        OkPrompt()
+        character.IsInMessage = False
     End Sub
 
     Friend Sub ShowMessages(messages As IEnumerable(Of String))

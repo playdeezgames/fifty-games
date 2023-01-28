@@ -2,4 +2,5 @@
     Teleport
     Inn
     Shoppe
+    Message
 End Enum

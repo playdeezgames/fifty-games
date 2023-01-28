@@ -4,4 +4,5 @@
     ReadOnly Property Inn As IInn
     ReadOnly Property Shoppe As IShoppe
     ReadOnly Property IsActive As Boolean
+    ReadOnly Property Message As IMessage
 End Interface

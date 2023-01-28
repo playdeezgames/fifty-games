@@ -23,7 +23,7 @@
             "#...# #.................,........................#",
             "#....,..................,........................#",
             "#....,,,,,,,,,,,,,,,,,,,,........................#",
-            "#.......................,........................#",
+            "#.......................,.?......................#",
             "#.......................,........................#",
             "########################,#########################"
         }
@@ -32,6 +32,17 @@
     Friend triggers As IReadOnlyList(Of (IReadOnlyList(Of TriggerData), Integer, Integer)) =
         New List(Of (IReadOnlyList(Of TriggerData), Integer, Integer)) From
         {
+            (
+                New List(Of TriggerData) From {
+                New TriggerData With
+                {
+                    .TriggerType = TriggerType.Message,
+                    .Message = New MessageData With
+                    {
+                        .Text = "Welcome to the Town of Quotidian!"
+                    }
+                }},
+                26, 22),
             (
                 New List(Of TriggerData) From {
                 New TriggerData With

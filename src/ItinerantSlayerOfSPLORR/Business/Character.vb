@@ -182,6 +182,15 @@
         End Get
     End Property
 
+    Public Property IsInMessage As Boolean Implements ICharacter.IsInMessage
+        Get
+            Return _data.IsInMessage
+        End Get
+        Set(value As Boolean)
+            _data.IsInMessage = value
+        End Set
+    End Property
+
     Public Sub AddXP(amount As Integer) Implements ICharacter.AddXP
         _data.XP += amount
     End Sub

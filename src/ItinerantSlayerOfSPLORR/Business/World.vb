@@ -89,6 +89,19 @@
         End Get
     End Property
 
+    Public ReadOnly Property Message As IMessage Implements IWorld.Message
+        Get
+            If Not PlayerCharacter.IsInMessage Then
+                Return Nothing
+            End If
+            Dim cell = PlayerBoard.GetCell(_data.PlayerData.BoardColumn, _data.PlayerData.BoardRow)
+            If cell.Triggers Is Nothing Then
+                Return Nothing
+            End If
+            Return cell.Triggers(Player.TriggerIndex).Message
+        End Get
+    End Property
+
     Friend Sub StartGame() Implements IWorld.StartGame
         AbandonGame()
         InitializeBoards()
@@ -132,6 +145,8 @@
                         boardCellData.Terrain = TerrainType.Empty
                     Case ","c
                         boardCellData.Terrain = TerrainType.Road
+                    Case "?"c
+                        boardCellData.Terrain = TerrainType.Sign
                     Case Else
                         Throw New NotImplementedException
                 End Select
@@ -204,10 +219,15 @@
                         nextX = nextTrigger.Teleport.DestinationX
                         nextY = nextTrigger.Teleport.DestinationY
                         nextCell = nextBoard.GetCell(nextX, nextY)
+                        nextTriggerIndex = 0
                     Case TriggerType.Inn
                         character.IsInInn = True
                     Case TriggerType.Shoppe
                         character.IsInShoppe = True
+                    Case TriggerType.Message
+                        character.IsInMessage = True
+                    Case Else
+                        Throw New NotImplementedException
                 End Select
             End If
         End If

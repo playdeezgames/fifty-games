@@ -88,6 +88,8 @@
                 AnsiConsole.Markup("[black on black] [/]")
             Case TerrainType.Road
                 AnsiConsole.Markup("[grey on black]░[/]")
+            Case TerrainType.Sign
+                AnsiConsole.Markup("[olive on black]?[/]")
             Case Else
                 Throw New NotImplementedException
         End Select

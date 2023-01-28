@@ -11,4 +11,5 @@
     Public Property IsInShoppe As Boolean
     Public Property Inventory As New Dictionary(Of ItemType, Integer)
     Public Property Equipment As New Dictionary(Of EquipSlotType, ItemType)
+    Public Property IsInMessage As Boolean
 End Class

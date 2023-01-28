@@ -42,4 +42,5 @@
     Property IsInShoppe As Boolean
     ReadOnly Property ItemCount(itemType As ItemType) As Integer
     ReadOnly Property EquippableItems As IEnumerable(Of ItemType)
+    Property IsInMessage As Boolean
 End Interface

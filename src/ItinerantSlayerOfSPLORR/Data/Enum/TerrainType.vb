@@ -5,4 +5,5 @@
     Wall
     Empty
     Road
+    Sign
 End Enum
