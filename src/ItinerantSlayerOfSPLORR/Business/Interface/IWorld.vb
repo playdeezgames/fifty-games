@@ -15,6 +15,8 @@
     Function Attack(enemy As IEnemy, random As Random) As IEnumerable(Of String)
     Function UseItem(itemType As ItemType, random As Random) As IEnumerable(Of String)
     Function EquipItem(itemType As ItemType) As IEnumerable(Of String)
+    Sub ProceedToNextTrigger()
+    ReadOnly Property HasMoreTriggers As Boolean
     ReadOnly Property Message As IMessage
     ReadOnly Property Inn As IInn
     ReadOnly Property PlayerCharacter As ICharacter

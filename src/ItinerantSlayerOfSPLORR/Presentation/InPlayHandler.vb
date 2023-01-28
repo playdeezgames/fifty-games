@@ -8,13 +8,12 @@
                 Exit Do
             ElseIf world.PlayerCharacter.IsInInn Then
                 ShowInn(world)
-                'TODO: next trigger?
             ElseIf world.PlayerCharacter.IsInShoppe Then
                 ShowShoppe(world)
-                'TODO: next trigger?
             ElseIf world.PlayerCharacter.IsInMessage Then
                 ShowMessage(world)
-                'TODO: next trigger?
+            ElseIf world.HasMoreTriggers Then
+                world.ProceedToNextTrigger()
             ElseIf world.IsInAnEncounter Then
                 ShowEncounter(random, world)
             Else

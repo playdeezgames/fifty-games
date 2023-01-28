@@ -102,6 +102,13 @@
         End Get
     End Property
 
+    Public ReadOnly Property HasMoreTriggers As Boolean Implements IWorld.HasMoreTriggers
+        Get
+            Dim cell = PlayerBoard.GetCell(_data.PlayerData.BoardColumn, _data.PlayerData.BoardRow)
+            Return Player.TriggerIndex < cell.Triggers.Count
+        End Get
+    End Property
+
     Friend Sub StartGame() Implements IWorld.StartGame
         AbandonGame()
         InitializeBoards()
@@ -295,4 +302,35 @@
         messages.AddRange(character.EquipItem(itemType))
         Return messages
     End Function
+
+    Public Sub ProceedToNextTrigger() Implements IWorld.ProceedToNextTrigger
+        If Not HasMoreTriggers Then
+            Return
+        End If
+        Player.TriggerIndex += 1
+        RunTrigger()
+    End Sub
+
+    Private Sub RunTrigger()
+        If Not HasMoreTriggers Then
+            Return
+        End If
+        Dim cell = PlayerBoard.GetCell(Player.X, Player.Y)
+        Dim trigger = cell.Triggers(Player.TriggerIndex)
+        If Not trigger.IsActive Then
+            ProceedToNextTrigger()
+        End If
+        Select Case trigger.TriggerType
+            Case TriggerType.Shoppe
+                Throw New NotImplementedException
+            Case TriggerType.Message
+                Throw New NotImplementedException
+            Case TriggerType.Teleport
+                Throw New NotImplementedException
+            Case TriggerType.Inn
+                Throw New NotImplementedException
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Sub
 End Class
