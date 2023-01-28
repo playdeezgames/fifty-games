@@ -33,28 +33,40 @@
         New List(Of (IReadOnlyList(Of TriggerData), Integer, Integer)) From
         {
             (
-                New List(Of TriggerData) From {
-                New TriggerData With
+                New List(Of TriggerData) From
                 {
-                    .TriggerType = TriggerType.Message,
-                    .Message = New MessageData With
+                    New TriggerData With
                     {
-                        .Text = "Welcome to the Town of Quotidian!"
+                        .TriggerType = TriggerType.Message,
+                        .Message = New MessageData With
+                        {
+                            .Text = "Welcome to the Town of Quotidian!"
+                        }
+                    },
+                    New TriggerData With
+                    {
+                        .TriggerType = TriggerType.Message,
+                        .Message = New MessageData With
+                        {
+                            .Text = "Please don't feed the bears."
+                        }
                     }
-                }},
+                },
                 26, 22),
             (
-                New List(Of TriggerData) From {
-                New TriggerData With
+                New List(Of TriggerData) From
                 {
-                    .TriggerType = TriggerType.Teleport,
-                    .Teleport = New TeleportData With
+                    New TriggerData With
                     {
-                        .DestinationX = 6,
-                        .DestinationY = 3,
-                        .DestinationBoard = 0
+                        .TriggerType = TriggerType.Teleport,
+                        .Teleport = New TeleportData With
+                        {
+                            .DestinationX = 6,
+                            .DestinationY = 3,
+                            .DestinationBoard = 0
+                        }
                     }
-                }},
+                },
                 24, 24),
             (New List(Of TriggerData) From {New TriggerData With
                 {

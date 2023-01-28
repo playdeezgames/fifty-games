@@ -136,6 +136,14 @@
                 {
                     New TriggerData With
                     {
+                        .TriggerType = TriggerType.Message,
+                        .Message = New MessageData With
+                        {
+                            .Text = "You enter the town of Quotidian."
+                        }
+                    },
+                    New TriggerData With
+                    {
                         .TriggerType = TriggerType.Teleport,
                         .Teleport = New TeleportData With
                         {

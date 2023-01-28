@@ -1,4 +1,6 @@
-﻿Friend Class World
+﻿Imports System.Buffers
+
+Friend Class World
     Implements IWorld
     Private _data As WorldData
     Sub New(data As WorldData)
@@ -209,41 +211,13 @@
                 Return
         End Select
         Dim character = currentCell.Character
-        Dim nextTriggerIndex = 0
-        If nextCell.Triggers IsNot Nothing AndAlso nextCell.Triggers.Any Then
-            For Each trigger In nextCell.Triggers
-                If trigger.IsActive Then
-                    Continue For
-                End If
-                nextTriggerIndex += 1
-            Next
-
-            If nextTriggerIndex < nextCell.Triggers.Count Then
-                Dim nextTrigger = nextCell.Triggers(nextTriggerIndex)
-                Select Case nextTrigger.TriggerType
-                    Case TriggerType.Teleport
-                        nextBoard = nextTrigger.Teleport.DestinationBoard
-                        nextX = nextTrigger.Teleport.DestinationX
-                        nextY = nextTrigger.Teleport.DestinationY
-                        nextCell = nextBoard.GetCell(nextX, nextY)
-                        nextTriggerIndex = 0
-                    Case TriggerType.Inn
-                        character.IsInInn = True
-                    Case TriggerType.Shoppe
-                        character.IsInShoppe = True
-                    Case TriggerType.Message
-                        character.IsInMessage = True
-                    Case Else
-                        Throw New NotImplementedException
-                End Select
-            End If
-        End If
-        nextCell.Character = Character
+        nextCell.Character = character
         currentCell.Character = Nothing
         PlayerBoard = nextBoard
         Player.X = nextX
         Player.Y = nextY
-        Player.TriggerIndex = nextTriggerIndex
+        Player.TriggerIndex = 0
+        RunTrigger()
         Encounter = PlayerBoard.CheckForEncounter(random, Player.X, Player.Y)
     End Sub
 
@@ -322,13 +296,20 @@
         End If
         Select Case trigger.TriggerType
             Case TriggerType.Shoppe
-                Throw New NotImplementedException
+                PlayerCharacter.IsInShoppe = True
             Case TriggerType.Message
-                Throw New NotImplementedException
+                PlayerCharacter.IsInMessage = True
             Case TriggerType.Teleport
-                Throw New NotImplementedException
+                Dim character = PlayerBoard.GetCell(Player.X, Player.Y).Character
+                PlayerBoard.GetCell(Player.X, Player.Y).Character = Nothing
+                PlayerBoard = trigger.Teleport.DestinationBoard
+                Player.X = trigger.Teleport.DestinationX
+                Player.Y = trigger.Teleport.DestinationY
+                PlayerBoard.GetCell(Player.X, Player.Y).Character = character
+                Player.TriggerIndex = 0
+                RunTrigger()
             Case TriggerType.Inn
-                Throw New NotImplementedException
+                PlayerCharacter.IsInInn = True
             Case Else
                 Throw New NotImplementedException
         End Select
