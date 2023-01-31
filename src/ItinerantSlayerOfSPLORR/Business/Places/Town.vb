@@ -110,7 +110,24 @@
                     }
                 }},
                 22, 3),
-            (New List(Of TriggerData) From {New TriggerData With
+            (New List(Of TriggerData) From {
+                New TriggerData With
+                {
+                    .TriggerType = TriggerType.Message,
+                    .Condition = TriggerConditionType.WhenFlagClear,
+                    .ConditionFlag = "Condition",
+                    .Message = New MessageData With
+                    {
+                        .Text = "Go away!"
+                    }
+                },
+                New TriggerData With
+                {
+                    .TriggerType = TriggerType.StopTriggers,
+                    .Condition = TriggerConditionType.WhenFlagClear,
+                    .ConditionFlag = "Condition"
+                },
+                New TriggerData With
                 {
                     .TriggerType = TriggerType.Shoppe,
                     .Shoppe = New ShoppeData With

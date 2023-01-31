@@ -4,4 +4,5 @@
     Shoppe
     Message
     SetFlag
+    StopTriggers
 End Enum

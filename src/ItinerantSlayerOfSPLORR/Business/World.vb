@@ -314,6 +314,8 @@ Friend Class World
             Case TriggerType.SetFlag
                 _data.Flags.Add(trigger.Flag)
                 ProceedToNextTrigger()
+            Case TriggerType.StopTriggers
+                Player.TriggerIndex = Integer.MaxValue
             Case Else
                 Throw New NotImplementedException
         End Select

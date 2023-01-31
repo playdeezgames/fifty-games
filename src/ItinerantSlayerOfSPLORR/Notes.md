@@ -37,4 +37,7 @@
 
 * equipment breakage/durability?
 
+## Marten's Shoppe
 
+1. Shoppe is closed due to a lack of blob gizzards.
+1. 
