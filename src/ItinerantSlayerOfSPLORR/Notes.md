@@ -2,12 +2,6 @@
 
 ## TODOs
 
-* trophy items dropped by slain creatures? 
-* trigger conditions
-    * all the time
-    * if a flag is set
-    * if a flag is clear
-* move to next trigger when the first trigger has been completed
 * sell item to shoppe optionally restocks
 
 ## Combat
@@ -36,19 +30,3 @@
 ## Feature Creep
 
 * equipment breakage/durability?
-
-## Marten's Shoppe
-
-Flag: BlobGizzardFetchQuest
-
-1. When BG Count >= 5, set temp flag
-1. When temp flag set and BGFG clear, BG Count -= 5
-1. When temp flag set and BGFG clear, set BGFG
-1. Clear temp flag
-1. When BGFG clear, show message
-1. When BGDF clear, stop
-1. When BGFG set, do shoppe
-
-No Flags Set: "Closed due to shortage of blob gizzards!"
-
-When Blob Gizzard Count >= 5: "Now that the blob gizzard shortage is over, we can reopen!"
