@@ -39,5 +39,16 @@
 
 ## Marten's Shoppe
 
-1. Shoppe is closed due to a lack of blob gizzards.
-1. 
+Flag: BlobGizzardFetchQuest
+
+1. When BG Count >= 5, set temp flag
+1. When temp flag set and BGFG clear, BG Count -= 5
+1. When temp flag set and BGFG clear, set BGFG
+1. Clear temp flag
+1. When BGFG clear, show message
+1. When BGDF clear, stop
+1. When BGFG set, do shoppe
+
+No Flags Set: "Closed due to shortage of blob gizzards!"
+
+When Blob Gizzard Count >= 5: "Now that the blob gizzard shortage is over, we can reopen!"

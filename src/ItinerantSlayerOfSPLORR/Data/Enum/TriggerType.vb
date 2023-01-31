@@ -5,4 +5,6 @@
     Message
     SetFlag
     StopTriggers
+    ClearFlag
+    RemoveItems
 End Enum

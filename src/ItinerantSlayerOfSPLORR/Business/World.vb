@@ -314,8 +314,13 @@ Friend Class World
             Case TriggerType.SetFlag
                 _data.Flags.Add(trigger.Flag)
                 ProceedToNextTrigger()
+            Case TriggerType.ClearFlag
+                _data.Flags.Remove(trigger.Flag)
+                ProceedToNextTrigger()
             Case TriggerType.StopTriggers
                 Player.TriggerIndex = Integer.MaxValue
+            Case TriggerType.RemoveItems
+                PlayerCharacter.RemoveItems(trigger.ItemRemoval.ItemType, trigger.ItemRemoval.ItemCount)
             Case Else
                 Throw New NotImplementedException
         End Select

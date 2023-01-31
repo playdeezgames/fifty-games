@@ -1,5 +1,5 @@
 ﻿Public Enum TriggerConditionType
-    None
     WhenFlagSet
     WhenFlagClear
+    WhenItemCountAtLeast
 End Enum

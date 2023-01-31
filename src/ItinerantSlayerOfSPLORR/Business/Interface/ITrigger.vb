@@ -6,4 +6,5 @@
     ReadOnly Property IsActive As Boolean
     ReadOnly Property Message As IMessage
     ReadOnly Property Flag As String
+    ReadOnly Property ItemRemoval As IItemRemoval
 End Interface

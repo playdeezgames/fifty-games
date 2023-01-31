@@ -4,7 +4,7 @@
             "##################################################",
             "#................................................#",
             "#....................###.........................#",
-            "#....................# #..................?......#",
+            "#....................# #.........................#",
             "#.....................,..........................#",
             "#.....................,..........................#",
             "#.....................,..........................#",
@@ -32,38 +32,6 @@
     Friend triggers As IReadOnlyList(Of (IReadOnlyList(Of TriggerData), Integer, Integer)) =
         New List(Of (IReadOnlyList(Of TriggerData), Integer, Integer)) From
         {
-            (
-                New List(Of TriggerData) From
-                {
-                    New TriggerData With
-                    {
-                        .Condition = TriggerConditionType.WhenFlagClear,
-                        .ConditionFlag = "Condition",
-                        .TriggerType = TriggerType.Message,
-                        .Message = New MessageData With
-                        {
-                            .Text = "First Time"
-                        }
-                    },
-                    New TriggerData With
-                    {
-                        .Condition = TriggerConditionType.WhenFlagSet,
-                        .ConditionFlag = "Condition",
-                        .TriggerType = TriggerType.Message,
-                        .Message = New MessageData With
-                        {
-                            .Text = "Subsequent Time"
-                        }
-                    },
-                    New TriggerData With
-                    {
-                        .Condition = TriggerConditionType.WhenFlagClear,
-                        .ConditionFlag = "Condition",
-                        .TriggerType = TriggerType.SetFlag,
-                        .Flag = "Condition"
-                    }
-                },
-                42, 3),
             (
                 New List(Of TriggerData) From
                 {
@@ -113,19 +81,90 @@
             (New List(Of TriggerData) From {
                 New TriggerData With
                 {
+                    .TriggerType = TriggerType.SetFlag,
+                    .Flag = "Temp",
+                    .Conditions = New List(Of ConditionData) From
+                    {
+                        New ConditionData With
+                        {
+                            .Condition = TriggerConditionType.WhenItemCountAtLeast,
+                            .ItemType = ItemType.BlobGizzard,
+                            .ItemCount = 5
+                        }
+                    }
+                },
+                New TriggerData With
+                {
+                    .TriggerType = TriggerType.RemoveItems,
+                    .ItemRemoval = New ItemRemovalData With
+                    {
+                        .ItemType = ItemType.BlobGizzard,
+                        .ItemCount = 5
+                    },
+                    .Conditions = New List(Of ConditionData) From
+                    {
+                        New ConditionData With
+                        {
+                            .Condition = TriggerConditionType.WhenFlagSet,
+                            .ConditionFlag = "Temp"
+                        },
+                        New ConditionData With
+                        {
+                            .Condition = TriggerConditionType.WhenFlagClear,
+                            .ConditionFlag = "BlobGizzardFetchQuest"
+                        }
+                    }
+                },
+                New TriggerData With
+                {
+                    .TriggerType = TriggerType.SetFlag,
+                    .Flag = "BlobGizzardFetchQuest",
+                    .Conditions = New List(Of ConditionData) From
+                    {
+                        New ConditionData With
+                        {
+                            .Condition = TriggerConditionType.WhenFlagSet,
+                            .ConditionFlag = "Temp"
+                        },
+                        New ConditionData With
+                        {
+                            .Condition = TriggerConditionType.WhenFlagClear,
+                            .ConditionFlag = "BlobGizzardFetchQuest"
+                        }
+                    }
+                },
+                New TriggerData With
+                {
+                    .TriggerType = TriggerType.ClearFlag,
+                    .Flag = "Temp"
+                },
+                New TriggerData With
+                {
                     .TriggerType = TriggerType.Message,
-                    .Condition = TriggerConditionType.WhenFlagClear,
-                    .ConditionFlag = "Condition",
                     .Message = New MessageData With
                     {
-                        .Text = "Go away!"
+                        .Text = "Temporarily Closed Due To Blob Gizzard Shortage!"
+                    },
+                    .Conditions = New List(Of ConditionData) From
+                    {
+                        New ConditionData With
+                        {
+                            .Condition = TriggerConditionType.WhenFlagClear,
+                            .ConditionFlag = "BlobGizzardFetchQuest"
+                        }
                     }
                 },
                 New TriggerData With
                 {
                     .TriggerType = TriggerType.StopTriggers,
-                    .Condition = TriggerConditionType.WhenFlagClear,
-                    .ConditionFlag = "Condition"
+                    .Conditions = New List(Of ConditionData) From
+                    {
+                        New ConditionData With
+                        {
+                            .Condition = TriggerConditionType.WhenFlagClear,
+                            .ConditionFlag = "BlobGizzardFetchQuest"
+                        }
+                    }
                 },
                 New TriggerData With
                 {

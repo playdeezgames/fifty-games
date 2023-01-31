@@ -44,16 +44,25 @@
 
     Public ReadOnly Property IsActive As Boolean Implements ITrigger.IsActive
         Get
-            Select Case _data.Condition
-                Case TriggerConditionType.None
-                    Return True
-                Case TriggerConditionType.WhenFlagClear
-                    Return Not _worldData.Flags.Contains(_data.ConditionFlag)
-                Case TriggerConditionType.WhenFlagSet
-                    Return _worldData.Flags.Contains(_data.ConditionFlag)
-                Case Else
-                    Throw New NotImplementedException
-            End Select
+            For Each condition In _data.Conditions
+                Select Case condition.Condition
+                    Case TriggerConditionType.WhenFlagClear
+                        If _worldData.Flags.Contains(condition.ConditionFlag) Then
+                            Return False
+                        End If
+                    Case TriggerConditionType.WhenFlagSet
+                        If Not _worldData.Flags.Contains(condition.ConditionFlag) Then
+                            Return False
+                        End If
+                    Case TriggerConditionType.WhenItemCountAtLeast
+                        If (New World(_worldData)).PlayerCharacter.ItemCount(condition.ItemType) < condition.ItemCount Then
+                            Return False
+                        End If
+                    Case Else
+                        Throw New NotImplementedException
+                End Select
+            Next
+            Return True
         End Get
     End Property
 
@@ -69,6 +78,12 @@
     Public ReadOnly Property Flag As String Implements ITrigger.Flag
         Get
             Return _data.Flag
+        End Get
+    End Property
+
+    Public ReadOnly Property ItemRemoval As IItemRemoval Implements ITrigger.ItemRemoval
+        Get
+            Return New ItemRemoval(_worldData, _data.ItemRemoval)
         End Get
     End Property
 End Class
