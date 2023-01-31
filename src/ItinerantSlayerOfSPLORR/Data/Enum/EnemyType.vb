@@ -19,7 +19,12 @@ Friend Module EnemyTypeExtensions
                     .Name = "Blob",
                     .XP = 1,
                     .MinimumJools = 1,
-                    .MaximumJools = 3
+                    .MaximumJools = 3,
+                    .LootTable =
+                    {
+                        (1, Array.Empty(Of ItemType)),
+                        (1, {ItemType.BlobGizzard})
+                    }
                 }
             }
         }

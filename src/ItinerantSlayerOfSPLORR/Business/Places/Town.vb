@@ -93,7 +93,7 @@
                         .TriggerType = TriggerType.Teleport,
                         .Teleport = New TeleportData With
                         {
-                            .DestinationX = 6,
+                            .DestinationX = 7,
                             .DestinationY = 3,
                             .DestinationBoard = 0
                         }

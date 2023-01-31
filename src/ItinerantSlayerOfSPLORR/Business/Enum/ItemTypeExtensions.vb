@@ -59,6 +59,13 @@ Friend Module ItemTypeExtensions
                     .EquipSlot = EquipSlotType.Torso,
                     .DefendStrength = 10
                 }
+            },
+            {
+                ItemType.BlobGizzard,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "Blob Gizzard"
+                }
             }
         }
     <Extension>

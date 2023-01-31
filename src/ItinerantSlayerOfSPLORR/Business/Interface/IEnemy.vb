@@ -7,5 +7,6 @@
     Function RollDefend(random As Random) As Integer
     Function Attack(character As ICharacter, random As Random) As IEnumerable(Of String)
     Function RollJools(random As Random) As Integer
+    Function RollLoot(random As Random) As IEnumerable(Of ItemType)
     ReadOnly Property XP As Integer
 End Interface

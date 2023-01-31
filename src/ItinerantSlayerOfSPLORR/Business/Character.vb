@@ -229,6 +229,13 @@
                     AddJools(jools)
                     messages.Add($"{Name} gets {jools} jools!")
                 End If
+                Dim loot = enemy.RollLoot(random)
+                If loot.Any Then
+                    For Each item In loot
+                        messages.Add($"{Name} gets {item.ToDescriptor.Name}!")
+                        AddItems(item, 1)
+                    Next
+                End If
             End If
         Else
             messages.Add($"{Name} misses!")

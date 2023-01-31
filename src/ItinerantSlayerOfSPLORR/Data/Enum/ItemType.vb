@@ -5,4 +5,5 @@
     Clothes
     Dagger
     LeatherArmor
+    BlobGizzard
 End Enum
