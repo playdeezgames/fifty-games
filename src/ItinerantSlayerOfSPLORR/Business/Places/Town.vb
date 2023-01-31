@@ -4,7 +4,7 @@
             "##################################################",
             "#................................................#",
             "#....................###.........................#",
-            "#....................# #.........................#",
+            "#....................# #..................?......#",
             "#.....................,..........................#",
             "#.....................,..........................#",
             "#.....................,..........................#",
@@ -32,6 +32,38 @@
     Friend triggers As IReadOnlyList(Of (IReadOnlyList(Of TriggerData), Integer, Integer)) =
         New List(Of (IReadOnlyList(Of TriggerData), Integer, Integer)) From
         {
+            (
+                New List(Of TriggerData) From
+                {
+                    New TriggerData With
+                    {
+                        .Condition = TriggerConditionType.WhenFlagClear,
+                        .ConditionFlag = "Condition",
+                        .TriggerType = TriggerType.Message,
+                        .Message = New MessageData With
+                        {
+                            .Text = "First Time"
+                        }
+                    },
+                    New TriggerData With
+                    {
+                        .Condition = TriggerConditionType.WhenFlagSet,
+                        .ConditionFlag = "Condition",
+                        .TriggerType = TriggerType.Message,
+                        .Message = New MessageData With
+                        {
+                            .Text = "Subsequent Time"
+                        }
+                    },
+                    New TriggerData With
+                    {
+                        .Condition = TriggerConditionType.WhenFlagClear,
+                        .ConditionFlag = "Condition",
+                        .TriggerType = TriggerType.SetFlag,
+                        .Flag = "Condition"
+                    }
+                },
+                42, 3),
             (
                 New List(Of TriggerData) From
                 {

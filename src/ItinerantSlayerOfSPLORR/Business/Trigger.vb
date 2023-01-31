@@ -48,9 +48,9 @@
                 Case TriggerConditionType.None
                     Return True
                 Case TriggerConditionType.WhenFlagClear
-                    Throw New NotImplementedException
+                    Return Not _worldData.Flags.Contains(_data.ConditionFlag)
                 Case TriggerConditionType.WhenFlagSet
-                    Throw New NotImplementedException
+                    Return _worldData.Flags.Contains(_data.ConditionFlag)
                 Case Else
                     Throw New NotImplementedException
             End Select
@@ -63,6 +63,12 @@
                 Return Nothing
             End If
             Return New Message(_worldData, _data.Message)
+        End Get
+    End Property
+
+    Public ReadOnly Property Flag As String Implements ITrigger.Flag
+        Get
+            Return _data.Flag
         End Get
     End Property
 End Class

@@ -2,6 +2,7 @@
 
 ## TODOs
 
+* trophy items dropped by slain creatures? 
 * trigger conditions
     * all the time
     * if a flag is set
@@ -34,7 +35,6 @@
 
 ## Feature Creep
 
-* trophy items dropped by slain creatures? 
 * equipment breakage/durability?
 
 

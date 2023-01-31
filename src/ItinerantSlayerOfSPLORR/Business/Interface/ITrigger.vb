@@ -5,4 +5,5 @@
     ReadOnly Property Shoppe As IShoppe
     ReadOnly Property IsActive As Boolean
     ReadOnly Property Message As IMessage
+    ReadOnly Property Flag As String
 End Interface

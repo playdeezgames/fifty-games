@@ -293,6 +293,7 @@ Friend Class World
         Dim trigger = cell.Triggers(Player.TriggerIndex)
         If Not trigger.IsActive Then
             ProceedToNextTrigger()
+            Return
         End If
         Select Case trigger.TriggerType
             Case TriggerType.Shoppe
@@ -310,6 +311,9 @@ Friend Class World
                 RunTrigger()
             Case TriggerType.Inn
                 PlayerCharacter.IsInInn = True
+            Case TriggerType.SetFlag
+                _data.Flags.Add(trigger.Flag)
+                ProceedToNextTrigger()
             Case Else
                 Throw New NotImplementedException
         End Select

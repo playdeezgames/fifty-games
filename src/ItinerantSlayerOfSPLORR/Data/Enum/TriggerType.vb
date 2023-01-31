@@ -3,4 +3,5 @@
     Inn
     Shoppe
     Message
+    SetFlag
 End Enum
