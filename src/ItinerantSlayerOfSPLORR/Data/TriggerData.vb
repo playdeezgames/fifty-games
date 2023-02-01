@@ -7,4 +7,5 @@
     Public Property Message As MessageData
     Public Property Flag As String
     Public Property ItemRemoval As ItemRemovalData
+    Public Property Minigame As Minigame
 End Class

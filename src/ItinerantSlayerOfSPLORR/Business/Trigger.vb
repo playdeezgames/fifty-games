@@ -86,4 +86,10 @@
             Return New ItemRemoval(_worldData, _data.ItemRemoval)
         End Get
     End Property
+
+    Public ReadOnly Property Minigame As Minigame Implements ITrigger.Minigame
+        Get
+            Return _data.Minigame
+        End Get
+    End Property
 End Class

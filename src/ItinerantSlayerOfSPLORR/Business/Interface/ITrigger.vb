@@ -7,4 +7,5 @@
     ReadOnly Property Message As IMessage
     ReadOnly Property Flag As String
     ReadOnly Property ItemRemoval As IItemRemoval
+    ReadOnly Property Minigame As Minigame
 End Interface

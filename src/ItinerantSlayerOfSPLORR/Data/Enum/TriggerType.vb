@@ -7,4 +7,5 @@
     StopTriggers
     ClearFlag
     RemoveItems
+    Minigame
 End Enum

@@ -11,7 +11,7 @@
             "#.....................,....###...................#",
             "#.....................,....# #...................#",
             "#.....................,.....,....................#",
-            "#.....................,.....,....................#",
+            "#.....................,..@..,....................#",
             "#.....................,,,,,,,....................#",
             "#.......................,........................#",
             "#.......................,........................#",
@@ -32,6 +32,24 @@
     Friend triggers As IReadOnlyList(Of (IReadOnlyList(Of TriggerData), Integer, Integer)) =
         New List(Of (IReadOnlyList(Of TriggerData), Integer, Integer)) From
         {
+            (
+                New List(Of TriggerData) From
+                {
+                    New TriggerData With
+                    {
+                        .TriggerType = TriggerType.Message,
+                        .Message = New MessageData With
+                        {
+                            .Text = "Let's Play Rock, Scissors, Paper for CA$H!"
+                        }
+                    },
+                    New TriggerData With
+                    {
+                        .TriggerType = TriggerType.Minigame,
+                        .Minigame = Minigame.RSP
+                    }
+                },
+                25, 10),
             (
                 New List(Of TriggerData) From
                 {
@@ -178,7 +196,8 @@
                         },
                         .Offers = New Dictionary(Of ItemType, Integer) From
                         {
-                            {ItemType.EmptyBottle, 1}
+                            {ItemType.EmptyBottle, 1},
+                            {ItemType.BlobGizzard, 1}
                         }
                     }
                 }},

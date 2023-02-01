@@ -90,6 +90,8 @@
                 AnsiConsole.Markup("[grey on black]░[/]")
             Case TerrainType.Sign
                 AnsiConsole.Markup("[olive on black]?[/]")
+            Case TerrainType.NPC
+                AnsiConsole.Markup("[teal on black]☻[/]")
             Case Else
                 Throw New NotImplementedException
         End Select

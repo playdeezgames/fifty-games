@@ -59,10 +59,13 @@
         End Set
     End Property
 
-    Public ReadOnly Property Jools As Integer Implements ICharacter.Jools
+    Public Property Jools As Integer Implements ICharacter.Jools
         Get
             Return _data.Jools
         End Get
+        Set(value As Integer)
+            _data.Jools = value
+        End Set
     End Property
 
     Private ReadOnly Property EquippedItemAttackStrength As Integer
@@ -188,6 +191,15 @@
         End Get
         Set(value As Boolean)
             _data.IsInMessage = value
+        End Set
+    End Property
+
+    Public Property Minigame As Minigame Implements ICharacter.Minigame
+        Get
+            Return _data.Minigame
+        End Get
+        Set(value As Minigame)
+            _data.Minigame = value
         End Set
     End Property
 

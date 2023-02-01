@@ -13,7 +13,7 @@
     Function Attack(enemy As IEnemy, random As Random) As IEnumerable(Of String)
     Function RollDefend(random As Random) As Integer
     Sub TakeDamage(damage As Integer)
-    ReadOnly Property Jools As Integer
+    Property Jools As Integer
     Sub RestAtInn(inn As IInn)
     Sub LevelUpHitPoints()
     Sub LevelUpDefendStrength()
@@ -43,4 +43,5 @@
     ReadOnly Property ItemCount(itemType As ItemType) As Integer
     ReadOnly Property EquippableItems As IEnumerable(Of ItemType)
     Property IsInMessage As Boolean
+    Property Minigame As Minigame
 End Interface

@@ -6,4 +6,5 @@
     Empty
     Road
     Sign
+    NPC
 End Enum

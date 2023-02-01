@@ -156,6 +156,8 @@ Friend Class World
                         boardCellData.Terrain = TerrainType.Road
                     Case "?"c
                         boardCellData.Terrain = TerrainType.Sign
+                    Case "@"c
+                        boardCellData.Terrain = TerrainType.NPC
                     Case Else
                         Throw New NotImplementedException
                 End Select
@@ -321,6 +323,8 @@ Friend Class World
                 Player.TriggerIndex = Integer.MaxValue
             Case TriggerType.RemoveItems
                 PlayerCharacter.RemoveItems(trigger.ItemRemoval.ItemType, trigger.ItemRemoval.ItemCount)
+            Case TriggerType.Minigame
+                PlayerCharacter.Minigame = trigger.Minigame
             Case Else
                 Throw New NotImplementedException
         End Select
