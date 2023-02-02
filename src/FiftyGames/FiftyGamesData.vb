@@ -13,4 +13,5 @@ Public Class FiftyGamesData
     Public Property Platformer As New PlatformerData
     Public Property WanderMaze As New WanderMazeData
     Public Property ItinerantSlayerOfSPLORR As New WorldData
+    Public Property InterplanetaryFracas As New InterplanetaryFracasData
 End Class

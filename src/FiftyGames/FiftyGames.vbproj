@@ -5,7 +5,7 @@
     <RootNamespace>FiftyGames</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
-    <ImportedNamespaces>CoinFlip=False,Common=False,FeedTheFish=False,GuessMyNumber=False,InfiniteRunner=False,InterstellarInterloper=False,ItinerantSlayerOfSPLORR=False,LandyMcLanderface=False,LightsOut=False,MoneyFace=False,Platformer=False,QueensPuzzle=False,Spectre.Console=False,System.IO=False,System.Text.Json=False,WanderMaze=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,FiftyGames=True</ImportedNamespaces>
+    <ImportedNamespaces>CoinFlip=False,Common=False,FeedTheFish=False,GuessMyNumber=False,InfiniteRunner=False,InterplanetaryFracas=False,InterstellarInterloper=False,ItinerantSlayerOfSPLORR=False,LandyMcLanderface=False,LightsOut=False,MoneyFace=False,Platformer=False,QueensPuzzle=False,Spectre.Console=False,System.IO=False,System.Text.Json=False,WanderMaze=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,FiftyGames=True</ImportedNamespaces>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -27,6 +27,7 @@
     <Import Include="FeedTheFish" />
     <Import Include="GuessMyNumber" />
     <Import Include="InfiniteRunner" />
+    <Import Include="InterplanetaryFracas" />
     <Import Include="InterstellarInterloper" />
     <Import Include="ItinerantSlayerOfSPLORR" />
     <Import Include="LandyMcLanderface" />
@@ -45,6 +46,7 @@
     <ProjectReference Include="..\FeedTheFish\FeedTheFish.vbproj" />
     <ProjectReference Include="..\GuessMyNumber\GuessMyNumber.vbproj" />
     <ProjectReference Include="..\InfiniteRunner\InfiniteRunner.vbproj" />
+    <ProjectReference Include="..\InterplanetaryFracas\InterplanetaryFracas.vbproj" />
     <ProjectReference Include="..\InterstellarInterloper\InterstellarInterloper.vbproj" />
     <ProjectReference Include="..\ItinerantSlayerOfSPLORR\ItinerantSlayerOfSPLORR.vbproj" />
     <ProjectReference Include="..\LandyMcLanderface\LandyMcLanderface.vbproj" />
