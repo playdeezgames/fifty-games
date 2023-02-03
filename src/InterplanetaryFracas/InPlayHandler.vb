@@ -1,8 +1,100 @@
 ﻿Module InPlayHandler
     Friend Sub Run(data As InterplanetaryFracasData)
-        AnsiConsole.Clear()
-        DrawBoard(data)
-        OkPrompt()
+        Do
+            AnsiConsole.Clear()
+            DrawBoard(data)
+            AnsiConsole.MarkupLine("M - Move Ship")
+            While Not AnsiConsole.Console.Input.IsKeyAvailable
+                'just wait!
+            End While
+            Select Case AnsiConsole.Console.Input.ReadKey(True).Value.Key
+                Case ConsoleKey.M
+                    MoveShip(data)
+                Case ConsoleKey.Escape
+                    Exit Do
+            End Select
+        Loop
+    End Sub
+    Const NeverMindText = "Never Mind"
+    Const ColumnLetters = "ABCDEFGHIJKLMNOPQRSTUVWX"
+
+    Function LocationName(column As Integer, row As Integer) As String
+        Return $"{ColumnLetters(column)}{row + 1}"
+    End Function
+
+    Private Sub MoveShip(data As InterplanetaryFracasData)
+        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]From Where?[/]"}
+        prompt.AddChoice(NeverMindText)
+        Dim fromCandidates = data.Board.GetMovableShipLocations()
+        Dim table = fromCandidates.ToDictionary(Function(x) LocationName(x.Item1, x.Item2), Function(x) x)
+        prompt.AddChoices(table.Keys)
+        Dim answer = AnsiConsole.Prompt(prompt)
+        Select Case answer
+            Case NeverMindText
+                Return
+            Case Else
+                MoveAShip(data, table(answer).Item1, table(answer).Item2)
+        End Select
+    End Sub
+
+    Private Sub MoveAShip(data As InterplanetaryFracasData, column As Integer, row As Integer)
+        Dim ships = data.Board.GetCell(column, row).GetPlayerShips
+        Select Case ships.Count
+            Case 0
+                AnsiConsole.MarkupLine("No ships!")
+            Case 1
+                MoveTheShip(data, column, row, ships.Single)
+            Case 2
+                Dim ship = PickShip(ships)
+                If ship IsNot Nothing Then
+                    MoveTheShip(data, column, row, ship)
+                End If
+        End Select
+    End Sub
+
+    Private Function PickShip(ships As IEnumerable(Of ShipData)) As ShipData
+        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Which Ship?[/]"}
+        prompt.AddChoice(NeverMindText)
+        Dim index = 1
+        Dim table As New Dictionary(Of String, ShipData)
+        For Each ship In ships
+            table.Add($"#{index}: {ship.ShipType}", ship)
+            index += 1
+        Next
+        Dim answer = AnsiConsole.Prompt(prompt)
+        Select Case answer
+            Case NeverMindText
+                Return Nothing
+            Case Else
+                Return table(answer)
+        End Select
+    End Function
+
+    Private Sub MoveTheShip(data As InterplanetaryFracasData, column As Integer, row As Integer, ship As ShipData)
+        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]To Where?[/]"}
+        prompt.AddChoice(NeverMindText)
+        Dim table As New Dictionary(Of String, (Integer, Integer))
+        If data.Board.GetCell(column, row - 1) IsNot Nothing Then
+            table.Add(LocationName(column, row - 1), (column, row - 1))
+        End If
+        If data.Board.GetCell(column + 1, row) IsNot Nothing Then
+            table.Add(LocationName(column + 1, row), (column + 1, row))
+        End If
+        If data.Board.GetCell(column, row + 1) IsNot Nothing Then
+            table.Add(LocationName(column, row + 1), (column, row + 1))
+        End If
+        If data.Board.GetCell(column - 1, row) IsNot Nothing Then
+            table.Add(LocationName(column - 1, row), (column - 1, row))
+        End If
+        prompt.AddChoices(table.Keys)
+        Dim answer = AnsiConsole.Prompt(prompt)
+        Select Case answer
+            Case NeverMindText
+                Return
+            Case Else
+                data.Board.GetCell(column, row).RemoveShip(ship)
+                data.Board.GetCell(table(answer).Item1, table(answer).Item2).AddShip(ship)
+        End Select
     End Sub
 
     Private Sub DrawBoard(data As InterplanetaryFracasData)

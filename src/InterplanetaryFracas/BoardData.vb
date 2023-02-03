@@ -34,4 +34,16 @@
         End If
         Return Cells(row * Columns + column)
     End Function
+    Friend Function GetMovableShipLocations() As IEnumerable(Of (Integer, Integer))
+        Dim result As New List(Of (Integer, Integer))
+        For column = 0 To Columns - 1
+            For row = 0 To Rows - 1
+                Dim cell = GetCell(column, row)
+                If cell.HasPlayerShips Then
+                    result.Add((column, row))
+                End If
+            Next
+        Next
+        Return result
+    End Function
 End Class
