@@ -3,5 +3,4 @@
     MarkII
     MarkIII
     MarkIV
-    MarkV
 End Enum

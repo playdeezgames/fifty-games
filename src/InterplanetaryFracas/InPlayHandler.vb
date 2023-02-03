@@ -123,7 +123,7 @@
             AnsiConsole.MarkupLine("--+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+")
             AnsiConsole.Markup($"{row + 1,2}|")
             For column = 0 To data.Board.Columns - 1
-                DrawBoardCell(data.Board.GetCell(column, row))
+                AnsiConsole.Markup(DrawBoardCell(data.Board.GetCell(column, row)))
                 AnsiConsole.Markup("|")
             Next
             AnsiConsole.WriteLine()
@@ -131,21 +131,22 @@
         AnsiConsole.MarkupLine("--+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+")
     End Sub
 
-    Private Sub DrawBoardCell(boardCellData As BoardCellData)
+    Private Function DrawBoardCell(boardCellData As BoardCellData) As String
         If Not boardCellData.IsVisible Then
-            AnsiConsole.Markup("[grey]???[/]")
-            Return
+            Return "[grey]???[/]"
         End If
         Dim ship = boardCellData.Ship
-        If ship IsNot Nothing AndAlso ship.PlayerOwned Then
-            If ship.IsMovable Then
-                AnsiConsole.Markup("[black on lime] S [/]")
-                Return
+        If ship IsNot Nothing Then
+            If ship.PlayerOwned Then
+                If ship.IsMovable Then
+                    Return "[black on lime] S [/]"
+                Else
+                    Return "[black on green] s [/]"
+                End If
             Else
-                AnsiConsole.Markup("[black on green] s [/]")
-                Return
+                Return "[black on red] E [/]"
             End If
         End If
-        AnsiConsole.Markup("   ")
-    End Sub
+        Return "   "
+    End Function
 End Module

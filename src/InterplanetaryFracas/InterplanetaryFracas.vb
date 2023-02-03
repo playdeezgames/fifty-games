@@ -27,20 +27,42 @@ Public Module InterplanetaryFracas
 
     Private Sub CreateBoard(data As InterplanetaryFracasData)
         InitializeBoard(data)
-        PlacePlayerShip(data)
-        PlacePlayerShip(data)
-        PlacePlayerShip(data)
-        PlacePlayerShip(data)
+        PlacePlayerShip(data, ShipType.MarkI)
+        PlacePlayerShip(data, ShipType.MarkII)
+        PlacePlayerShip(data, ShipType.MarkIII)
+        PlacePlayerShip(data, ShipType.MarkIV)
+        PlaceEnemyShip(data, ShipType.MarkI)
+        PlaceEnemyShip(data, ShipType.MarkI)
+        PlaceEnemyShip(data, ShipType.MarkI)
+        PlaceEnemyShip(data, ShipType.MarkI)
+        PlaceEnemyShip(data, ShipType.MarkII)
+        PlaceEnemyShip(data, ShipType.MarkII)
+        PlaceEnemyShip(data, ShipType.MarkII)
+        PlaceEnemyShip(data, ShipType.MarkIII)
+        PlaceEnemyShip(data, ShipType.MarkIII)
+        PlaceEnemyShip(data, ShipType.MarkIV)
     End Sub
 
-    Private Sub PlacePlayerShip(data As InterplanetaryFracasData)
+    Private Sub PlaceEnemyShip(data As InterplanetaryFracasData, shipType As ShipType)
         Do
             Dim column As Integer = random.Next(data.Board.Columns)
             Dim row As Integer = random.Next(data.Board.Rows)
             If data.Board.GetCell(column, row).Ship IsNot Nothing Then
                 Continue Do
             End If
-            data.Board.GetCell(column, row).Ship = New ShipData With {.PlayerOwned = True, .ShipType = ShipType.MarkI}
+            data.Board.GetCell(column, row).Ship = New ShipData With {.PlayerOwned = False, .ShipType = shipType}
+            Exit Do
+        Loop
+    End Sub
+
+    Private Sub PlacePlayerShip(data As InterplanetaryFracasData, shipType As ShipType)
+        Do
+            Dim column As Integer = random.Next(data.Board.Columns)
+            Dim row As Integer = random.Next(data.Board.Rows)
+            If data.Board.GetCell(column, row).Ship IsNot Nothing Then
+                Continue Do
+            End If
+            data.Board.GetCell(column, row).Ship = New ShipData With {.PlayerOwned = True, .ShipType = shipType}
             Exit Do
         Loop
     End Sub
