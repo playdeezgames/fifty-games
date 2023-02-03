@@ -3,18 +3,25 @@
         Do
             AnsiConsole.Clear()
             DrawBoard(data)
-            AnsiConsole.MarkupLine("M - Move Ship")
+            AnsiConsole.MarkupLine("M - Move Ship | T - End Turn")
             While Not AnsiConsole.Console.Input.IsKeyAvailable
                 'just wait!
             End While
             Select Case AnsiConsole.Console.Input.ReadKey(True).Value.Key
                 Case ConsoleKey.M
                     MoveShip(data)
+                Case ConsoleKey.T
+                    EndTurn(data)
                 Case ConsoleKey.Escape
                     Exit Do
             End Select
         Loop
     End Sub
+
+    Private Sub EndTurn(data As InterplanetaryFracasData)
+        data.Board.EndTurn()
+    End Sub
+
     Const NeverMindText = "Never Mind"
     Const ColumnLetters = "ABCDEFGHIJKLMNOPQRSTUVWX"
 
@@ -23,17 +30,25 @@
     End Function
 
     Private Sub MoveShip(data As InterplanetaryFracasData)
-        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]From Where?[/]"}
-        prompt.AddChoice(NeverMindText)
         Dim fromCandidates = data.Board.GetMovableShipLocations()
-        Dim table = fromCandidates.ToDictionary(Function(x) LocationName(x.Item1, x.Item2), Function(x) x)
-        prompt.AddChoices(table.Keys)
-        Dim answer = AnsiConsole.Prompt(prompt)
-        Select Case answer
-            Case NeverMindText
-                Return
+        Select Case fromCandidates.Count
+            Case 0
+                AnsiConsole.MarkupLine("No ships to move!")
+                OkPrompt()
+            Case 1
+                MoveAShip(data, fromCandidates.First.Item1, fromCandidates.First.Item2)
             Case Else
-                MoveAShip(data, table(answer).Item1, table(answer).Item2)
+                Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]From Where?[/]"}
+                prompt.AddChoice(NeverMindText)
+                Dim table = fromCandidates.ToDictionary(Function(x) LocationName(x.Item1, x.Item2), Function(x) x)
+                prompt.AddChoices(table.Keys)
+                Dim answer = AnsiConsole.Prompt(prompt)
+                Select Case answer
+                    Case NeverMindText
+                        Return
+                    Case Else
+                        MoveAShip(data, table(answer).Item1, table(answer).Item2)
+                End Select
         End Select
     End Sub
 
@@ -92,6 +107,7 @@
             Case NeverMindText
                 Return
             Case Else
+                ship.HasMoved = True
                 data.Board.GetCell(column, row).RemoveShip(ship)
                 data.Board.GetCell(table(answer).Item1, table(answer).Item2).AddShip(ship)
         End Select
@@ -117,9 +133,15 @@
             AnsiConsole.Markup("[grey]???[/]")
             Return
         End If
-        If boardCellData.Ships.Any(Function(x) x.PlayerOwned) Then
-            AnsiConsole.Markup("[lime] S [/]")
-            Return
+        Dim ships = boardCellData.Ships
+        If ships.Any(Function(x) x.PlayerOwned) Then
+            If ships.Any(Function(x) x.IsMovable) Then
+                AnsiConsole.Markup("[black on lime] S [/]")
+                Return
+            Else
+                AnsiConsole.Markup("[black on green] s [/]")
+                Return
+            End If
         End If
         AnsiConsole.Markup("   ")
     End Sub

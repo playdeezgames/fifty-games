@@ -17,6 +17,12 @@
         Next
     End Sub
 
+    Friend Sub EndTurn()
+        For Each cell In Cells
+            cell.EndTurn()
+        Next
+    End Sub
+
     Private Sub MakeVisible(firstColumn As Integer, firstRow As Integer, lastColumn As Integer, lastRow As Integer)
         For column = firstColumn To lastColumn
             For row = firstRow To lastRow
@@ -39,7 +45,7 @@
         For column = 0 To Columns - 1
             For row = 0 To Rows - 1
                 Dim cell = GetCell(column, row)
-                If cell.HasPlayerShips Then
+                If cell.HasMovablePlayerShips Then
                     result.Add((column, row))
                 End If
             Next

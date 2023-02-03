@@ -28,6 +28,9 @@ Public Module InterplanetaryFracas
     Private Sub CreateBoard(data As InterplanetaryFracasData)
         InitializeBoard(data)
         PlacePlayerShip(data)
+        PlacePlayerShip(data)
+        PlacePlayerShip(data)
+        PlacePlayerShip(data)
     End Sub
 
     Private Sub PlacePlayerShip(data As InterplanetaryFracasData)
