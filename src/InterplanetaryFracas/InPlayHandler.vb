@@ -84,23 +84,26 @@
                 Return table(answer)
         End Select
     End Function
+    Private ReadOnly Deltas As IReadOnlyList(Of (Integer, Integer)) =
+        New List(Of (Integer, Integer)) From
+        {
+            (0, -1),
+            (1, 0),
+            (0, 1),
+            (-1, 0)
+        }
 
     Private Sub MoveTheShip(data As InterplanetaryFracasData, column As Integer, row As Integer, ship As ShipData)
         Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]To Where?[/]"}
         prompt.AddChoice(NeverMindText)
         Dim table As New Dictionary(Of String, (Integer, Integer))
-        If data.Board.GetCell(column, row - 1) IsNot Nothing Then
-            table.Add(LocationName(column, row - 1), (column, row - 1))
-        End If
-        If data.Board.GetCell(column + 1, row) IsNot Nothing Then
-            table.Add(LocationName(column + 1, row), (column + 1, row))
-        End If
-        If data.Board.GetCell(column, row + 1) IsNot Nothing Then
-            table.Add(LocationName(column, row + 1), (column, row + 1))
-        End If
-        If data.Board.GetCell(column - 1, row) IsNot Nothing Then
-            table.Add(LocationName(column - 1, row), (column - 1, row))
-        End If
+        For Each delta In Deltas
+            Dim destination = (column + delta.Item1, row + delta.Item2)
+            Dim cell = data.Board.GetCell(destination.Item1, destination.Item2)
+            If cell IsNot Nothing AndAlso cell.Ship Is Nothing Then
+                table.Add(LocationName(destination.Item1, destination.Item2), (destination.Item1, destination.Item2))
+            End If
+        Next
         prompt.AddChoices(table.Keys)
         Dim answer = AnsiConsole.Prompt(prompt)
         Select Case answer
@@ -108,8 +111,8 @@
                 Return
             Case Else
                 ship.HasMoved = True
-                data.Board.GetCell(column, row).RemoveShip(ship)
-                data.Board.GetCell(table(answer).Item1, table(answer).Item2).AddShip(ship)
+                data.Board.GetCell(column, row).Ship = Nothing
+                data.Board.GetCell(table(answer).Item1, table(answer).Item2).Ship = ship
         End Select
     End Sub
 
@@ -133,9 +136,9 @@
             AnsiConsole.Markup("[grey]???[/]")
             Return
         End If
-        Dim ships = boardCellData.Ships
-        If ships.Any(Function(x) x.PlayerOwned) Then
-            If ships.Any(Function(x) x.IsMovable) Then
+        Dim ship = boardCellData.Ship
+        If ship IsNot Nothing AndAlso ship.PlayerOwned Then
+            If ship.IsMovable Then
                 AnsiConsole.Markup("[black on lime] S [/]")
                 Return
             Else

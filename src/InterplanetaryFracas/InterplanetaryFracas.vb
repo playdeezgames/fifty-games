@@ -34,9 +34,15 @@ Public Module InterplanetaryFracas
     End Sub
 
     Private Sub PlacePlayerShip(data As InterplanetaryFracasData)
-        Dim column As Integer = random.Next(data.Board.Columns)
-        Dim row As Integer = random.Next(data.Board.Rows)
-        data.Board.GetCell(column, row).Ships.Add(New ShipData With {.PlayerOwned = True, .ShipType = ShipType.MarkI})
+        Do
+            Dim column As Integer = random.Next(data.Board.Columns)
+            Dim row As Integer = random.Next(data.Board.Rows)
+            If data.Board.GetCell(column, row).Ship IsNot Nothing Then
+                Continue Do
+            End If
+            data.Board.GetCell(column, row).Ship = New ShipData With {.PlayerOwned = True, .ShipType = ShipType.MarkI}
+            Exit Do
+        Loop
     End Sub
 
     Private Sub InitializeBoard(data As InterplanetaryFracasData)

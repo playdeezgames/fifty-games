@@ -1,31 +1,26 @@
 ﻿Public Class BoardCellData
     Public Property Feature As FeatureData
-    Public Property Ships As New List(Of ShipData)
+    Public Property Ship As ShipData
     Public Property IsVisible As Boolean
 
-    Friend Sub RemoveShip(ship As ShipData)
-        Ships.Remove(ship)
-    End Sub
-
-    Friend Sub AddShip(ship As ShipData)
-        Ships.Add(ship)
-    End Sub
-
     Friend Sub EndTurn()
-        For Each ship In Ships
-            ship.EndTurn()
-        Next
+        If Ship IsNot Nothing Then
+            Ship.EndTurn()
+        End If
     End Sub
 
     Friend Function HasPlayerShips() As Boolean
-        Return Ships.Any(Function(x) x.PlayerOwned)
+        Return Ship IsNot Nothing AndAlso Ship.PlayerOwned
     End Function
 
     Friend Function GetPlayerShips() As IEnumerable(Of ShipData)
-        Return Ships.Where(Function(x) x.PlayerOwned)
+        If Ship Is Nothing Then
+            Return Array.Empty(Of ShipData)
+        End If
+        Return New List(Of ShipData) From {Ship}
     End Function
 
     Friend Function HasMovablePlayerShips() As Boolean
-        Return Ships.Any(Function(x) x.PlayerOwned AndAlso x.IsMovable)
+        Return HasPlayerShips() AndAlso Ship.IsMovable
     End Function
 End Class
