@@ -125,6 +125,7 @@
                 Return
             Case Else
                 ship.HasFired = True
+                ship.Torpedos -= 1
                 Dim delta = table(answer)
                 column += delta.Item1
                 row += delta.Item2

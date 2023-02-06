@@ -62,7 +62,12 @@ Public Module InterplanetaryFracas
             If data.Board.GetCell(column, row).Ship IsNot Nothing Then
                 Continue Do
             End If
-            data.Board.GetCell(column, row).Ship = New ShipData With {.PlayerOwned = True, .ShipType = shipType}
+            data.Board.GetCell(column, row).Ship = New ShipData With
+                {
+                    .PlayerOwned = True,
+                    .ShipType = shipType,
+                    .Torpedos = shipType.GetStartingTorpedos
+                }
             Exit Do
         Loop
     End Sub
