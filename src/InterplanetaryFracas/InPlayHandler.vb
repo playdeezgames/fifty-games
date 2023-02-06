@@ -3,11 +3,13 @@
         Do
             AnsiConsole.Clear()
             DrawBoard(data)
-            AnsiConsole.MarkupLine("M - Move Ship | T - End Turn")
+            AnsiConsole.MarkupLine("M - Move Ship | F - Fire! | T - End Turn")
             While Not AnsiConsole.Console.Input.IsKeyAvailable
                 'just wait!
             End While
             Select Case AnsiConsole.Console.Input.ReadKey(True).Value.Key
+                Case ConsoleKey.F
+                    FireShip(data)
                 Case ConsoleKey.M
                     MoveShip(data)
                 Case ConsoleKey.T
@@ -16,6 +18,29 @@
                     Exit Do
             End Select
         Loop
+    End Sub
+
+    Private Sub FireShip(data As InterplanetaryFracasData)
+        Dim fromCandidates = data.Board.GetFirableShipLocations()
+        Select Case fromCandidates.Count
+            Case 0
+                AnsiConsole.MarkupLine("No ships to fire!")
+                OkPrompt()
+            Case 1
+                FireAShip(data, fromCandidates.First.Item1, fromCandidates.First.Item2)
+            Case Else
+                Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]From Where?[/]"}
+                prompt.AddChoice(NeverMindText)
+                Dim table = fromCandidates.ToDictionary(Function(x) LocationName(x.Item1, x.Item2), Function(x) x)
+                prompt.AddChoices(table.Keys)
+                Dim answer = AnsiConsole.Prompt(prompt)
+                Select Case answer
+                    Case NeverMindText
+                        Return
+                    Case Else
+                        FireAShip(data, table(answer).Item1, table(answer).Item2)
+                End Select
+        End Select
     End Sub
 
     Private Sub EndTurn(data As InterplanetaryFracasData)
@@ -63,6 +88,62 @@
                 Dim ship = PickShip(ships)
                 If ship IsNot Nothing Then
                     MoveTheShip(data, column, row, ship)
+                End If
+        End Select
+    End Sub
+
+    Private Sub FireAShip(data As InterplanetaryFracasData, column As Integer, row As Integer)
+        Dim ships = data.Board.GetCell(column, row).GetPlayerShips
+        Select Case ships.Count
+            Case 0
+                AnsiConsole.MarkupLine("No ships!")
+            Case 1
+                FireTheShip(data, column, row, ships.Single)
+            Case 2
+                Dim ship = PickShip(ships)
+                If ship IsNot Nothing Then
+                    FireTheShip(data, column, row, ship)
+                End If
+        End Select
+    End Sub
+
+    Private Sub FireTheShip(data As InterplanetaryFracasData, column As Integer, row As Integer, ship As ShipData)
+        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Towards Where?[/]"}
+        prompt.AddChoice(NeverMindText)
+        Dim table As New Dictionary(Of String, (Integer, Integer))
+        For Each delta In Deltas
+            Dim destination = (column + delta.Item1, row + delta.Item2)
+            Dim cell = data.Board.GetCell(destination.Item1, destination.Item2)
+            If cell IsNot Nothing Then
+                table.Add(LocationName(destination.Item1, destination.Item2), (delta.Item1, delta.Item2))
+            End If
+        Next
+        prompt.AddChoices(table.Keys)
+        Dim answer = AnsiConsole.Prompt(prompt)
+        Select Case answer
+            Case NeverMindText
+                Return
+            Case Else
+                ship.HasFired = True
+                Dim delta = table(answer)
+                column += delta.Item1
+                row += delta.Item2
+                Dim hitShip As ShipData = Nothing
+                While data.Board.HasCell(column, row) AndAlso hitShip Is Nothing
+                    Dim cell = data.Board.GetCell(column, row)
+                    If cell.Ship IsNot Nothing Then
+                        hitShip = cell.Ship
+                        AnsiConsole.MarkupLine("HIT!")
+                        cell.Ship = Nothing
+                        OkPrompt()
+                        Exit While
+                    End If
+                    column += delta.Item1
+                    row += delta.Item2
+                End While
+                If hitShip Is Nothing Then
+                    AnsiConsole.MarkupLine("MISS!")
+                    OkPrompt()
                 End If
         End Select
     End Sub

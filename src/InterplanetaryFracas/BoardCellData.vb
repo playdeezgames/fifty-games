@@ -23,4 +23,8 @@
     Friend Function HasMovablePlayerShips() As Boolean
         Return HasPlayerShips() AndAlso Ship.IsMovable
     End Function
+
+    Friend Function HasFirablePlayerShips() As Boolean
+        Return HasPlayerShips() AndAlso Ship.IsFirable
+    End Function
 End Class

@@ -35,7 +35,7 @@
     End Sub
 
     Function GetCell(column As Integer, row As Integer) As BoardCellData
-        If column < 0 OrElse row < 0 OrElse column >= Columns OrElse row >= Rows Then
+        If Not HasCell(column, row) Then
             Return Nothing
         End If
         Return Cells(row * Columns + column)
@@ -51,5 +51,22 @@
             Next
         Next
         Return result
+    End Function
+
+    Friend Function GetFirableShipLocations() As IEnumerable(Of (Integer, Integer))
+        Dim result As New List(Of (Integer, Integer))
+        For column = 0 To Columns - 1
+            For row = 0 To Rows - 1
+                Dim cell = GetCell(column, row)
+                If cell.HasFirablePlayerShips Then
+                    result.Add((column, row))
+                End If
+            Next
+        Next
+        Return result
+    End Function
+
+    Friend Function HasCell(column As Integer, row As Integer) As Boolean
+        Return column >= 0 AndAlso row >= 0 AndAlso column < Columns AndAlso row < Rows
     End Function
 End Class
